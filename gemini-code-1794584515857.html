@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXUS // LAUNCHPAD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #050507;
+      --bg-surface: #0b0c10;
+      --bg-elevated: #11131a;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text-primary: #f4f4f6;
+      --text-secondary: #8e92a4;
+      --text-muted: #525669;
+      --accent: #22d3ee;
+      --accent-dim: rgba(34, 211, 238, 0.12);
+      --danger: #f43f5e;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Architectural Background Grid & Ambient Cyan Glow */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 40%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow {
+      position: fixed;
+      top: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.09) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Top Telemetry Bar */
+    .telemetry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 32px;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      margin-right: 8px;
+    }
+
+    /* Header & Controls */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .title-group h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px;
+      margin-left: -8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .title-group h1:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .title-group h1:focus {
+      outline: 1px solid var(--accent);
+      background: var(--bg-elevated);
+    }
+
+    .title-group p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 9px 36px 9px 14px;
+      border-radius: 8px;
+      width: 240px;
+      transition: border-color 0.2s, width 0.2s;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--accent);
+      width: 280px;
+    }
+
+    .kbd-hint {
+      position: absolute;
+      right: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      padding: 1px 6px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    .btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 9px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-elevated);
+    }
+
+    .btn-primary {
+      background: var(--accent-dim);
+      border-color: rgba(34, 211, 238, 0.35);
+      color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: rgba(34, 211, 238, 0.2);
+      border-color: var(--accent);
+    }
+
+    .btn-danger {
+      color: var(--danger);
+      border-color: rgba(244, 63, 94, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(244, 63, 94, 0.12);
+    }
+
+    /* Filter Pills */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .pill:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .pill.active {
+      background: var(--text-primary);
+      color: var(--bg-void);
+      border-color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Cards Grid with Mouse-Tracking 1px Spotlight */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--bg-surface);
+      border-radius: 12px;
+      padding: 1px; /* 1px border wrapper */
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Spotlight Border Layer */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: radial-gradient(
+        350px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+        rgba(34, 211, 238, 0.45),
+        rgba(255, 255, 255, 0.08) 45%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      z-index: 0;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-surface);
+      border-radius: 11px;
+      padding: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .site-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .favicon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .favicon-wrap img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .site-meta {
+      min-width: 0;
+    }
+
+    .site-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .site-url {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 6px;
+      opacity: 0;
+      transition: opacity 0.15s, color 0.15s, background 0.15s;
+    }
+
+    .card:hover .delete-btn {
+      opacity: 1;
+    }
+
+    .delete-btn:hover {
+      color: var(--danger);
+      background: rgba(244, 63, 94, 0.12);
+    }
+
+    .site-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .tag {
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .launch-arrow {
+      color: var(--text-muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .card:hover .launch-arrow {
+      color: var(--text-primary);
+      transform: translate(2px, -2px);
+    }
+
+    /* Empty State */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 64px 20px;
+      border: 1px dashed var(--border-subtle);
+      border-radius: 12px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 460px;
+      padding: 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+    }
+
+    .modal h2 {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .modal p.sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg-void);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 8px;
+    }
+
+    .form-group textarea {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      min-height: 180px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .search-box input, .search-box input:focus {
+        width: 100%;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .delete-btn {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <div class="container">
+    <div class="telemetry">
+      <div><span class="status-dot"></span>SYS.ONLINE // READY</div>
+      <div id="node-count">0 NODES ACTIVE</div>
+      <div id="clock">00:00:00</div>
+    </div>
+
+    <header>
+      <div class="title-group">
+        <h1 id="workspace-title" contenteditable="true" spellcheck="false" title="Click to rename workspace">NEXUS // LAUNCHPAD</h1>
+        <p>Personal command directory. Click title to rename or add endpoints below.</p>
+      </div>
+
+      <div class="controls">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Filter nodes..." autocomplete="off" />
+          <span class="kbd-hint">/</span>
+        </div>
+        <button class="btn" id="open-config-btn">{ } Config</button>
+        <button class="btn btn-primary" id="open-add-btn">+ Add Site</button>
+      </div>
+    </header>
+
+    <div class="filters" id="category-filters"></div>
+
+    <main class="grid" id="sites-grid"></main>
+  </div>
+
+  <!-- Add Site Modal -->
+  <div class="modal-backdrop" id="add-modal">
+    <div class="modal">
+      <h2>+ REGISTER NEW NODE</h2>
+      <p class="sub">Saved automatically to your browser's local storage.</p>
+      <form id="add-site-form">
+        <div class="form-group">
+          <label>Site Name</label>
+          <input type="text" id="site-name" placeholder="e.g., GitHub" required />
+        </div>
+        <div class="form-group">
+          <label>URL</label>
+          <input type="text" id="site-url" placeholder="e.g., https://github.com" required />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" id="site-category" placeholder="e.g., DEV, AI, MEDIA, TOOLS" required />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="site-desc" placeholder="Short note on what this site is for" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn" id="close-add-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Node</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Config Export / Reset Modal -->
+  <div class="modal-backdrop" id="config-modal">
+    <div class="modal">
+      <h2>{ } EXPORT / HARDCODE CONFIG</h2>
+      <p class="sub">Copy this JSON array into <code>DEFAULT_SITES</code> inside the HTML file to make your changes permanent across all devices.</p>
+      <div class="form-group">
+        <textarea id="config-output" readonly></textarea>
+      </div>
+      <div class="modal-actions" style="justify-content: space-between;">
+        <button type="button" class="btn btn-danger" id="reset-defaults-btn">Reset to Defaults</button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn" id="close-config-btn">Close</button>
+          <button type="button" class="btn btn-primary" id="copy-config-btn">Copy JSON</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // EDIT THIS ARRAY TO HARDCODE YOUR PERMANENT SITES DIRECTLY IN THE HTML
+    // =========================================================================
+    const DEFAULT_SITES = [
+      {
+        name: "GitHub",
+        url: "https://github.com",
+        category: "DEV",
+        description: "Source control, repositories, and deployment workflows."
+      },
+      {
+        name: "Gemini",
+        url: "https://gemini.google.com",
+        category: "AI",
+        description: "Multimodal AI workspace for research, coding, and synthesis."
+      },
+      {
+        name: "YouTube",
+        url: "https://youtube.com",
+        category: "MEDIA",
+        description: "Video streams, technical talks, and tutorials."
+      },
+      {
+        name: "Vercel",
+        url: "https://vercel.com",
+        category: "CLOUD",
+        description: "Frontend cloud hosting, edge functions, and analytics."
+      }
+    ];
+
+    const STORAGE_KEY = "nexus_launchpad_sites_v1";
+    const TITLE_KEY = "nexus_launchpad_title_v1";
+
+    let sites = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [...DEFAULT_SITES];
+    let activeCategory = "ALL";
+    let searchQuery = "";
+
+    const gridEl = document.getElementById("sites-grid");
+    const filtersEl = document.getElementById("category-filters");
+    const searchInput = document.getElementById("search-input");
+    const nodeCountEl = document.getElementById("node-count");
+    const titleEl = document.getElementById("workspace-title");
+
+    // Load & Save Custom Workspace Title
+    const savedTitle = localStorage.getItem(TITLE_KEY);
+    if (savedTitle) titleEl.textContent = savedTitle;
+
+    titleEl.addEventListener("blur", () => {
+      const clean = titleEl.textContent.trim() || "NEXUS // LAUNCHPAD";
+      titleEl.textContent = clean;
+      localStorage.setItem(TITLE_KEY, clean);
+    });
+
+    titleEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        titleEl.blur();
+      }
+    });
+
+    // Live Telemetry Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").textContent = now.toTimeString().split(" ")[0];
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function escapeHTML(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function getDomain(url) {
+      try {
+        return new URL(url).hostname.replace(/^www\./, "");
+      } catch {
+        return url;
+      }
+    }
+
+    function saveSites() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sites));
+      render();
+    }
+
+    function renderFilters() {
+      const categories = ["ALL", ...new Set(sites.map(s => s.category.toUpperCase()))];
+      if (!categories.includes(activeCategory)) activeCategory = "ALL";
+
+      filtersEl.innerHTML = categories.map(cat => `
+        <button class="pill ${cat === activeCategory ? "active" : ""}" data-cat="${escapeHTML(cat)}">
+          ${escapeHTML(cat)}
+        </button>
+      `).join("");
+
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeCategory = btn.dataset.cat;
+          render();
+        });
+      });
+    }
+
+    function render() {
+      renderFilters();
+
+      const filtered = sites.filter(site => {
+        const matchesCat = activeCategory === "ALL" || site.category.toUpperCase() === activeCategory;
+        const q = searchQuery.toLowerCase();
+        const matchesSearch = !q ||
+          site.name.toLowerCase().includes(q) ||
+          site.url.toLowerCase().includes(q) ||
+          site.category.toLowerCase().includes(q) ||
+          (site.description && site.description.toLowerCase().includes(q));
+        return matchesCat && matchesSearch;
+      });
+
+      nodeCountEl.textContent = `${filtered.length} / ${sites.length} NODES ACTIVE`;
+
+      if (filtered.length === 0) {
+        gridEl.innerHTML = `<div class="empty-state">NO MATCHING NODES FOUND // CLICK "+ ADD SITE" TO REGISTER ONE</div>`;
+        return;
+      }
+
+      gridEl.innerHTML = filtered.map((site) => {
+        const realIndex = sites.indexOf(site);
+        const domain = getDomain(site.url);
+        const initial = escapeHTML(site.name.charAt(0).toUpperCase() || "#");
+        const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+
+        return `
+          <a class="card" href="${escapeHTML(site.url)}" target="_blank" rel="noopener noreferrer">
+            <div class="card-inner">
+              <div>
+                <div class="card-top">
+                  <div class="site-identity">
+                    <div class="favicon-wrap">
+                      <img src="${faviconUrl}" alt="" onerror="this.style.display='none'; this.parentElement.textContent='${initial}';" />
+                    </div>
+                    <div class="site-meta">
+                      <div class="site-name">${escapeHTML(site.name)}</div>
+                      <div class="site-url">${escapeHTML(domain)}</div>
+                    </div>
+                  </div>
+                  <button class="delete-btn" data-index="${realIndex}" title="Remove node">&times;</button>
+                </div>
+                <p class="site-desc" style="margin-top: 14px;">
+                  ${escapeHTML(site.description || "Direct endpoint link.")}
+                </p>
+              </div>
+              <div class="card-footer">
+                <span class="tag">${escapeHTML(site.category)}</span>
+                <span class="launch-arrow">OPEN &#8599;</span>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join("");
+
+      // Delete handlers
+      gridEl.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const idx = Number(btn.dataset.index);
+          sites.splice(idx, 1);
+          saveSites();
+        });
+      });
+    }
+
+    // Mouse-tracking spotlight effect across cards
+    gridEl.addEventListener("pointermove", (e) => {
+      for (const card of gridEl.querySelectorAll(".card")) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+      }
+    });
+
+    // Search & Keyboard Shortcuts
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value;
+      render();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const isTyping = ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName) || document.activeElement.isContentEditable;
+      if (e.key === "/" && !isTyping) {
+        e.preventDefault();
+        searchInput.focus();
+      } else if (e.key === "Escape") {
+        addModal.classList.remove("open");
+        configModal.classList.remove("open");
+        if (document.activeElement === searchInput) {
+          searchInput.value = "";
+          searchQuery = "";
+          searchInput.blur();
+          render();
+        }
+      }
+    });
+
+    // Add Site Modal Logic
+    const addModal = document.getElementById("add-modal");
+    document.getElementById("open-add-btn").addEventListener("click", () => {
+      addModal.classList.add("open");
+      document.getElementById("site-name").focus();
+    });
+    document.getElementById("close-add-btn").addEventListener("click", () => addModal.classList.remove("open"));
+    addModal.addEventListener("click", (e) => { if (e.target === addModal) addModal.classList.remove("open"); });
+
+    document.getElementById("add-site-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("site-name").value.trim();
+      let url = document.getElementById("site-url").value.trim();
+      const category = document.getElementById("site-category").value.trim().toUpperCase();
+      const description = document.getElementById("site-desc").value.trim();
+
+      if (!/^https?:\/\//i.test(url)) {
+        url = "https://" + url;
+      }
+
+      sites.push({ name, url, category, description });
+      saveSites();
+      e.target.reset();
+      addModal.classList.remove("open");
+    });
+
+    // Config Modal Logic
+    const configModal = document.getElementById("config-modal");
+    const configOutput = document.getElementById("config-output");
+
+    document.getElementById("open-config-btn").addEventListener("click", () => {
+      configOutput.value = JSON.stringify(sites, null, 2);
+      configModal.classList.add("open");
+    });
+    document.getElementById("close-config-btn").addEventListener("click", () => configModal.classList.remove("open"));
+    configModal.addEventListener("click", (e) => { if (e.target === configModal) configModal.classList.remove("open"); });
+
+    document.getElementById("copy-config-btn").addEventListener("click", async () => {
+      await navigator.clipboard.writeText(configOutput.value);
+      const btn = document.getElementById("copy-config-btn");
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = "Copy JSON", 1500);
+    });
+
+    document.getElementById("reset-defaults-btn").addEventListener("click", () => {
+      sites = [...DEFAULT_SITES];
+      saveSites();
+      configOutput.value = JSON.stringify(sites, null, 2);
+    });
+
+    // Initial Render
+    render();
+  </script>
+</body>
+</html>
