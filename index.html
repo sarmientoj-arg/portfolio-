@@ -56,6 +56,63 @@
   <!-- Subtle Radial Vignette Overlay to Keep Text Razor-Sharp -->
   <div id="bg-vignette" class="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_92%)] transition-opacity duration-300"></div>
 
+  <!-- Momentary Dimensional Glitch Overlay (Triggered on Tesseract Click) -->
+  <canvas id="glitch-overlay" class="fixed inset-0 w-full h-full pointer-events-none z-50 hidden"></canvas>
+
+  <!-- System Reboot Overlay (Triggered After 10% Tesseract Laser Meltdown) -->
+  <div id="reboot-screen" class="fixed inset-0 z-50 hidden items-center justify-center bg-void p-4 sm:p-8 select-none">
+    <div class="w-full max-w-xl border-2 border-crimson bg-void rounded-2xl p-6 sm:p-8 shadow-red-glow-strong font-mono">
+      <div class="flex items-center justify-between gap-2 pb-4 mb-5 border-b border-pure/20">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping"></span>
+          <span class="text-xs sm:text-sm font-bold uppercase tracking-widest text-crimson">
+            CRITICAL_FAULT // 0x4D_BEAM
+          </span>
+        </div>
+        <span id="reboot-percent" class="text-xs sm:text-sm font-bold text-pure">0%</span>
+      </div>
+
+      <h2 class="font-display text-lg sm:text-2xl font-black uppercase tracking-wider text-pure mb-2">
+        SYSTEM INTEGRITY COMPROMISED
+      </h2>
+      <p class="text-xs text-pure/70 mb-5">
+        Tesseract containment breach detected. Executing automated kernel recovery...
+      </p>
+
+      <!-- Live Reboot Telemetry Logs -->
+      <div id="reboot-logs" class="space-y-1.5 text-xs text-pure/90 bg-void border border-pure/15 rounded-xl p-4 mb-5 min-h-[124px]"></div>
+
+      <!-- Reboot Progress Bar -->
+      <div class="w-full h-3 rounded-full border border-crimson/70 bg-void overflow-hidden p-0.5">
+        <div id="reboot-bar" class="h-full bg-crimson rounded-full transition-all duration-75" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Roaming 4D Tesseract -->
+  <canvas
+    id="tesseract-roamer"
+    width="120"
+    height="120"
+    role="button"
+    tabindex="0"
+    aria-label="Interactive 4D Tesseract"
+    title="Click 4D Tesseract"
+    class="fixed top-0 left-0 z-40 w-[120px] h-[120px] cursor-pointer select-none touch-manipulation rounded-full transition-opacity duration-150 active:scale-90 focus:outline-none"
+  ></canvas>
+
+  <!-- Glitchy Post-Reboot Speech Readout Attached to 4D Tesseract -->
+  <div
+    id="tesseract-speech"
+    aria-live="polite"
+    class="fixed top-0 left-0 z-40 hidden pointer-events-none select-none px-3.5 py-2 rounded-xl border border-crimson bg-void/95 shadow-red-glow-strong font-mono text-xs sm:text-sm font-bold tracking-wider text-pure whitespace-nowrap"
+  >
+    <div class="flex items-center gap-2">
+      <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping"></span>
+      <span id="tesseract-speech-text">Dont touch me</span>
+    </div>
+  </div>
+
   <!-- Main Application Wrapper -->
   <div id="portfolio-ui" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 flex flex-col min-h-screen transition-opacity duration-300">
 
@@ -68,7 +125,7 @@
         </span>
       </div>
 
-      <div class="flex items-center gap-4 font-mono text-xs text-pure/80">
+      <div class="flex items-center gap-3 sm:gap-4 font-mono text-xs text-pure/80">
         <span id="hud-clock" class="hidden sm:inline-block tracking-wider">00:00:00 UTC</span>
         <span class="px-2.5 py-1 rounded-md border border-crimson/60 bg-crimson/10 text-pure font-semibold tracking-wider">
           STATUS: ACTIVE
@@ -101,20 +158,89 @@
         </div>
 
         <!-- Quick Telemetry Stats -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0 font-mono">
-          <div class="border border-pure/20 bg-void rounded-xl p-3 text-center">
+        <div class="shrink-0 font-mono">
+          <div class="border border-pure/20 bg-void rounded-xl px-6 py-3.5 text-center">
             <div id="stat-total" class="text-xl sm:text-2xl font-bold text-crimson">00</div>
             <div class="text-[11px] uppercase tracking-wider text-pure/70">Total Builds</div>
           </div>
-          <div class="border border-pure/20 bg-void rounded-xl p-3 text-center">
-            <div class="text-xl sm:text-2xl font-bold text-pure">04</div>
-            <div class="text-[11px] uppercase tracking-wider text-pure/70">Categories</div>
-          </div>
-          <div class="col-span-2 sm:col-span-1 border border-crimson/50 bg-crimson/10 rounded-xl p-3 text-center">
-            <div id="stat-active-cat" class="text-xl sm:text-2xl font-bold text-pure uppercase">ALL</div>
-            <div class="text-[11px] uppercase tracking-wider text-pure/80">Active Filter</div>
-          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Main / Featured Showcase Section (Above Category Bar) -->
+    <section id="main-showcase" aria-label="Main Featured Modules" class="mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 bg-crimson rounded-sm inline-block shadow-red-glow"></span>
+        <h2 class="font-display text-xs sm:text-sm font-bold uppercase tracking-widest text-pure">
+          Main // Featured Uplinks
+        </h2>
+      </div>
+
+      <!-- Compact Small-Box Grid for GitHub, YouTube & Projects Labeled "Main" -->
+      <div id="main-items-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
+        <!-- Featured GitHub Small Box -->
+        <a
+          id="main-github-card"
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group border border-crimson/70 hover:border-crimson bg-void/90 backdrop-blur-md rounded-xl p-3.5 flex flex-col justify-between gap-2.5 shadow-red-glow transition-all duration-200 hover:-translate-y-0.5 hover:shadow-red-glow-strong"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <div class="w-8 h-8 rounded-lg border border-crimson bg-crimson/15 text-pure flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+            </div>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-crimson">UPLINK</span>
+          </div>
+
+          <div>
+            <h3 class="font-display text-sm font-bold uppercase tracking-wider text-pure group-hover:text-crimson transition-colors">
+              GITHUB
+            </h3>
+            <p class="text-[11px] text-pure/70 line-clamp-1 mt-0.5">
+              Source repositories
+            </p>
+          </div>
+
+          <div class="pt-2 border-t border-pure/15 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-pure group-hover:text-crimson">
+            <span>Open</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+
+        <!-- Featured YouTube Small Box -->
+        <a
+          id="main-youtube-card"
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group border border-crimson/70 hover:border-crimson bg-void/90 backdrop-blur-md rounded-xl p-3.5 flex flex-col justify-between gap-2.5 shadow-red-glow transition-all duration-200 hover:-translate-y-0.5 hover:shadow-red-glow-strong"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <div class="w-8 h-8 rounded-lg border border-crimson bg-crimson/15 text-pure flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-crimson">STREAM</span>
+          </div>
+
+          <div>
+            <h3 class="font-display text-sm font-bold uppercase tracking-wider text-pure group-hover:text-crimson transition-colors">
+              YOUTUBE
+            </h3>
+            <p class="text-[11px] text-pure/70 line-clamp-1 mt-0.5">
+              Video player
+            </p>
+          </div>
+
+          <div class="pt-2 border-t border-pure/15 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-pure group-hover:text-crimson">
+            <span>Open</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -128,7 +254,7 @@
           <span>Filter Modules:</span>
         </div>
 
-        <!-- Category Buttons: All, Sims, Sites, Games, Other -->
+        <!-- Category Buttons: Sims, Sites, Games, Other, All -->
         <div id="category-buttons" class="flex flex-wrap items-center gap-2 sm:gap-3">
           <!-- Rendered dynamically via JavaScript for exact counts and active state sync -->
         </div>
@@ -140,7 +266,7 @@
       <div class="flex items-center gap-3">
         <span class="w-3 h-3 bg-crimson rounded-sm inline-block shadow-red-glow"></span>
         <h2 id="section-heading" class="font-display text-lg sm:text-xl font-bold uppercase tracking-wider text-pure">
-          Displaying: All Projects
+          Category: All (0)
         </h2>
       </div>
 
@@ -165,7 +291,7 @@
       <!-- Project Cards injected here by JavaScript -->
     </main>
 
-    <!-- Empty State Message (Shown when no projects exist yet or search yields 0 items) -->
+    <!-- Empty State Message -->
     <div id="empty-state" class="hidden border border-crimson/50 bg-void/90 rounded-2xl p-10 text-center my-8">
       <div class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-crimson text-crimson mb-4">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -173,7 +299,7 @@
         </svg>
       </div>
       <h3 id="empty-state-title" class="font-display text-lg font-bold uppercase text-pure mb-2">Awaiting Module Deployment</h3>
-      <p id="empty-state-desc" class="text-sm text-pure/70 mb-5">No builds have been added yet. Add your projects to <span class="font-mono text-crimson">PROJECTS_DATA</span> in the script section to display them here.</p>
+      <p id="empty-state-desc" class="text-sm text-pure/70 mb-5">No modules have been deployed to this sector yet.</p>
       <button id="reset-filters-btn" class="hidden px-5 py-2.5 rounded-xl bg-crimson text-pure font-mono text-xs font-bold uppercase tracking-wider hover:shadow-red-glow transition-all cursor-pointer">
         Reset Filters
       </button>
@@ -265,7 +391,7 @@
     </svg>
   </button>
 
-  <!-- Non-blocking Toast Notification (Replaces alert()) -->
+  <!-- Non-blocking Toast Notification -->
   <div id="toast-banner" class="fixed bottom-20 left-5 z-50 hidden items-center gap-3 px-5 py-3 rounded-xl border border-crimson bg-void text-pure font-mono text-xs shadow-red-glow">
     <span class="w-2 h-2 rounded-full bg-crimson animate-ping"></span>
     <span id="toast-message">Action completed.</span>
@@ -273,59 +399,40 @@
 
   <!-- Main Application Logic -->
   <script>
-    /**
-     * ============================================================================
-     * JULIAN'S PORTFOLIO - PROJECT DATABASE
-     * ============================================================================
-     * Add your own builds inside PROJECTS_DATA below!
-     * Valid categories: 'Sims', 'Sites', 'Games', 'Other'
-     * Valid visualType icons: 'sims-orbit', 'sims-wave', 'sites-grid',
-     *   'sites-nodes', 'games-reticle', 'games-maze', 'other-lock', 'other-audio'
-     *
-     * Example template you can copy and paste inside PROJECTS_DATA:
-     * {
-     *   id: 'my-first-project',
-     *   title: 'My Project Name',
-     *   category: 'Games',
-     *   version: 'v1.0',
-     *   summary: 'Short description shown on the project card.',
-     *   details: 'Full description shown when clicking Inspect Module.',
-     *   tech: ['HTML5', 'CSS', 'JavaScript'],
-     *   liveUrl: 'https://your-username.github.io/project-repo/',
-     *   repoUrl: 'https://github.com/your-username/project-repo',
-     *   visualType: 'games-reticle'
-     * }
-     */
+    // GitHub Profile URL
+    const GITHUB_URL = 'https://github.com';
+
+    // Project Entries (Add builds here; label with category: 'Main' or ['Main', 'Games'] to feature above the category bar)
     const PROJECTS_DATA = [];
 
-    // Categories ordered explicitly per Julian's request: Sims, Sites, Games, Other, All
+    // Filter Bar Categories
     const CATEGORIES = ['Sims', 'Sites', 'Games', 'Other', 'All'];
 
     // Application State
     let activeCategory = 'All';
     let searchQuery = '';
+    let selectedProject = null;
     let isBgOnlyMode = false;
+    let toastTimeout = null;
+    let bgGlitchIntensity = 0;
+    let bgNetwork = null;
 
-    // DOM Elements
+    // DOM Element References
     const portfolioUi = document.getElementById('portfolio-ui');
     const bgVignette = document.getElementById('bg-vignette');
-    const toggleBgBtn = document.getElementById('toggle-bg-btn');
-    const eyeOpenIcon = document.getElementById('eye-open-icon');
-    const eyeClosedIcon = document.getElementById('eye-closed-icon');
+    const hudClock = document.getElementById('hud-clock');
+    const statTotal = document.getElementById('stat-total');
+    const mainItemsGrid = document.getElementById('main-items-grid');
     const categoryButtonsContainer = document.getElementById('category-buttons');
-    const projectsGrid = document.getElementById('projects-grid');
     const sectionHeading = document.getElementById('section-heading');
     const searchInput = document.getElementById('search-input');
+    const projectsGrid = document.getElementById('projects-grid');
     const emptyState = document.getElementById('empty-state');
     const emptyStateTitle = document.getElementById('empty-state-title');
     const emptyStateDesc = document.getElementById('empty-state-desc');
     const resetFiltersBtn = document.getElementById('reset-filters-btn');
-    const statTotal = document.getElementById('stat-total');
-    const statActiveCat = document.getElementById('stat-active-cat');
-    const hudClock = document.getElementById('hud-clock');
     const footerYear = document.getElementById('footer-year');
 
-    // Modal DOM Elements
     const projectModal = document.getElementById('project-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
     const modalCategory = document.getElementById('modal-category');
@@ -338,148 +445,156 @@
     const modalRepoLink = document.getElementById('modal-repo-link');
     const modalCopyBtn = document.getElementById('modal-copy-btn');
 
-    // Toast Elements
+    const toggleBgBtn = document.getElementById('toggle-bg-btn');
+    const eyeOpenIcon = document.getElementById('eye-open-icon');
+    const eyeClosedIcon = document.getElementById('eye-closed-icon');
     const toastBanner = document.getElementById('toast-banner');
     const toastMessage = document.getElementById('toast-message');
-    let toastTimeout = null;
 
     /**
-     * Generates crisp, bespoke high-tech SVG schematics strictly using #000000, #ff0000, #ffffff
+     * Non-blocking toast banner feedback
      */
-    function getSchematicSVG(type) {
-      const commonAttrs = 'class="w-full h-full" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg"';
-      switch (type) {
-        case 'sims-orbit':
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <circle cx="200" cy="90" r="70" stroke="#ffffff" stroke-opacity="0.2" stroke-dasharray="4 4"/>
-            <ellipse cx="200" cy="90" rx="135" ry="48" stroke="#ff0000" stroke-width="1.5"/>
-            <ellipse cx="200" cy="90" rx="95" ry="32" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1"/>
-            <circle cx="200" cy="90" r="14" fill="#ff0000"/>
-            <circle cx="200" cy="90" r="22" stroke="#ff0000" stroke-opacity="0.5"/>
-            <circle cx="318" cy="67" r="6" fill="#ffffff"/>
-            <circle cx="115" cy="105" r="4" fill="#ff0000"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">SIM // ORBITAL_TELEMETRY</text>
-          </svg>`;
-        case 'sims-wave':
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <path d="M0 60 Q 100 20, 200 60 T 400 60" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
-            <path d="M0 90 Q 100 40, 200 90 T 400 90" stroke="#ff0000" stroke-width="2"/>
-            <path d="M0 120 Q 100 160, 200 120 T 400 120" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
-            <polygon points="155,90 215,72 215,108" fill="#000000" stroke="#ffffff" stroke-width="2"/>
-            <circle cx="215" cy="72" r="3" fill="#ff0000"/>
-            <circle cx="215" cy="108" r="3" fill="#ff0000"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">SIM // AERO_FLOW_SOLVER</text>
-          </svg>`;
-        case 'sites-grid':
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <rect x="45" y="32" width="310" height="116" rx="8" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.5"/>
-            <line x1="45" y1="56" x2="355" y2="56" stroke="#ffffff" stroke-opacity="0.3"/>
-            <circle cx="62" cy="44" r="4" fill="#ff0000"/>
-            <circle cx="76" cy="44" r="4" fill="#ffffff" fill-opacity="0.5"/>
-            <rect x="65" y="72" width="120" height="58" rx="4" stroke="#ff0000" stroke-width="1.5"/>
-            <rect x="200" y="72" width="135" height="24" rx="4" fill="#ff0000" fill-opacity="0.2" stroke="#ff0000"/>
-            <rect x="200" y="106" width="135" height="24" rx="4" stroke="#ffffff" stroke-opacity="0.3"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">SITE // UI_ARCHITECTURE</text>
-          </svg>`;
-        case 'sites-nodes':
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <polyline points="40,130 110,95 180,115 250,55 320,75 365,35" stroke="#ff0000" stroke-width="2.5" fill="none"/>
-            <circle cx="110" cy="95" r="5" fill="#000000" stroke="#ffffff" stroke-width="2"/>
-            <circle cx="180" cy="115" r="5" fill="#000000" stroke="#ffffff" stroke-width="2"/>
-            <circle cx="250" cy="55" r="6" fill="#ff0000"/>
-            <circle cx="320" cy="75" r="5" fill="#000000" stroke="#ffffff" stroke-width="2"/>
-            <line x1="40" y1="145" x2="365" y2="145" stroke="#ffffff" stroke-opacity="0.25"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">SITE // LIVE_METRICS</text>
-          </svg>`;
-        case 'games-reticle':
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <circle cx="200" cy="90" r="52" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="10 6"/>
-            <circle cx="200" cy="90" r="26" stroke="#ffffff" stroke-width="1.5"/>
-            <line x1="130" y1="90" x2="165" y2="90" stroke="#ff0000" stroke-width="2"/>
-            <line x1="235" y1="90" x2="270" y2="90" stroke="#ff0000" stroke-width="2"/>
-            <line x1="200" y1="25" x2="200" y2="55" stroke="#ff0000" stroke-width="2"/>
-            <line x1="200" y1="125" x2="200" y2="155" stroke="#ff0000" stroke-width="2"/>
-            <polygon points="200,78 210,98 200,93 190,98" fill="#ffffff"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">GAME // TARGET_LOCK</text>
-          </svg>`;
-        case 'games-maze':
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <rect x="90" y="30" width="220" height="120" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
-            <path d="M90 70 H230 V110 H150" stroke="#ffffff" stroke-width="2"/>
-            <path d="M310 110 H260 V55" stroke="#ffffff" stroke-width="2"/>
-            <path d="M110 50 H280 V130 H120" stroke="#ff0000" stroke-width="2" stroke-dasharray="5 5"/>
-            <rect x="104" y="44" width="12" height="12" fill="#ffffff"/>
-            <circle cx="120" cy="130" r="7" fill="#ff0000"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">GAME // BREACH_MATRIX</text>
-          </svg>`;
-        case 'other-lock':
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <polygon points="200,28 255,60 255,120 200,152 145,120 145,60" stroke="#ff0000" stroke-width="2"/>
-            <polygon points="200,46 238,68 238,112 200,134 162,112 162,68" stroke="#ffffff" stroke-opacity="0.45"/>
-            <circle cx="200" cy="86" r="8" fill="#ffffff"/>
-            <path d="M196 92 L204 92 L206 108 L194 108 Z" fill="#ff0000"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">OTHER // CRYPTO_CORE</text>
-          </svg>`;
-        default:
-          return `<svg ${commonAttrs}>
-            <rect width="400" height="180" fill="#000000"/>
-            <path d="M30 90 L70 90 L85 45 L105 135 L125 60 L145 115 L165 90 L235 90 L250 35 L270 145 L290 70 L310 105 L325 90 L370 90" stroke="#ff0000" stroke-width="2.5" fill="none"/>
-            <line x1="30" y1="90" x2="370" y2="90" stroke="#ffffff" stroke-opacity="0.25" stroke-dasharray="3 3"/>
-            <text x="16" y="24" fill="#ffffff" fill-opacity="0.6" font-family="monospace" font-size="10">OTHER // SIGNAL_SYNTH</text>
-          </svg>`;
+    function showToast(msg) {
+      if (!toastBanner || !toastMessage) return;
+      toastMessage.textContent = msg;
+      toastBanner.classList.remove('hidden');
+      toastBanner.classList.add('flex');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastBanner.classList.add('hidden');
+        toastBanner.classList.remove('flex');
+      }, 2600);
+    }
+
+    /**
+     * iFrame-safe clipboard copy helper using document.execCommand('copy')
+     */
+    function copyTextToClipboard(text) {
+      try {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        tempInput.setAttribute('readonly', '');
+        tempInput.style.position = 'fixed';
+        tempInput.style.opacity = '0';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        showToast('Link copied to clipboard.');
+      } catch (err) {
+        showToast('Unable to copy link.');
       }
     }
 
     /**
-     * Shows a crisp non-blocking toast message
+     * Live UTC Telemetry Clock
      */
-    function showToast(message) {
-      toastMessage.textContent = message;
-      toastBanner.classList.remove('hidden');
-      toastBanner.classList.add('flex');
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toastBanner.classList.add('hidden');
-        toastBanner.classList.remove('flex');
-      }, 2800);
+    function updateHudClock() {
+      if (!hudClock) return;
+      const now = new Date();
+      const hh = String(now.getUTCHours()).padStart(2, '0');
+      const mm = String(now.getUTCMinutes()).padStart(2, '0');
+      const ss = String(now.getUTCSeconds()).padStart(2, '0');
+      hudClock.textContent = `${hh}:${mm}:${ss} UTC`;
     }
 
     /**
-     * Renders the 5 Category Buttons (Sims, Sites, Games, Other, All) with live item counts
+     * Normalizes a project's category field (supports string or array of strings)
+     */
+    function getProjectCategories(project) {
+      if (!project || !project.category) return ['Other'];
+      return Array.isArray(project.category) ? project.category : [project.category];
+    }
+
+    /**
+     * Generates a high-tech #000000 / #ff0000 / #ffffff SVG schematic for a project
+     */
+    function createSchematicSvg(project) {
+      const cats = getProjectCategories(project);
+      const primary = cats[0] || 'Module';
+      return `
+        <svg viewBox="0 0 320 140" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="320" height="140" fill="#000000" />
+          <g stroke="#ffffff" stroke-opacity="0.12" stroke-width="1">
+            <line x1="0" y1="35" x2="320" y2="35" />
+            <line x1="0" y1="70" x2="320" y2="70" />
+            <line x1="0" y1="105" x2="320" y2="105" />
+            <line x1="80" y1="0" x2="80" y2="140" />
+            <line x1="160" y1="0" x2="160" y2="140" />
+            <line x1="240" y1="0" x2="240" y2="140" />
+          </g>
+          <polygon points="160,22 212,70 160,118 108,70" fill="none" stroke="#ff0000" stroke-width="2" />
+          <rect x="134" y="44" width="52" height="52" fill="none" stroke="#ffffff" stroke-width="1.25" stroke-dasharray="4 3" />
+          <circle cx="160" cy="70" r="6" fill="#ff0000" />
+          <text x="14" y="22" fill="#ffffff" fill-opacity="0.65" font-family="monospace" font-size="10">SECTOR // ${primary.toUpperCase()}</text>
+          <text x="14" y="128" fill="#ff0000" font-family="monospace" font-size="10">STATUS: READY</text>
+        </svg>
+      `;
+    }
+
+    /**
+     * Renders any projects tagged with "Main" inside the top Featured Uplinks showcase
+     */
+    function renderMainProjects() {
+      if (!mainItemsGrid) return;
+      const dynamicCards = mainItemsGrid.querySelectorAll('[data-dynamic-main="true"]');
+      dynamicCards.forEach((el) => el.remove());
+
+      const mainProjects = PROJECTS_DATA.filter((p) => getProjectCategories(p).includes('Main'));
+      mainProjects.forEach((project) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.setAttribute('data-dynamic-main', 'true');
+        card.className =
+          'text-left group border border-crimson/70 hover:border-crimson bg-void/90 backdrop-blur-md rounded-xl p-3.5 flex flex-col justify-between gap-2.5 shadow-red-glow transition-all duration-200 hover:-translate-y-0.5 hover:shadow-red-glow-strong cursor-pointer';
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <div class="w-8 h-8 rounded-lg border border-crimson bg-crimson/15 text-pure flex items-center justify-center shrink-0 font-mono text-xs font-bold">
+              4D
+            </div>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-crimson">MAIN</span>
+          </div>
+          <div>
+            <h3 class="font-display text-sm font-bold uppercase tracking-wider text-pure group-hover:text-crimson transition-colors line-clamp-1">
+              ${project.title || 'Untitled Module'}
+            </h3>
+            <p class="text-[11px] text-pure/70 line-clamp-1 mt-0.5">
+              ${project.summary || project.description || 'Featured module'}
+            </p>
+          </div>
+          <div class="pt-2 border-t border-pure/15 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-pure group-hover:text-crimson">
+            <span>Inspect</span>
+            <span>&rarr;</span>
+          </div>
+        `;
+        card.addEventListener('click', () => openProjectModal(project));
+        mainItemsGrid.appendChild(card);
+      });
+    }
+
+    /**
+     * Renders the category filter buttons with live counts
      */
     function renderCategoryButtons() {
+      if (!categoryButtonsContainer) return;
       categoryButtonsContainer.innerHTML = '';
 
-      CATEGORIES.forEach((category) => {
-        const count = category === 'All'
-          ? PROJECTS_DATA.length
-          : PROJECTS_DATA.filter((item) => item.category === category).length;
-
-        const isActive = activeCategory === category;
+      CATEGORIES.forEach((cat) => {
+        const count =
+          cat === 'All'
+            ? PROJECTS_DATA.length
+            : PROJECTS_DATA.filter((p) => getProjectCategories(p).includes(cat)).length;
+        const isActive = activeCategory === cat;
 
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         btn.className = isActive
-          ? 'px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider bg-crimson text-pure border border-crimson shadow-red-glow transition-all cursor-pointer flex items-center gap-2'
-          : 'px-4 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-medium uppercase tracking-wider bg-void text-pure border border-pure/25 hover:border-crimson hover:text-pure transition-all cursor-pointer flex items-center gap-2';
-
-        btn.innerHTML = `
-          <span>${category}</span>
-          <span class="px-1.5 py-0.5 text-[11px] rounded ${isActive ? 'bg-void text-pure' : 'bg-pure/10 text-pure/80'}">
-            ${String(count).padStart(2, '0')}
-          </span>
-        `;
+          ? 'px-4 py-2 rounded-xl bg-crimson text-pure border border-crimson font-mono text-xs font-bold uppercase tracking-wider shadow-red-glow transition-all cursor-pointer'
+          : 'px-4 py-2 rounded-xl bg-void text-pure border border-pure/25 hover:border-crimson font-mono text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer';
+        btn.textContent = `${cat} (${count})`;
 
         btn.addEventListener('click', () => {
-          activeCategory = category;
+          activeCategory = cat;
           renderCategoryButtons();
           renderProjects();
         });
@@ -489,362 +604,3091 @@
     }
 
     /**
-     * Renders filtered project cards into the responsive grid
-     */
-    function renderProjects() {
-      const normalizedQuery = searchQuery.trim().toLowerCase();
-
-      const filtered = PROJECTS_DATA.filter((project) => {
-        const matchesCategory = activeCategory === 'All' || project.category === activeCategory;
-        const matchesSearch =
-          !normalizedQuery ||
-          project.title.toLowerCase().includes(normalizedQuery) ||
-          project.summary.toLowerCase().includes(normalizedQuery) ||
-          project.category.toLowerCase().includes(normalizedQuery) ||
-          project.tech.some((t) => t.toLowerCase().includes(normalizedQuery));
-        return matchesCategory && matchesSearch;
-      });
-
-      // Update Telemetry & Headings
-      statTotal.textContent = String(PROJECTS_DATA.length).padStart(2, '0');
-      statActiveCat.textContent = activeCategory.toUpperCase();
-      sectionHeading.textContent =
-        activeCategory === 'All'
-          ? `Displaying: All Projects (${filtered.length})`
-          : `Category: ${activeCategory} (${filtered.length})`;
-
-      projectsGrid.innerHTML = '';
-
-      if (filtered.length === 0) {
-        if (PROJECTS_DATA.length === 0) {
-          emptyStateTitle.textContent = 'Awaiting Module Deployment';
-          emptyStateDesc.innerHTML = 'No builds have been added yet. Add your projects to <span class="font-mono text-crimson">PROJECTS_DATA</span> in the script section to display them here.';
-          resetFiltersBtn.classList.add('hidden');
-        } else {
-          emptyStateTitle.textContent = 'No Matching Modules Found';
-          emptyStateDesc.textContent = 'No builds match your current filter or search query.';
-          resetFiltersBtn.classList.remove('hidden');
-        }
-        emptyState.classList.remove('hidden');
-        return;
-      } else {
-        emptyState.classList.add('hidden');
-      }
-
-      filtered.forEach((project, idx) => {
-        const card = document.createElement('article');
-        card.style.animationDelay = `${idx * 45}ms`;
-        card.className =
-          'group relative flex flex-col justify-between border border-pure/20 hover:border-crimson bg-void/95 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-red-glow animate-fade-up';
-
-        const techBadges = project.tech
-          .map(
-            (tag) =>
-              `<span class="px-2.5 py-1 rounded-md border border-pure/15 bg-pure/5 font-mono text-[11px] text-pure/85">${tag}</span>`
-          )
-          .join('');
-
-        card.innerHTML = `
-          <div>
-            <!-- Top Schematic Preview Banner -->
-            <div class="relative h-44 w-full border-b border-pure/15 overflow-hidden bg-void">
-              ${getSchematicSVG(project.visualType)}
-              <div class="absolute top-3 right-3 flex items-center gap-2">
-                <span class="px-2.5 py-1 rounded-md bg-crimson text-pure font-mono text-[11px] font-bold uppercase tracking-wider shadow-red-glow">
-                  ${project.category}
-                </span>
-              </div>
-              <div class="absolute bottom-2.5 right-3 font-mono text-[11px] text-pure/60">
-                ${project.version}
-              </div>
-            </div>
-
-            <!-- Card Body -->
-            <div class="p-6">
-              <h3 class="font-display text-lg sm:text-xl font-bold uppercase text-pure group-hover:text-crimson transition-colors mb-2.5">
-                ${project.title}
-              </h3>
-              <p class="text-sm text-pure/75 leading-relaxed mb-5">
-                ${project.summary}
-              </p>
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                ${techBadges}
-              </div>
-            </div>
-          </div>
-
-          <!-- Card Footer Action Bar -->
-          <div class="px-6 pb-6 pt-2 flex items-center justify-between gap-3">
-            <button
-              type="button"
-              data-project-id="${project.id}"
-              class="inspect-btn flex-1 py-2.5 px-4 rounded-xl bg-crimson text-pure font-mono text-xs font-bold uppercase tracking-wider hover:shadow-red-glow transition-all cursor-pointer text-center"
-            >
-              Inspect Module
-            </button>
-            <a
-              href="${project.repoUrl}"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View ${project.title} on GitHub"
-              class="p-2.5 rounded-xl border border-pure/25 hover:border-crimson text-pure transition-all"
-              title="GitHub Repository"
-            >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-              </svg>
-            </a>
-          </div>
-        `;
-
-        projectsGrid.appendChild(card);
-      });
-
-      // Attach modal open listeners to all Inspect buttons
-      document.querySelectorAll('.inspect-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const projectId = btn.getAttribute('data-project-id');
-          const selected = PROJECTS_DATA.find((p) => p.id === projectId);
-          if (selected) openProjectModal(selected);
-        });
-      });
-    }
-
-    /**
-     * Opens the detailed Project Inspector Modal
+     * Opens the interactive project inspector modal
      */
     function openProjectModal(project) {
-      modalCategory.textContent = project.category;
-      modalVersion.textContent = `BUILD ${project.version}`;
-      modalTitle.textContent = project.title;
-      modalVisual.innerHTML = getSchematicSVG(project.visualType);
-      modalDescription.textContent = project.details;
-      modalLiveLink.href = project.liveUrl;
-      modalRepoLink.href = project.repoUrl;
+      if (!projectModal || !project) return;
+      selectedProject = project;
 
-      modalTags.innerHTML = project.tech
-        .map(
-          (tag) =>
-            `<span class="px-3 py-1 rounded-lg border border-crimson/50 bg-crimson/10 font-mono text-xs text-pure">${tag}</span>`
-        )
-        .join('');
+      const cats = getProjectCategories(project).filter((c) => c !== 'Main');
+      if (modalCategory) modalCategory.textContent = cats[0] || 'MODULE';
+      if (modalVersion) modalVersion.textContent = project.version || 'BUILD v1.0';
+      if (modalTitle) modalTitle.textContent = project.title || 'Untitled Module';
+      if (modalVisual) modalVisual.innerHTML = createSchematicSvg(project);
+      if (modalDescription) {
+        modalDescription.textContent =
+          project.description || project.summary || 'No telemetry description provided.';
+      }
 
-      modalCopyBtn.onclick = () => {
-        const shareText = `${project.title} (${project.category}) - Julian's portfolio`;
-        const tempInput = document.createElement('textarea');
-        tempInput.value = shareText;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        try {
-          document.execCommand('copy');
-          showToast('Module info copied to clipboard.');
-        } catch (err) {
-          showToast('Unable to copy automatically.');
-        }
-        document.body.removeChild(tempInput);
-      };
+      if (modalTags) {
+        modalTags.innerHTML = '';
+        const tags = Array.isArray(project.tags) ? project.tags : ['HTML5', 'JavaScript', 'Tailwind'];
+        tags.forEach((tag) => {
+          const span = document.createElement('span');
+          span.className =
+            'px-3 py-1 rounded-lg border border-pure/20 bg-void font-mono text-xs text-pure/90';
+          span.textContent = tag;
+          modalTags.appendChild(span);
+        });
+      }
+
+      if (modalLiveLink) modalLiveLink.href = project.liveUrl || GITHUB_URL;
+      if (modalRepoLink) modalRepoLink.href = project.repoUrl || GITHUB_URL;
 
       projectModal.classList.remove('hidden');
       projectModal.classList.add('flex');
     }
 
+    /**
+     * Closes the interactive project inspector modal
+     */
     function closeProjectModal() {
+      if (!projectModal) return;
+      selectedProject = null;
       projectModal.classList.add('hidden');
       projectModal.classList.remove('flex');
     }
 
     /**
-     * Toggles pure background view mode by fading out the HUD and vignette
+     * Renders the filtered project grid or empty state
      */
-    function toggleBackgroundView(forceState) {
-      isBgOnlyMode = typeof forceState === 'boolean' ? forceState : !isBgOnlyMode;
-      toggleBgBtn.setAttribute('aria-pressed', isBgOnlyMode ? 'true' : 'false');
+    function renderProjects() {
+      if (!projectsGrid) return;
 
-      if (isBgOnlyMode) {
-        portfolioUi.classList.add('opacity-0', 'pointer-events-none');
-        bgVignette.classList.add('opacity-0');
-        eyeOpenIcon.classList.add('hidden');
-        eyeClosedIcon.classList.remove('hidden');
-        toggleBgBtn.classList.add('bg-crimson');
-        toggleBgBtn.classList.remove('bg-void/90');
-      } else {
-        portfolioUi.classList.remove('opacity-0', 'pointer-events-none');
-        bgVignette.classList.remove('opacity-0');
-        eyeOpenIcon.classList.remove('hidden');
-        eyeClosedIcon.classList.add('hidden');
-        toggleBgBtn.classList.remove('bg-crimson');
-        toggleBgBtn.classList.add('bg-void/90');
+      if (statTotal) {
+        statTotal.textContent = String(PROJECTS_DATA.length).padStart(2, '0');
       }
-    }
 
-    toggleBgBtn.addEventListener('click', () => toggleBackgroundView());
+      const query = searchQuery.trim().toLowerCase();
+      const filtered = PROJECTS_DATA.filter((project) => {
+        const cats = getProjectCategories(project);
+        const matchesCat = activeCategory === 'All' || cats.includes(activeCategory);
+        if (!matchesCat) return false;
+        if (!query) return true;
 
-    // Event Listeners for Search, Reset, and Modal
-    searchInput.addEventListener('input', (e) => {
-      searchQuery = e.target.value;
-      renderProjects();
-    });
+        const haystack = [
+          project.title || '',
+          project.summary || '',
+          project.description || '',
+          ...(Array.isArray(project.tags) ? project.tags : []),
+          ...cats,
+        ]
+          .join(' ')
+          .toLowerCase();
+        return haystack.includes(query);
+      });
 
-    resetFiltersBtn.addEventListener('click', () => {
-      activeCategory = 'All';
-      searchQuery = '';
-      searchInput.value = '';
-      renderCategoryButtons();
-      renderProjects();
-    });
+      if (sectionHeading) {
+        sectionHeading.textContent = `Category: ${activeCategory} (${filtered.length})`;
+      }
 
-    closeModalBtn.addEventListener('click', closeProjectModal);
-    projectModal.addEventListener('click', (e) => {
-      if (e.target === projectModal) closeProjectModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (!projectModal.classList.contains('hidden')) {
-          closeProjectModal();
-        } else if (isBgOnlyMode) {
-          toggleBackgroundView(false);
+      projectsGrid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        if (emptyState) emptyState.classList.remove('hidden');
+        const hasFilters = activeCategory !== 'All' || query.length > 0;
+        if (emptyStateTitle) {
+          emptyStateTitle.textContent = hasFilters
+            ? 'No Matching Modules Found'
+            : 'Awaiting Module Deployment';
         }
+        if (emptyStateDesc) {
+          emptyStateDesc.textContent = hasFilters
+            ? 'No modules matched your current filter or search query.'
+            : 'No modules have been deployed to this sector yet.';
+        }
+        if (resetFiltersBtn) {
+          if (hasFilters) {
+            resetFiltersBtn.classList.remove('hidden');
+          } else {
+            resetFiltersBtn.classList.add('hidden');
+          }
+        }
+        return;
       }
-    });
 
-    /**
-     * Live UTC HUD Clock
-     */
-    function updateHudClock() {
-      const now = new Date();
-      const timeStr = now.toISOString().split('T')[1].split('.')[0] + ' UTC';
-      hudClock.textContent = timeStr;
+      if (emptyState) emptyState.classList.add('hidden');
+
+      filtered.forEach((project) => {
+        const cats = getProjectCategories(project).filter((c) => c !== 'Main');
+        const primaryCat = cats[0] || 'Module';
+        const tags = Array.isArray(project.tags) ? project.tags.slice(0, 3) : [];
+
+        const card = document.createElement('article');
+        card.className =
+          'group border border-pure/20 hover:border-crimson bg-void/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between gap-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-red-glow animate-fade-up';
+        card.innerHTML = `
+          <div>
+            <div class="w-full h-36 rounded-xl border border-pure/15 overflow-hidden mb-4">
+              ${createSchematicSvg(project)}
+            </div>
+            <div class="flex items-center justify-between gap-2 mb-2 font-mono text-xs">
+              <span class="px-2.5 py-0.5 rounded-md bg-crimson/15 border border-crimson text-crimson font-bold uppercase tracking-wider">
+                ${primaryCat}
+              </span>
+              <span class="text-pure/60">${project.version || 'v1.0'}</span>
+            </div>
+            <h3 class="font-display text-lg font-bold uppercase tracking-wide text-pure group-hover:text-crimson transition-colors mb-2">
+              ${project.title || 'Untitled Module'}
+            </h3>
+            <p class="text-sm text-pure/75 line-clamp-2 leading-relaxed">
+              ${project.summary || project.description || 'System module ready for inspection.'}
+            </p>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              ${tags
+                .map(
+                  (t) =>
+                    `<span class="px-2 py-0.5 rounded-md border border-pure/15 font-mono text-[11px] text-pure/75">${t}</span>`
+                )
+                .join('')}
+            </div>
+            <div class="pt-3 border-t border-pure/15 flex items-center justify-between gap-2">
+              <button type="button" class="inspect-btn px-4 py-2 rounded-xl bg-crimson text-pure font-mono text-xs font-bold uppercase tracking-wider hover:shadow-red-glow transition-all cursor-pointer">
+                Inspect Module
+              </button>
+              <a href="${project.liveUrl || GITHUB_URL}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl border border-pure/25 hover:border-crimson text-pure font-mono text-xs uppercase tracking-wider transition-all">
+                Launch &rarr;
+              </a>
+            </div>
+          </div>
+        `;
+
+        const inspectBtn = card.querySelector('.inspect-btn');
+        if (inspectBtn) {
+          inspectBtn.addEventListener('click', () => openProjectModal(project));
+        }
+
+        projectsGrid.appendChild(card);
+      });
     }
 
     /**
-     * Interactive High-Tech Neural/Radar Background Canvas (#000000, #ff0000, #ffffff)
+     * Toggles pure background view (hides portfolio UI so the tesseract hunts background dots)
+     */
+    function toggleBackgroundView() {
+      isBgOnlyMode = !isBgOnlyMode;
+      if (portfolioUi) {
+        portfolioUi.classList.toggle('hidden', isBgOnlyMode);
+      }
+      if (bgVignette) {
+        bgVignette.classList.toggle('opacity-0', isBgOnlyMode);
+      }
+      if (eyeOpenIcon && eyeClosedIcon) {
+        eyeOpenIcon.classList.toggle('hidden', isBgOnlyMode);
+        eyeClosedIcon.classList.toggle('hidden', !isBgOnlyMode);
+      }
+      if (toggleBgBtn) {
+        toggleBgBtn.setAttribute('aria-pressed', String(isBgOnlyMode));
+      }
+      if (!isBgOnlyMode && bgNetwork) {
+        bgNetwork.respawnAll();
+      }
+    }
+
+    /**
+     * High-Tech Dense Particle Network Background (#000000 BG, #ff0000 & #ffffff Nodes, Bright #ffffff Lines)
      */
     function initBackgroundCanvas() {
       const canvas = document.getElementById('bg-canvas');
+      if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      let width = 0;
-      let height = 0;
-      let particles = [];
-      const pointer = { x: null, y: null };
+      if (!ctx) return;
 
-      function resizeCanvas() {
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      const mouse = {
+        x: null,
+        y: null,
+        active: false,
+      };
+
+      window.addEventListener('resize', () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
-        const count = Math.min(260, Math.floor((width * height) / 4800));
-        particles = Array.from({ length: count }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.45,
-          vy: (Math.random() - 0.5) * 0.45,
-          isRed: Math.random() > 0.35,
-          radius: Math.random() * 1.8 + 1.1
-        }));
-      }
-
-      window.addEventListener('resize', resizeCanvas);
-
-      // Track pointer coordinates for interactive node connections
-      window.addEventListener('mousemove', (e) => {
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
       });
 
-      window.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches.length > 0) {
-          pointer.x = e.touches[0].clientX;
-          pointer.y = e.touches[0].clientY;
-        }
-      }, { passive: true });
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      });
 
       window.addEventListener('mouseleave', () => {
-        pointer.x = null;
-        pointer.y = null;
+        mouse.active = false;
       });
+
+      window.addEventListener(
+        'touchmove',
+        (e) => {
+          if (e.touches && e.touches.length > 0) {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+            mouse.active = true;
+          }
+        },
+        { passive: true }
+      );
 
       window.addEventListener('touchend', () => {
-        pointer.x = null;
-        pointer.y = null;
+        mouse.active = false;
       });
 
-      function animate() {
+      const nodeCount = Math.min(310, Math.max(155, Math.floor((width * height) / 4500)));
+      const nodes = [];
+      const dotSparks = [];
+      const attackEffects = [];
+
+      for (let i = 0; i < nodeCount; i++) {
+        nodes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.75,
+          vy: (Math.random() - 0.5) * 0.75,
+          radius: Math.random() * 1.8 + 1.2,
+          isRed: Math.random() < 0.58,
+          alive: true,
+          deadTimer: 0,
+          spawnScale: 1,
+        });
+      }
+
+      function destroyNode(node, pushVx = 0, pushVy = 0) {
+        if (!node || !node.alive) return;
+        node.alive = false;
+        node.deadTimer = 420 + Math.floor(Math.random() * 240);
+        node.spawnScale = 0;
+
+        // Spawn #ff0000 & #ffffff disintegration sparks
+        const sparkCount = 7 + Math.floor(Math.random() * 5);
+        for (let s = 0; s < sparkCount; s++) {
+          const ang = Math.random() * Math.PI * 2;
+          const spd = 1.4 + Math.random() * 4.8;
+          dotSparks.push({
+            x: node.x,
+            y: node.y,
+            vx: Math.cos(ang) * spd + pushVx * 0.25,
+            vy: Math.sin(ang) * spd + pushVy * 0.25,
+            size: 1.5 + Math.random() * 2.5,
+            life: 1,
+            decay: 0.03 + Math.random() * 0.025,
+            isRed: Math.random() < 0.55 ? node.isRed : !node.isRed,
+          });
+        }
+
+        // Mini geometric rupture ring
+        attackEffects.push({
+          type: 'POP_RING',
+          x: node.x,
+          y: node.y,
+          radius: 2,
+          maxRadius: 16 + Math.random() * 10,
+          life: 1,
+          decay: 0.065,
+          isRed: node.isRed,
+        });
+      }
+
+      function respawnAll() {
+        dotSparks.length = 0;
+        attackEffects.length = 0;
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+          if (!n.alive) {
+            n.x = Math.random() * width;
+            n.y = Math.random() * height;
+            n.vx = (Math.random() - 0.5) * 0.75;
+            n.vy = (Math.random() - 0.5) * 0.75;
+          }
+          n.alive = true;
+          n.deadTimer = 0;
+          n.spawnScale = 1;
+        }
+      }
+
+      bgNetwork = {
+        nodes,
+        attackEffects,
+        destroyNode,
+        respawnAll,
+      };
+
+      function animateBg() {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, width, height);
+
+        const isGlitchingBg = bgGlitchIntensity > 0.01;
+        const maxLinkDist = isGlitchingBg ? 210 : 78;
+
+        // Calculate dynamic respawn multiplier: fewer alive dots = exponentially faster regeneration
+        let aliveCount = 0;
+        for (let i = 0; i < nodes.length; i++) {
+          if (nodes[i].alive) aliveCount++;
+        }
+        const aliveRatio = nodes.length > 0 ? aliveCount / nodes.length : 1;
+        const missingRatio = Math.max(0, 1 - aliveRatio);
+        const respawnRate = 1 + Math.pow(missingRatio, 2.2) * 14;
+        const spawnGrowSpeed = 0.06 + missingRatio * 0.08;
+
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+
+          if (!n.alive) {
+            n.deadTimer -= respawnRate;
+            if (n.deadTimer <= 0) {
+              n.alive = true;
+              n.spawnScale = 0.05;
+              n.x = Math.random() * width;
+              n.y = Math.random() * height;
+              n.vx = (Math.random() - 0.5) * 0.75;
+              n.vy = (Math.random() - 0.5) * 0.75;
+            }
+            continue;
+          }
+
+          if (n.spawnScale < 1) {
+            n.spawnScale = Math.min(1, n.spawnScale + spawnGrowSpeed);
+          }
+
+          // Gently damp high velocities back to normal drift speed
+          const spd = Math.hypot(n.vx, n.vy);
+          if (spd > 1.1) {
+            n.vx *= 0.94;
+            n.vy *= 0.94;
+          }
+
+          n.x += n.vx * (isGlitchingBg ? 1 + Math.random() * 6 * bgGlitchIntensity : 1);
+          n.y += n.vy * (isGlitchingBg ? 1 + Math.random() * 6 * bgGlitchIntensity : 1);
+
+          if (n.x < 0) {
+            n.x = 0;
+            n.vx = Math.abs(n.vx);
+          } else if (n.x > width) {
+            n.x = width;
+            n.vx = -Math.abs(n.vx);
+          }
+          if (n.y < 0) {
+            n.y = 0;
+            n.vy = Math.abs(n.vy);
+          } else if (n.y > height) {
+            n.y = height;
+            n.vy = -Math.abs(n.vy);
+          }
+
+          const drawX = isGlitchingBg
+            ? n.x + (Math.random() - 0.5) * 95 * bgGlitchIntensity
+            : n.x;
+          const drawY = isGlitchingBg
+            ? n.y + (Math.random() - 0.5) * 55 * bgGlitchIntensity
+            : n.y;
+
+          // Connecting lines (fracture into erratic red/white webs during explosion)
+          for (let j = i + 1; j < nodes.length; j++) {
+            const m = nodes[j];
+            if (!m.alive) continue;
+            const dist = Math.hypot(n.x - m.x, n.y - m.y);
+            if (dist < maxLinkDist && (!isGlitchingBg || Math.random() < 0.65)) {
+              const scaleFactor = Math.min(n.spawnScale, m.spawnScale);
+              const alpha = (1 - dist / maxLinkDist) * (isGlitchingBg ? 0.9 : 0.95) * scaleFactor;
+              ctx.beginPath();
+              ctx.moveTo(drawX, drawY);
+              ctx.lineTo(
+                isGlitchingBg ? m.x + (Math.random() - 0.5) * 95 * bgGlitchIntensity : m.x,
+                isGlitchingBg ? m.y + (Math.random() - 0.5) * 55 * bgGlitchIntensity : m.y
+              );
+              ctx.strokeStyle =
+                isGlitchingBg && Math.random() < 0.58
+                  ? `rgba(255, 0, 0, ${Math.min(1, alpha).toFixed(3)})`
+                  : `rgba(255, 255, 255, ${Math.min(1, alpha).toFixed(3)})`;
+              ctx.lineWidth = isGlitchingBg ? 0.8 + Math.random() * 2.4 : 1.15;
+              ctx.stroke();
+            }
+          }
+
+          // Connect nearby dots to the mouse cursor just like dot-to-dot links
+          if (mouse.active && mouse.x !== null && mouse.y !== null) {
+            const mDist = Math.hypot(n.x - mouse.x, n.y - mouse.y);
+            if (mDist < maxLinkDist && (!isGlitchingBg || Math.random() < 0.7)) {
+              const mAlpha = (1 - mDist / maxLinkDist) * (isGlitchingBg ? 0.9 : 0.95) * n.spawnScale;
+              ctx.beginPath();
+              ctx.moveTo(drawX, drawY);
+              ctx.lineTo(
+                isGlitchingBg ? mouse.x + (Math.random() - 0.5) * 65 * bgGlitchIntensity : mouse.x,
+                isGlitchingBg ? mouse.y + (Math.random() - 0.5) * 45 * bgGlitchIntensity : mouse.y
+              );
+              ctx.strokeStyle =
+                isGlitchingBg && Math.random() < 0.58
+                  ? `rgba(255, 0, 0, ${Math.min(1, mAlpha).toFixed(3)})`
+                  : `rgba(255, 255, 255, ${Math.min(1, mAlpha).toFixed(3)})`;
+              ctx.lineWidth = isGlitchingBg ? 0.8 + Math.random() * 2.4 : 1.15;
+              ctx.stroke();
+            }
+          }
+
+          // Red and white high-tech nodes (stretch & duplicate during explosion)
+          if (isGlitchingBg && Math.random() < 0.45) {
+            ctx.fillStyle = Math.random() < 0.55 ? '#ff0000' : '#ffffff';
+            ctx.fillRect(
+              drawX - 18 * Math.random(),
+              drawY,
+              12 + Math.random() * 54 * bgGlitchIntensity,
+              2 + Math.random() * 4
+            );
+          } else {
+            ctx.beginPath();
+            const r = (isGlitchingBg ? n.radius * (1 + Math.random() * 2) : n.radius) * n.spawnScale;
+            ctx.arc(drawX, drawY, Math.max(0.2, r), 0, Math.PI * 2);
+            ctx.fillStyle = n.isRed ? '#ff0000' : '#ffffff';
+            ctx.fill();
+          }
+        }
+
+        // Render active tesseract weapon effects (beams, shockwaves, vortex wells, dash trails)
+        for (let i = attackEffects.length - 1; i >= 0; i--) {
+          const ef = attackEffects[i];
+          ef.life -= ef.decay;
+          if (ef.life <= 0) {
+            attackEffects.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, Math.min(1, ef.life));
+
+          if (ef.type === 'POP_RING') {
+            ef.radius += (ef.maxRadius - ef.radius) * 0.25;
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = ef.isRed ? '#ff0000' : '#ffffff';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+          } else if (ef.type === 'SNIPER_BEAM') {
+            // Outer crimson plasma beam
+            ctx.beginPath();
+            ctx.moveTo(ef.x1, ef.y1);
+            ctx.lineTo(ef.x2, ef.y2);
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 7 * ef.life;
+            ctx.stroke();
+
+            // Inner pure white laser core
+            ctx.beginPath();
+            ctx.moveTo(ef.x1, ef.y1);
+            ctx.lineTo(ef.x2, ef.y2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.2 * ef.life;
+            ctx.stroke();
+
+            // Target lock diamond at impact point
+            const s = 10 + (1 - ef.life) * 14;
+            ctx.translate(ef.x2, ef.y2);
+            ctx.rotate(Math.PI / 4);
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 1.6;
+            ctx.strokeRect(-s / 2, -s / 2, s, s);
+          } else if (ef.type === 'DASH_TRAIL') {
+            ctx.beginPath();
+            ctx.moveTo(ef.x1, ef.y1);
+            ctx.lineTo(ef.x2, ef.y2);
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 16 * ef.life;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(ef.x1, ef.y1);
+            ctx.lineTo(ef.x2, ef.y2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 4 * ef.life;
+            ctx.stroke();
+          } else if (ef.type === 'NOVA_WAVE') {
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 6 * ef.life;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius * 0.94, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2 * ef.life;
+            ctx.stroke();
+
+            // Rotating 4D square shockwave frame
+            ctx.translate(ef.x, ef.y);
+            ctx.rotate(ef.rot || 0);
+            const sq = ef.radius * 0.72;
+            ctx.strokeStyle = 'rgba(255, 0, 0, 0.75)';
+            ctx.lineWidth = 1.8;
+            ctx.strokeRect(-sq, -sq, sq * 2, sq * 2);
+          } else if (ef.type === 'VORTEX_WELL') {
+            const grad = ctx.createRadialGradient(ef.x, ef.y, 6, ef.x, ef.y, ef.radius);
+            grad.addColorStop(0, 'rgba(255, 255, 255, 0.28)');
+            grad.addColorStop(0.35, 'rgba(255, 0, 0, 0.22)');
+            grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.translate(ef.x, ef.y);
+            ctx.rotate(ef.rot || 0);
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 1.6;
+            ctx.setLineDash([10, 8]);
+            ctx.beginPath();
+            ctx.arc(0, 0, ef.radius * 0.85, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.rotate(-(ef.rot || 0) * 2.2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.2;
+            const box = ef.radius * 0.45;
+            ctx.strokeRect(-box, -box, box * 2, box * 2);
+          } else if (ef.type === 'AIM_LINE') {
+            ctx.beginPath();
+            ctx.moveTo(ef.x1, ef.y1);
+            ctx.lineTo(ef.x2, ef.y2);
+            ctx.strokeStyle = 'rgba(255, 0, 0, 0.65)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([8, 6]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+          } else if (ef.type === 'CHAIN_BOLT') {
+            // Jagged 4D crimson & white arc lightning between chained dots
+            const segments = 6;
+            const dx = ef.x2 - ef.x1;
+            const dy = ef.y2 - ef.y1;
+            const len = Math.max(1, Math.hypot(dx, dy));
+            const nx = -dy / len;
+            const ny = dx / len;
+
+            const pts = [{ x: ef.x1, y: ef.y1 }];
+            for (let s = 1; s < segments; s++) {
+              const t = s / segments;
+              const jitter = (Math.random() - 0.5) * 26;
+              pts.push({
+                x: ef.x1 + dx * t + nx * jitter,
+                y: ef.y1 + dy * t + ny * jitter,
+              });
+            }
+            pts.push({ x: ef.x2, y: ef.y2 });
+
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x, pts[0].y);
+            for (let p = 1; p < pts.length; p++) {
+              ctx.lineTo(pts[p].x, pts[p].y);
+            }
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 4.5 * ef.life;
+            ctx.stroke();
+
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.6 * ef.life;
+            ctx.stroke();
+
+            // Node discharge ring at target dot
+            ctx.beginPath();
+            ctx.arc(ef.x2, ef.y2, 8 + (1 - ef.life) * 10, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+          } else if (ef.type === 'ORBITAL_BLADE') {
+            // 4D spinning plasma saw ring & orbiting diamond blades
+            ctx.translate(ef.x, ef.y);
+            ctx.rotate(ef.rot || 0);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, ef.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(255, 0, 0, 0.75)';
+            ctx.lineWidth = 2.2;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(0, 0, ef.radius * 0.86, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([6, 6]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            for (let b = 0; b < 4; b++) {
+              const ang = (b * Math.PI) / 2;
+              const bx = Math.cos(ang) * ef.radius;
+              const by = Math.sin(ang) * ef.radius;
+              ctx.save();
+              ctx.translate(bx, by);
+              ctx.rotate(ang + Math.PI / 4);
+              ctx.fillStyle = b % 2 === 0 ? '#ff0000' : '#ffffff';
+              ctx.fillRect(-7, -7, 14, 14);
+              ctx.strokeStyle = b % 2 === 0 ? '#ffffff' : '#ff0000';
+              ctx.lineWidth = 1.4;
+              ctx.strokeRect(-7, -7, 14, 14);
+              ctx.restore();
+            }
+          }
+
+          ctx.restore();
+        }
+
+        // Render disintegrating dot sparks
+        for (let i = dotSparks.length - 1; i >= 0; i--) {
+          const sp = dotSparks[i];
+          sp.x += sp.vx;
+          sp.y += sp.vy;
+          sp.vx *= 0.94;
+          sp.vy *= 0.94;
+          sp.life -= sp.decay;
+          if (sp.life <= 0) {
+            dotSparks.splice(i, 1);
+            continue;
+          }
+          ctx.fillStyle = sp.isRed ? '#ff0000' : '#ffffff';
+          ctx.globalAlpha = Math.max(0, sp.life);
+          ctx.fillRect(sp.x - sp.size / 2, sp.y - sp.size / 2, sp.size, sp.size);
+        }
+        ctx.globalAlpha = 1;
+
+        // Background raster slice tears during extreme explosion
+        if (isGlitchingBg) {
+          const tearCount = Math.floor(8 + bgGlitchIntensity * 10);
+          for (let t = 0; t < tearCount; t++) {
+            const ty = Math.random() * height;
+            const th = 2 + Math.random() * 24;
+            ctx.fillStyle =
+              Math.random() < 0.5 ? 'rgba(255, 0, 0, 0.35)' : 'rgba(255, 255, 255, 0.28)';
+            ctx.fillRect(Math.random() * width * 0.4, ty, width * (0.3 + Math.random() * 0.7), th);
+          }
+        }
+
+        requestAnimationFrame(animateBg);
+      }
+
+      animateBg();
+    }
+
+    /**
+     * Procedurally Generated Site Glitch Engine (#000000, #ff0000, #ffffff)
+     * Synthesizes a brand-new random anomaly seed on every click with 10 randomized
+     * glitch archetypes, irregular burst cadences, frame-stutter rates, HUD telemetry
+     * corruption, DOM clip-path slicing, hex data bleeds, and 3D perspective warps.
+     */
+    let activeGlitchRaf = null;
+    let activeGlitchCleanup = null;
+
+    function createRandomGlitchSeed(width, height, originX, originY) {
+      const archetypes = [
+        'SHEAR_CASCADE',
+        'SIGNAL_BLACKOUT',
+        'MEMORY_CORRUPTION',
+        'VECTOR_SHATTER',
+        'CHROMATIC_DESYNC',
+        'CRT_ROLL_DESYNC',
+        'VOID_PUNCTURE',
+        'HEX_DATA_BLEED',
+        'PERSPECTIVE_WARP',
+        'STATIC_STORM',
+      ];
+      const archetype = archetypes[Math.floor(Math.random() * archetypes.length)];
+
+      // Randomized duration, frame-stutter cadence, & multi-burst envelope
+      const duration = Math.floor(220 + Math.random() * 830);
+      const frameSkip = Math.random() < 0.45 ? Math.floor(2 + Math.random() * 2) : 1;
+      const burstCount = Math.floor(1 + Math.random() * 5);
+      const burstWindows = [];
+      for (let b = 0; b < burstCount; b++) {
+        const segStart = b / burstCount;
+        const segLen = (1 / burstCount) * (0.35 + Math.random() * 0.65);
+        burstWindows.push({ start: segStart, end: Math.min(1, segStart + segLen) });
+      }
+
+      // Randomized glyph & hex telemetry pools
+      const glyphAlphabets = [
+        '01',
+        '0123456789ABCDEF',
+        '#/\\X[]<>_+-=*?!',
+        '|!:/\\[]{}()',
+        '01X#//--',
+      ];
+      const hexSnippets = [
+        '0xFF0000',
+        'ERR_4D_RIFT',
+        'SYNC_LOST',
+        '0xDEAD_NODE',
+        'NULL_VECTOR',
+        'MEM_BLEED',
+        '01011001',
+        'DIM_FAULT',
+        'SYS//BREACH',
+        '0x0000_VOID',
+      ];
+
+      return {
+        archetype,
+        duration,
+        frameSkip,
+        burstWindows,
+        baseIntensity: 0.75 + Math.random() * 1.15,
+        originX: typeof originX === 'number' ? originX : Math.random() * width,
+        originY: typeof originY === 'number' ? originY : Math.random() * height,
+        sweepDirection: Math.random() < 0.5 ? 1 : -1,
+        sweepFrequency: 1.2 + Math.random() * 6,
+        horizontalTears: archetype === 'SHEAR_CASCADE' || archetype === 'CRT_ROLL_DESYNC' || Math.random() < 0.72,
+        verticalColumns: archetype === 'CHROMATIC_DESYNC' || Math.random() < 0.48,
+        pixelBlocks: archetype === 'MEMORY_CORRUPTION' || Math.random() < 0.62,
+        voidPunctures: archetype === 'VOID_PUNCTURE' || Math.random() < 0.42,
+        hexDataBleed: archetype === 'HEX_DATA_BLEED' || Math.random() < 0.46,
+        staticStorm: archetype === 'STATIC_STORM' || Math.random() < 0.38,
+        vectorFractures: archetype === 'VECTOR_SHATTER' || Math.random() < 0.5,
+        radialShockRays: archetype === 'VECTOR_SHATTER' || Math.random() < 0.44,
+        radialPolygons: archetype === 'VECTOR_SHATTER' || Math.random() < 0.35,
+        voidDropouts: archetype === 'SIGNAL_BLACKOUT' || Math.random() < 0.4,
+        crtRollBar: archetype === 'CRT_ROLL_DESYNC' || Math.random() < 0.36,
+        scanlines: Math.random() < 0.68,
+        uiWarp: Math.random() < 0.88,
+        perspectiveTilt: archetype === 'PERSPECTIVE_WARP' || Math.random() < 0.36,
+        cardMicroGlitch: Math.random() < 0.76,
+        domClipSlice: Math.random() < 0.54,
+        scalePulse: Math.random() < 0.52,
+        invertPulse: archetype === 'SIGNAL_BLACKOUT' ? Math.random() < 0.78 : Math.random() < 0.28,
+        textScramble: archetype === 'MEMORY_CORRUPTION' || archetype === 'HEX_DATA_BLEED' ? true : Math.random() < 0.62,
+        hudHijack: Math.random() < 0.72,
+        glyphSet: glyphAlphabets[Math.floor(Math.random() * glyphAlphabets.length)],
+        hexSnippets,
+        scanlineStep: Math.floor(3 + Math.random() * 11),
+        tearMaxHeight: Math.floor(5 + Math.random() * 44),
+        jitterRange: Math.floor(8 + Math.random() * 28),
+        chromaticAngle: Math.random() * Math.PI * 2,
+        dominantPalette: Math.random() < 0.5 ? 'crimson' : Math.random() < 0.78 ? 'balanced' : 'stark',
+      };
+    }
+
+    function triggerSiteGlitch(originX, originY) {
+      const overlay = document.getElementById('glitch-overlay');
+      const bgCanvas = document.getElementById('bg-canvas');
+      if (!overlay) return;
+      const ctx = overlay.getContext('2d');
+      if (!ctx) return;
+
+      if (activeGlitchCleanup) {
+        activeGlitchCleanup();
+      }
+
+      const width = (overlay.width = window.innerWidth);
+      const height = (overlay.height = window.innerHeight);
+      overlay.classList.remove('hidden');
+
+      const seed = createRandomGlitchSeed(width, height, originX, originY);
+
+      // Randomly select visible text nodes to corrupt temporarily
+      const originalTexts = new Map();
+      if (seed.textScramble && portfolioUi && !isBgOnlyMode) {
+        const walker = document.createTreeWalker(portfolioUi, NodeFilter.SHOW_TEXT, null);
+        const candidates = [];
+        let node;
+        while ((node = walker.nextNode())) {
+          const trimmed = node.nodeValue ? node.nodeValue.trim() : '';
+          if (trimmed.length >= 3 && trimmed.length <= 44) {
+            candidates.push(node);
+          }
+        }
+        const pickCount = Math.min(candidates.length, Math.floor(2 + Math.random() * 8));
+        for (let i = 0; i < pickCount; i++) {
+          const randIdx = Math.floor(Math.random() * candidates.length);
+          const chosen = candidates.splice(randIdx, 1)[0];
+          if (chosen && !originalTexts.has(chosen)) {
+            originalTexts.set(chosen, chosen.nodeValue);
+          }
+        }
+      }
+
+      // Randomly pick individual cards/headers to warp or clip-slice independently
+      const glitchedElements = [];
+      if ((seed.cardMicroGlitch || seed.domClipSlice) && portfolioUi && !isBgOnlyMode) {
+        const targets = Array.from(portfolioUi.querySelectorAll('header, section, nav, article, a, button'));
+        const warpCount = Math.min(targets.length, Math.floor(2 + Math.random() * 7));
+        for (let i = 0; i < warpCount; i++) {
+          const idx = Math.floor(Math.random() * targets.length);
+          const el = targets.splice(idx, 1)[0];
+          if (el) glitchedElements.push(el);
+        }
+      }
+
+      const originalClockText = hudClock ? hudClock.textContent : '';
+      const startTime = performance.now();
+      let frameCounter = 0;
+
+      function cleanupGlitch() {
+        if (activeGlitchRaf) {
+          cancelAnimationFrame(activeGlitchRaf);
+          activeGlitchRaf = null;
+        }
+        ctx.clearRect(0, 0, width, height);
+        overlay.classList.add('hidden');
+        if (portfolioUi) {
+          portfolioUi.style.transform = '';
+          portfolioUi.style.filter = '';
+        }
+        if (bgCanvas) {
+          bgCanvas.style.transform = '';
+        }
+        if (hudClock && originalClockText) {
+          hudClock.textContent = originalClockText;
+        }
+        glitchedElements.forEach((el) => {
+          el.style.transform = '';
+          el.style.boxShadow = '';
+          el.style.clipPath = '';
+        });
+        originalTexts.forEach((origVal, textNode) => {
+          textNode.nodeValue = origVal;
+        });
+        originalTexts.clear();
+        activeGlitchCleanup = null;
+      }
+
+      activeGlitchCleanup = cleanupGlitch;
+
+      function pickStrictColor(alpha) {
+        const roll = Math.random();
+        if (seed.dominantPalette === 'crimson') {
+          if (roll < 0.64) return `rgba(255, 0, 0, ${alpha})`;
+          if (roll < 0.86) return `rgba(255, 255, 255, ${alpha})`;
+          return `rgba(0, 0, 0, ${Math.min(0.95, alpha + 0.25)})`;
+        }
+        if (seed.dominantPalette === 'stark') {
+          if (roll < 0.48) return `rgba(255, 255, 255, ${alpha})`;
+          if (roll < 0.82) return `rgba(255, 0, 0, ${alpha})`;
+          return `rgba(0, 0, 0, ${Math.min(0.95, alpha + 0.3)})`;
+        }
+        if (roll < 0.44) return `rgba(255, 0, 0, ${alpha})`;
+        if (roll < 0.8) return `rgba(255, 255, 255, ${alpha})`;
+        return `rgba(0, 0, 0, ${Math.min(0.95, alpha + 0.25)})`;
+      }
+
+      function renderGlitchFrame(now) {
+        const elapsed = now - startTime;
+        if (elapsed >= seed.duration) {
+          cleanupGlitch();
+          return;
+        }
+
+        frameCounter++;
+        if (seed.frameSkip > 1 && frameCounter % seed.frameSkip !== 0) {
+          activeGlitchRaf = requestAnimationFrame(renderGlitchFrame);
+          return;
+        }
+
+        const progress = elapsed / seed.duration;
+        const inActiveBurst = seed.burstWindows.some((w) => progress >= w.start && progress <= w.end);
+
         ctx.clearRect(0, 0, width, height);
 
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          p.x += p.vx;
-          p.y += p.vy;
+        if (!inActiveBurst) {
+          if (portfolioUi) {
+            portfolioUi.style.transform = '';
+            portfolioUi.style.filter = '';
+          }
+          if (bgCanvas) {
+            bgCanvas.style.transform = '';
+          }
+          glitchedElements.forEach((el) => {
+            el.style.transform = '';
+            el.style.boxShadow = '';
+            el.style.clipPath = '';
+          });
+          activeGlitchRaf = requestAnimationFrame(renderGlitchFrame);
+          return;
+        }
 
-          if (p.x < 0 || p.x > width) p.vx *= -1;
-          if (p.y < 0 || p.y > height) p.vy *= -1;
+        const intensity = (1 - progress * 0.48) * seed.baseIntensity;
 
-          // Connect nearby nodes with bright white lines
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const dx = p.x - p2.x;
-            const dy = p.y - p2.y;
-            const dist = Math.hypot(dx, dy);
+        // 1. Signal Blackout / Strobe Flash (#000000, #ff0000, #ffffff)
+        if (seed.voidDropouts && Math.random() < 0.38) {
+          const roll = Math.random();
+          ctx.fillStyle =
+            roll < 0.45
+              ? `rgba(0, 0, 0, ${(0.58 * Math.min(1.2, intensity)).toFixed(2)})`
+              : roll < 0.78
+              ? `rgba(255, 0, 0, ${(0.17 * intensity).toFixed(2)})`
+              : `rgba(255, 255, 255, ${(0.13 * intensity).toFixed(2)})`;
+          ctx.fillRect(0, 0, width, height);
+        }
 
-            if (dist < 145) {
-              const alpha = (1 - dist / 145) * 0.75;
-              ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-              ctx.lineWidth = 1.15;
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.stroke();
+        // 2. CRT Rolling Sync Bar
+        if (seed.crtRollBar) {
+          const rollY = (((progress * seed.sweepFrequency * seed.sweepDirection) % 1 + 1) % 1) * height;
+          const bandH = 26 + Math.random() * 68;
+          ctx.fillStyle = `rgba(255, 0, 0, ${(0.16 * intensity).toFixed(2)})`;
+          ctx.fillRect(0, rollY - bandH / 2, width, bandH);
+          ctx.fillStyle = `rgba(255, 255, 255, ${(0.25 * intensity).toFixed(2)})`;
+          ctx.fillRect(0, rollY, width, 2);
+        }
+
+        // 3. Directional Sweep & Horizontal Tear Slices
+        if (seed.horizontalTears) {
+          const sweepCenter =
+            ((progress * seed.sweepFrequency * seed.sweepDirection + 10) % 1) * height;
+          const sliceCount = Math.floor(6 + Math.random() * 18 * intensity);
+          for (let i = 0; i < sliceCount; i++) {
+            const nearSweep = Math.random() < 0.45;
+            const sliceY = nearSweep
+              ? (sweepCenter + (Math.random() - 0.5) * 160 + height) % height
+              : Math.random() * height;
+            const sliceH = Math.random() * seed.tearMaxHeight + 2;
+            const shiftX = (Math.random() - 0.5) * 145 * intensity;
+            const sliceW = width * (0.2 + Math.random() * 0.8);
+            const sliceX = Math.random() * (width - sliceW * 0.35) + shiftX;
+            const alpha = Number((0.2 + Math.random() * 0.5 * Math.min(1.2, intensity)).toFixed(2));
+            ctx.fillStyle = pickStrictColor(alpha);
+            ctx.fillRect(sliceX, sliceY, sliceW, sliceH);
+          }
+        }
+
+        // 4. Vertical Sync-Drop Columns
+        if (seed.verticalColumns) {
+          const colCount = Math.floor(3 + Math.random() * 11 * intensity);
+          for (let c = 0; c < colCount; c++) {
+            const colX = Math.random() * width;
+            const colW = Math.random() * 22 + 2;
+            const colH = height * (0.15 + Math.random() * 0.8);
+            const colY = Math.random() * (height - colH * 0.45);
+            ctx.fillStyle = pickStrictColor(Number((0.22 + Math.random() * 0.42).toFixed(2)));
+            ctx.fillRect(colX, colY, colW, colH);
+          }
+        }
+
+        // 5. Random Digital Memory-Block Clusters
+        if (seed.pixelBlocks) {
+          const blockCount = Math.floor(6 + Math.random() * 16 * intensity);
+          for (let b = 0; b < blockCount; b++) {
+            const bw = 12 + Math.random() * 140;
+            const bh = 3 + Math.random() * 20;
+            const bx = Math.random() * width;
+            const by = Math.random() * height;
+            ctx.fillStyle = Math.random() < 0.5 ? '#ff0000' : Math.random() < 0.82 ? '#ffffff' : '#000000';
+            ctx.globalAlpha = Math.min(0.88, (0.32 + Math.random() * 0.48) * intensity);
+            ctx.fillRect(bx, by, bw, bh);
+          }
+          ctx.globalAlpha = 1;
+        }
+
+        // 6. Void Punctures (Jagged #000000 Cutouts with #ff0000 / #ffffff Wireframes)
+        if (seed.voidPunctures) {
+          const voidCount = Math.floor(2 + Math.random() * 6);
+          for (let v = 0; v < voidCount; v++) {
+            const vw = 40 + Math.random() * 210;
+            const vh = 18 + Math.random() * 90;
+            const vx = Math.random() * (width - vw);
+            const vy = Math.random() * (height - vh);
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(vx, vy, vw, vh);
+            ctx.strokeStyle = Math.random() < 0.65 ? '#ff0000' : '#ffffff';
+            ctx.lineWidth = 1.25;
+            ctx.strokeRect(vx, vy, vw, vh);
+          }
+        }
+
+        // 7. Localized High-Frequency Digital Static Snow
+        if (seed.staticStorm) {
+          const zoneCount = Math.floor(2 + Math.random() * 4);
+          for (let z = 0; z < zoneCount; z++) {
+            const zx = Math.random() * width;
+            const zy = Math.random() * height;
+            const zw = 60 + Math.random() * 180;
+            const zh = 24 + Math.random() * 90;
+            const specks = Math.floor(25 + Math.random() * 45);
+            for (let s = 0; s < specks; s++) {
+              ctx.fillStyle = Math.random() < 0.55 ? '#ffffff' : '#ff0000';
+              ctx.fillRect(zx + Math.random() * zw, zy + Math.random() * zh, 2 + Math.random() * 6, 2);
             }
           }
+        }
 
-          // Connect to pointer if nearby with bright white lines
-          if (pointer.x !== null && pointer.y !== null) {
-            const pdx = p.x - pointer.x;
-            const pdy = p.y - pointer.y;
-            const pDist = Math.hypot(pdx, pdy);
-            if (pDist < 170) {
-              ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - pDist / 170) * 0.85})`;
-              ctx.lineWidth = 1.25;
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(pointer.x, pointer.y);
-              ctx.stroke();
-            }
+        // 8. Procedural Hex / Telemetry Data Bleed
+        if (seed.hexDataBleed) {
+          const textCount = Math.floor(3 + Math.random() * 8);
+          for (let t = 0; t < textCount; t++) {
+            const label = seed.hexSnippets[Math.floor(Math.random() * seed.hexSnippets.length)];
+            const tx = Math.random() * (width - 120);
+            const ty = Math.random() * height;
+            const fontSize = Math.floor(10 + Math.random() * 10);
+            ctx.font = `bold ${fontSize}px "JetBrains Mono", monospace`;
+            ctx.fillStyle = Math.random() < 0.62 ? '#ff0000' : '#ffffff';
+            ctx.globalAlpha = Math.min(0.92, 0.55 * intensity);
+            ctx.fillText(label, tx, ty);
           }
+          ctx.globalAlpha = 1;
+        }
 
-          // Render node dot (#ff0000 or #ffffff)
-          ctx.fillStyle = p.isRed ? '#ff0000' : '#ffffff';
+        // 9. Radial Vector Shock Rays & Shattered Polygons from Tesseract Origin
+        if (seed.radialShockRays) {
+          const rayCount = Math.floor(4 + Math.random() * 10);
+          for (let r = 0; r < rayCount; r++) {
+            const angle = Math.random() * Math.PI * 2;
+            const len = (120 + Math.random() * Math.max(width, height) * 0.65) * intensity;
+            ctx.beginPath();
+            ctx.moveTo(seed.originX, seed.originY);
+            ctx.lineTo(
+              seed.originX + Math.cos(angle) * len,
+              seed.originY + Math.sin(angle) * len
+            );
+            ctx.strokeStyle = Math.random() < 0.6 ? '#ff0000' : '#ffffff';
+            ctx.lineWidth = Math.random() * 2.2 + 0.7;
+            ctx.globalAlpha = Math.min(0.85, 0.48 * intensity);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+        }
+
+        if (seed.radialPolygons) {
+          const sides = Math.floor(3 + Math.random() * 5);
+          const radius = (40 + progress * 260) * intensity;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          for (let s = 0; s <= sides; s++) {
+            const a = (s / sides) * Math.PI * 2 + Math.random() * 0.35;
+            const rJitter = radius * (0.75 + Math.random() * 0.5);
+            const px = seed.originX + Math.cos(a) * rJitter;
+            const py = seed.originY + Math.sin(a) * rJitter;
+            if (s === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+          }
+          ctx.strokeStyle = Math.random() < 0.55 ? '#ff0000' : '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+
+        // 10. Sharp Geometric Vector Fractures
+        if (seed.vectorFractures) {
+          const lineCount = Math.floor(2 + Math.random() * 7);
+          for (let l = 0; l < lineCount; l++) {
+            ctx.beginPath();
+            ctx.moveTo(Math.random() * width, Math.random() * height);
+            ctx.lineTo(Math.random() * width, Math.random() * height);
+            if (Math.random() < 0.5) {
+              ctx.lineTo(Math.random() * width, Math.random() * height);
+            }
+            ctx.strokeStyle = Math.random() < 0.55 ? '#ff0000' : '#ffffff';
+            ctx.lineWidth = Math.random() * 2 + 0.8;
+            ctx.globalAlpha = Math.min(0.9, 0.5 * intensity);
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+        }
+
+        // 11. Variable-Pitch CRT Scanlines
+        if (seed.scanlines) {
+          ctx.fillStyle = `rgba(255, 255, 255, ${(0.065 * intensity).toFixed(3)})`;
+          const offset = Math.floor(Math.random() * seed.scanlineStep);
+          for (let y = offset; y < height; y += seed.scanlineStep) {
+            ctx.fillRect(0, y, width, 1.5);
+          }
+        }
+
+        // 12. HUD Clock Telemetry Hijack & Random Text Glyph Corruption
+        if (seed.hudHijack && hudClock && Math.random() < 0.65) {
+          hudClock.textContent = seed.hexSnippets[Math.floor(Math.random() * seed.hexSnippets.length)];
+        }
+
+        if (originalTexts.size > 0) {
+          originalTexts.forEach((origVal, textNode) => {
+            if (Math.random() < 0.72) {
+              let corrupted = '';
+              for (let ch = 0; ch < origVal.length; ch++) {
+                const c = origVal[ch];
+                if (c !== ' ' && c !== '\n' && Math.random() < 0.38 * Math.min(1.2, intensity)) {
+                  corrupted += seed.glyphSet[Math.floor(Math.random() * seed.glyphSet.length)];
+                } else {
+                  corrupted += c;
+                }
+              }
+              textNode.nodeValue = corrupted;
+            } else {
+              textNode.nodeValue = origVal;
+            }
+          });
+        }
+
+        // 13. Individual Card Micro-Warps & DOM Clip-Path Slicing
+        if (glitchedElements.length > 0) {
+          glitchedElements.forEach((el) => {
+            if (Math.random() < 0.68) {
+              const ex = ((Math.random() - 0.5) * 20 * intensity).toFixed(1);
+              const ey = ((Math.random() - 0.5) * 9 * intensity).toFixed(1);
+              const eskew = ((Math.random() - 0.5) * 4.5 * intensity).toFixed(2);
+              el.style.transform = `translate3d(${ex}px, ${ey}px, 0) skewX(${eskew}deg)`;
+              el.style.boxShadow =
+                Math.random() < 0.5
+                  ? '0 0 18px rgba(255, 0, 0, 0.85)'
+                  : '0 0 14px rgba(255, 255, 255, 0.65)';
+              if (seed.domClipSlice && Math.random() < 0.45) {
+                const topCut = Math.floor(Math.random() * 28);
+                const bottomCut = Math.floor(Math.random() * 28);
+                el.style.clipPath = `inset(${topCut}% 0 ${bottomCut}% 0)`;
+              } else {
+                el.style.clipPath = '';
+              }
+            } else {
+              el.style.transform = '';
+              el.style.boxShadow = '';
+              el.style.clipPath = '';
+            }
+          });
+        }
+
+        // 14. Global UI Jitter, 3D Perspective Tilt, Chromatic Split & Contrast Inversion
+        if (seed.uiWarp && portfolioUi && !isBgOnlyMode) {
+          const jx = ((Math.random() - 0.5) * seed.jitterRange * intensity).toFixed(1);
+          const jy = ((Math.random() - 0.5) * (seed.jitterRange * 0.55) * intensity).toFixed(1);
+          const skew = ((Math.random() - 0.5) * 3.8 * intensity).toFixed(2);
+          const scale = seed.scalePulse
+            ? (1 + (Math.random() - 0.45) * 0.032 * intensity).toFixed(4)
+            : '1';
+          const tiltTransform = seed.perspectiveTilt
+            ? `perspective(950px) rotateX(${((Math.random() - 0.5) * 3.5 * intensity).toFixed(2)}deg) rotateY(${((Math.random() - 0.5) * 4.5 * intensity).toFixed(2)}deg) `
+            : '';
+          portfolioUi.style.transform = `${tiltTransform}translate3d(${jx}px, ${jy}px, 0) skewX(${skew}deg) scale(${scale})`;
+
+          const filters = [];
+          if (Math.random() < 0.78) {
+            const splitDist = (2 + Math.random() * 6.5) * intensity;
+            const ox = (Math.cos(seed.chromaticAngle) * splitDist).toFixed(1);
+            const oy = (Math.sin(seed.chromaticAngle) * splitDist).toFixed(1);
+            filters.push(`drop-shadow(${-ox}px ${-oy}px 0 #ff0000)`);
+            filters.push(`drop-shadow(${ox}px ${oy}px 0 #ffffff)`);
+          }
+          if (seed.invertPulse && Math.random() < 0.3) {
+            filters.push('invert(1)');
+          }
+          portfolioUi.style.filter = filters.join(' ');
+        }
+
+        if (bgCanvas) {
+          const bx = ((Math.random() - 0.5) * 20 * intensity).toFixed(1);
+          const by = ((Math.random() - 0.5) * 12 * intensity).toFixed(1);
+          bgCanvas.style.transform = `translate3d(${bx}px, ${by}px, 0)`;
+        }
+
+        activeGlitchRaf = requestAnimationFrame(renderGlitchFrame);
+      }
+
+      activeGlitchRaf = requestAnimationFrame(renderGlitchFrame);
+    }
+
+    /**
+     * Interactive Roaming 4D Tesseract (Hypercube) in #ff0000 & #ffffff
+     */
+    function initTesseractRoamer() {
+      const canvas = document.getElementById('tesseract-roamer');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const size = 120;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = size * dpr;
+      canvas.height = size * dpr;
+      ctx.scale(dpr, dpr);
+
+      // Generate 16 vertices of a 4D hypercube: (±1, ±1, ±1, ±1)
+      const vertices4D = [];
+      for (let i = 0; i < 16; i++) {
+        vertices4D.push([
+          i & 1 ? 1 : -1,
+          i & 2 ? 1 : -1,
+          i & 4 ? 1 : -1,
+          i & 8 ? 1 : -1,
+        ]);
+      }
+
+      // Generate 32 edges connecting vertices that differ by 1 coordinate
+      const edges = [];
+      for (let i = 0; i < 16; i++) {
+        for (let j = i + 1; j < 16; j++) {
+          const diff = i ^ j;
+          if (diff && (diff & (diff - 1)) === 0) {
+            edges.push({ a: i, b: j, isWEdge: diff === 8 });
+          }
+        }
+      }
+
+      // Screen roaming physics state
+      let posX = Math.max(24, window.innerWidth - size - 48);
+      let posY = Math.max(96, window.innerHeight * 0.28);
+      let velX = -1.15;
+      let velY = 0.85;
+      let driftPhase = Math.random() * Math.PI * 2;
+      let isLaserMode = false;
+
+      // 4D rotation angles & interactive burst state
+      let angleXW = 0.4;
+      let angleYW = 0.2;
+      let angleZW = 0.6;
+      let angleXY = 0.1;
+      let spinBoost = 0;
+      let pulseEnergy = 0;
+      let isHovered = false;
+
+      // BG-Only Mode Annihilator State Machine (Hunts & destroys BG dots with 6 distinct 4D attacks)
+      const HUNTER_ATTACKS = ['DASH', 'SNIPER', 'CHAIN', 'VORTEX', 'ORBITAL', 'NOVA'];
+      let hunterAttackIndex = 0;
+      let hunterState = 'IDLE'; // 'IDLE' | 'SEEK' | 'DASH' | 'SNIPER' | 'CHAIN' | 'VORTEX' | 'ORBITAL' | 'NOVA'
+      let hunterTimer = 0;
+      let hunterTargetX = posX + size / 2;
+      let hunterTargetY = posY + size / 2;
+      let hunterDashRemaining = 0;
+      let hunterDashVx = 0;
+      let hunterDashVy = 0;
+      let hunterShotsRemaining = 0;
+      let hunterChainsRemaining = 0;
+      let hunterNovaRadius = 0;
+
+      function pickDensestDotCluster() {
+        if (!bgNetwork || !bgNetwork.nodes.length) return null;
+        const alive = bgNetwork.nodes.filter((n) => n.alive);
+        if (!alive.length) return null;
+
+        let bestNode = alive[Math.floor(Math.random() * alive.length)];
+        let bestScore = -1;
+        const sampleCount = Math.min(18, alive.length);
+
+        for (let s = 0; s < sampleCount; s++) {
+          const candidate = alive[Math.floor(Math.random() * alive.length)];
+          let neighbors = 0;
+          for (let j = 0; j < alive.length; j++) {
+            const d = Math.hypot(candidate.x - alive[j].x, candidate.y - alive[j].y);
+            if (d < 190) neighbors++;
+          }
+          if (neighbors > bestScore) {
+            bestScore = neighbors;
+            bestNode = candidate;
+          }
+        }
+        return bestNode;
+      }
+
+      function pickNextHunterAttack() {
+        const atk = HUNTER_ATTACKS[hunterAttackIndex % HUNTER_ATTACKS.length];
+        hunterAttackIndex++;
+        return atk;
+      }
+
+      function beginHunterAttack(attackName) {
+        hunterState = attackName;
+        hunterTimer = 0;
+        if (attackName === 'DASH') {
+          hunterDashRemaining = 3;
+        } else if (attackName === 'SNIPER') {
+          hunterShotsRemaining = 6;
+        } else if (attackName === 'CHAIN') {
+          hunterChainsRemaining = 4;
+        } else if (attackName === 'NOVA') {
+          hunterNovaRadius = 18;
+        }
+      }
+
+      // Locked #ff0000 and #ffffff color palette
+      const TESSERACT_STYLE = {
+        mainColor: '#ff0000',
+        wColor: '#ffffff',
+        nodeColor: '#ffffff',
+      };
+
+      let activeSpeechRaf = null;
+      let activeSpeechCleanup = null;
+
+      /**
+       * Displays a glitchy warning readout attached to the 4D tesseract after reboot
+       */
+      function triggerTesseractGlitchSpeech() {
+        const speechEl = document.getElementById('tesseract-speech');
+        const speechTextEl = document.getElementById('tesseract-speech-text');
+        if (!speechEl || !speechTextEl) return;
+
+        if (activeSpeechCleanup) {
+          activeSpeechCleanup();
+        }
+
+        const warnings = ['Dont touch me', 'Leave me alone', 'Dont test me'];
+        const chosenPhrase = warnings[Math.floor(Math.random() * warnings.length)];
+        const glitchChars = '01X#/\\[]<>_+-=*?!|@%';
+        const speechDuration = 3800;
+        const speechStart = performance.now();
+
+        speechTextEl.textContent = chosenPhrase;
+        speechEl.classList.remove('hidden');
+
+        function cleanupSpeech() {
+          if (activeSpeechRaf) {
+            cancelAnimationFrame(activeSpeechRaf);
+            activeSpeechRaf = null;
+          }
+          speechEl.classList.add('hidden');
+          speechEl.style.transform = '';
+          speechEl.style.borderColor = '';
+          speechEl.style.clipPath = '';
+          speechTextEl.style.textShadow = '';
+          speechTextEl.style.color = '';
+          speechTextEl.textContent = chosenPhrase;
+          activeSpeechCleanup = null;
+        }
+
+        activeSpeechCleanup = cleanupSpeech;
+
+        function animateSpeech(now) {
+          const elapsed = now - speechStart;
+          if (elapsed >= speechDuration) {
+            cleanupSpeech();
+            return;
+          }
+
+          const progress = elapsed / speechDuration;
+          const isBurst = progress < 0.22 || progress > 0.85 || Math.random() < 0.24;
+
+          const boxW = speechEl.offsetWidth || 168;
+          const boxH = speechEl.offsetHeight || 36;
+          let targetX = posX + size / 2 - boxW / 2;
+          targetX = Math.max(12, Math.min(window.innerWidth - boxW - 12, targetX));
+          let targetY = posY > boxH + 24 ? posY - boxH - 8 : posY + size + 8;
+          targetY = Math.max(12, Math.min(window.innerHeight - boxH - 12, targetY));
+
+          if (isBurst) {
+            const jx = (Math.random() - 0.5) * 16;
+            const jy = (Math.random() - 0.5) * 9;
+            const skew = ((Math.random() - 0.5) * 14).toFixed(1);
+            speechEl.style.transform = `translate3d(${(targetX + jx).toFixed(1)}px, ${(targetY + jy).toFixed(1)}px, 0) skewX(${skew}deg)`;
+
+            const split = (2 + Math.random() * 4).toFixed(1);
+            speechTextEl.style.textShadow = `${-split}px 0 #ff0000, ${split}px 0 #ffffff`;
+            speechTextEl.style.color = Math.random() < 0.28 ? '#ff0000' : '#ffffff';
+            speechEl.style.borderColor = Math.random() < 0.5 ? '#ff0000' : '#ffffff';
+
+            if (Math.random() < 0.35) {
+              const topCut = Math.floor(Math.random() * 24);
+              const botCut = Math.floor(Math.random() * 24);
+              speechEl.style.clipPath = `inset(${topCut}% 0 ${botCut}% 0)`;
+            } else {
+              speechEl.style.clipPath = '';
+            }
+
+            const corruptChance = progress < 0.16 || progress > 0.88 ? 0.55 : 0.22;
+            let glitched = '';
+            for (let i = 0; i < chosenPhrase.length; i++) {
+              const ch = chosenPhrase[i];
+              if (ch !== ' ' && Math.random() < corruptChance) {
+                glitched += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+              } else {
+                glitched += ch;
+              }
+            }
+            speechTextEl.textContent = glitched;
+          } else {
+            speechEl.style.transform = `translate3d(${targetX.toFixed(1)}px, ${targetY.toFixed(1)}px, 0)`;
+            speechTextEl.style.textShadow = '-1.5px 0 #ff0000, 1.5px 0 #ffffff';
+            speechTextEl.style.color = '#ffffff';
+            speechEl.style.borderColor = '#ff0000';
+            speechEl.style.clipPath = '';
+            speechTextEl.textContent = chosenPhrase;
+          }
+
+          activeSpeechRaf = requestAnimationFrame(animateSpeech);
+        }
+
+        activeSpeechRaf = requestAnimationFrame(animateSpeech);
+      }
+
+      /**
+       * 10% Rare Event: Tesseract slowly descends to the bottom of the screen,
+       * executes an extended 4D geometric charge-up, fires a stationary 4D hyper-laser
+       * matching the tesseract's #ff0000 & #ffffff wireframe design, locks scrolling,
+       * glitches the site, surges to the center for a massive 4D explosion with extreme
+       * site-wide glitching, and initiates a full system reboot.
+       */
+      function triggerTesseractLaserMeltdown() {
+        if (isLaserMode) return;
+        isLaserMode = true;
+
+        if (activeGlitchCleanup) {
+          activeGlitchCleanup();
+        }
+        if (activeSpeechCleanup) {
+          activeSpeechCleanup();
+        }
+
+        const overlay = document.getElementById('glitch-overlay');
+        const bgCanvas = document.getElementById('bg-canvas');
+        const rebootScreen = document.getElementById('reboot-screen');
+        const rebootLogs = document.getElementById('reboot-logs');
+        const rebootBar = document.getElementById('reboot-bar');
+        const rebootPercent = document.getElementById('reboot-percent');
+
+        const ctxOverlay = overlay ? overlay.getContext('2d') : null;
+        if (overlay) {
+          overlay.width = window.innerWidth;
+          overlay.height = window.innerHeight;
+          overlay.classList.remove('hidden');
+        }
+
+        // Gather UI blocks to physically shatter and drop when struck by the laser
+        const breakableBlocks = portfolioUi
+          ? Array.from(portfolioUi.querySelectorAll('header, section, nav, article, footer')).map((el) => ({
+              el,
+              breakAt: 0.06 + Math.random() * 0.72,
+              broken: false,
+              dropY: 0,
+              dropVy: 0,
+              rot: 0,
+              rotV: (Math.random() - 0.5) * 7.5,
+              shiftX: (Math.random() - 0.5) * 160,
+            }))
+          : [];
+
+        const sparks = [];
+        const chargeParticles = [];
+        const explosionParticles = [];
+        const explosionShards = [];
+        const explosionTextBackups = new Map();
+        const explosionSubElements = portfolioUi
+          ? Array.from(portfolioUi.querySelectorAll('a, button, h1, h2, h3, p, span, input, svg'))
+          : [];
+        let explosionInitialized = false;
+        let isScrollLocked = false;
+        const originalClockText = hudClock ? hudClock.textContent : '';
+        const explosionGlyphs = '01X#/\\[]<>_+-=*?!|@%';
+        const explosionPanicCodes = [
+          'ERR_4D_DETONATION',
+          '0xFF0000_CRITICAL',
+          'DIM_COLLAPSE',
+          'VOID_BREACH',
+          '0xDEAD_CORE',
+          'SYS_SHATTER',
+          'KERNEL_PANIC',
+          'MEM_OVERFLOW',
+        ];
+        const laserGlitchCodes = [
+          '0xFF0000',
+          'ERR_4D_BEAM',
+          'SYS//BREACH',
+          'SYNC_LOST',
+          '0xDEAD_NODE',
+          'CORE_FAULT',
+        ];
+
+        function preventScrollEvent(e) {
+          e.preventDefault();
+        }
+
+        function preventScrollKeys(e) {
+          const blockedKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+          if (blockedKeys.includes(e.key)) {
+            e.preventDefault();
+          }
+        }
+
+        function lockViewportScroll() {
+          if (isScrollLocked) return;
+          isScrollLocked = true;
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+          window.addEventListener('wheel', preventScrollEvent, { passive: false });
+          window.addEventListener('touchmove', preventScrollEvent, { passive: false });
+          window.addEventListener('keydown', preventScrollKeys, { passive: false });
+        }
+
+        function unlockViewportScroll() {
+          if (!isScrollLocked) return;
+          isScrollLocked = false;
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+          window.removeEventListener('wheel', preventScrollEvent);
+          window.removeEventListener('touchmove', preventScrollEvent);
+          window.removeEventListener('keydown', preventScrollKeys);
+        }
+
+        // Helper: Draws a nested 4D hypercube wireframe cross-section matching the tesseract
+        function drawTesseractGlyph(targetCtx, cx, cy, radius, rotAngle, alpha) {
+          targetCtx.save();
+          targetCtx.translate(cx, cy);
+          targetCtx.rotate(rotAngle);
+          targetCtx.globalAlpha = alpha;
+
+          const outer = radius;
+          const inner = radius * 0.52;
+
+          // Outer crimson square
+          targetCtx.strokeStyle = '#ff0000';
+          targetCtx.lineWidth = 2;
+          targetCtx.strokeRect(-outer, -outer, outer * 2, outer * 2);
+
+          // Inner counter-rotated white square
+          targetCtx.save();
+          targetCtx.rotate(-rotAngle * 1.8);
+          targetCtx.strokeStyle = '#ffffff';
+          targetCtx.lineWidth = 1.6;
+          targetCtx.strokeRect(-inner, -inner, inner * 2, inner * 2);
+
+          // 4D diagonal hyper-struts linking inner & outer corners
+          targetCtx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+          targetCtx.lineWidth = 1.1;
+          targetCtx.beginPath();
+          targetCtx.moveTo(-outer, -outer);
+          targetCtx.lineTo(-inner, -inner);
+          targetCtx.moveTo(outer, -outer);
+          targetCtx.lineTo(inner, -inner);
+          targetCtx.moveTo(outer, outer);
+          targetCtx.lineTo(inner, inner);
+          targetCtx.moveTo(-outer, outer);
+          targetCtx.lineTo(-inner, inner);
+          targetCtx.stroke();
+          targetCtx.restore();
+
+          targetCtx.restore();
+        }
+
+        const startX = posX;
+        const startY = posY;
+        const startTime = performance.now();
+
+        // Slower, dramatic pacing with extended charge-up and center explosion
+        const descendEnd = 1500;
+        const chargeEnd = 4400;
+        const laserEnd = 7800;
+        const centerMoveEnd = 8450;
+        const explosionEnd = 10650;
+        const blackoutEnd = 11550;
+        const rebootEnd = 14150;
+
+        let loggedStep = 0;
+        const bootSteps = [
+          '> [0x01] HALTING ROGUE 4D HYPERCUBE EMITTER...',
+          '> [0x02] PURGING CORRUPTED DOM SECTORS...',
+          '> [0x03] REBUILDING #000000 / #FF0000 / #FFFFFF MATRIX...',
+          '> [0x04] RECALIBRATING TELEMETRY & ARCHIVE NODES...',
+          '> [0x05] SYSTEM INTEGRITY RESTORED. ONLINE.',
+        ];
+
+        function runMeltdownFrame(now) {
+          const elapsed = now - startTime;
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+
+          if (overlay && (overlay.width !== width || overlay.height !== height)) {
+            overlay.width = width;
+            overlay.height = height;
+          }
+
+          if (ctxOverlay) {
+            ctxOverlay.clearRect(0, 0, width, height);
+          }
+
+          const bottomTargetX = width / 2 - size / 2;
+          const bottomTargetY = height - size - 16;
+
+          // PHASE 1: Slow, deliberate descent to bottom center
+          if (elapsed < descendEnd) {
+            const t = elapsed / descendEnd;
+            const ease = 1 - Math.pow(1 - t, 3);
+            posX = startX + (bottomTargetX - startX) * ease;
+            posY = startY + (bottomTargetY - startY) * ease;
+            spinBoost = 0.06 + t * 0.14;
+            pulseEnergy = t * 0.45;
+
+            if (ctxOverlay) {
+              const cx = posX + size / 2;
+              const cy = posY + size / 2;
+              drawTesseractGlyph(ctxOverlay, cx, cy, 46 + t * 24, t * Math.PI, 0.25 + t * 0.35);
+            }
+
+            requestAnimationFrame(runMeltdownFrame);
+            return;
+          }
+
+          // PHASE 2: Extended 2.9-second 4D Geometric Charge-Up at bottom center
+          if (elapsed < chargeEnd) {
+            const cProgress = (elapsed - descendEnd) / (chargeEnd - descendEnd);
+            const easeCharge = cProgress * cProgress;
+            const shake = (Math.random() - 0.5) * (3 + easeCharge * 16);
+            posX = bottomTargetX + shake;
+            posY = bottomTargetY + (Math.random() - 0.5) * (2 + easeCharge * 8);
+            spinBoost = 0.2 + easeCharge * 0.85;
+            pulseEnergy = 0.5 + easeCharge * 1.4;
+
+            if (ctxOverlay) {
+              const cx = posX + size / 2;
+              const cy = posY + size / 2;
+
+              // Ambient crimson reactor aura building around the tesseract
+              const aura = ctxOverlay.createRadialGradient(cx, cy, 8, cx, cy, 120 + easeCharge * 220);
+              aura.addColorStop(0, `rgba(255, 255, 255, ${(0.25 + easeCharge * 0.45).toFixed(2)})`);
+              aura.addColorStop(0.35, `rgba(255, 0, 0, ${(0.3 + easeCharge * 0.5).toFixed(2)})`);
+              aura.addColorStop(1, 'rgba(0, 0, 0, 0)');
+              ctxOverlay.fillStyle = aura;
+              ctxOverlay.fillRect(0, 0, width, height);
+
+              // Siphoning energy particles drawn inward into the tesseract core
+              if (Math.random() < 0.85) {
+                const ang = Math.random() * Math.PI * 2;
+                const dist = 130 + Math.random() * 240;
+                chargeParticles.push({
+                  x: cx + Math.cos(ang) * dist,
+                  y: cy + Math.sin(ang) * dist,
+                  speed: 0.045 + easeCharge * 0.075,
+                  size: 1.5 + Math.random() * 3,
+                  isWhite: Math.random() < 0.42,
+                });
+              }
+
+              for (let i = chargeParticles.length - 1; i >= 0; i--) {
+                const pt = chargeParticles[i];
+                const prevX = pt.x;
+                const prevY = pt.y;
+                pt.x += (cx - pt.x) * pt.speed;
+                pt.y += (cy - pt.y) * pt.speed;
+                const d = Math.hypot(cx - pt.x, cy - pt.y);
+                if (d < 16) {
+                  chargeParticles.splice(i, 1);
+                  continue;
+                }
+                ctxOverlay.beginPath();
+                ctxOverlay.moveTo(prevX, prevY);
+                ctxOverlay.lineTo(pt.x, pt.y);
+                ctxOverlay.strokeStyle = pt.isWhite ? '#ffffff' : '#ff0000';
+                ctxOverlay.lineWidth = pt.size;
+                ctxOverlay.stroke();
+              }
+
+              // Contracting nested 4D hypercube wireframe squares locking onto the core
+              for (let r = 0; r < 4; r++) {
+                const cycle = ((cProgress * 2.4 + r * 0.25) % 1);
+                const glyphRadius = (1 - cycle) * (150 + easeCharge * 90) + 18;
+                const glyphAlpha = Math.sin(cycle * Math.PI) * (0.45 + easeCharge * 0.55);
+                drawTesseractGlyph(
+                  ctxOverlay,
+                  cx,
+                  cy,
+                  glyphRadius,
+                  elapsed * 0.002 * (r % 2 === 0 ? 1 : -1),
+                  glyphAlpha
+                );
+              }
+
+              // Vertical targeting sightline & harmonic tick marks locking upward
+              ctxOverlay.save();
+              ctxOverlay.strokeStyle = `rgba(255, 0, 0, ${(0.3 + easeCharge * 0.65).toFixed(2)})`;
+              ctxOverlay.lineWidth = 1.5 + easeCharge * 3;
+              ctxOverlay.setLineDash([12, 8]);
+              ctxOverlay.beginPath();
+              ctxOverlay.moveTo(cx, cy - 20);
+              ctxOverlay.lineTo(cx, 0);
+              ctxOverlay.stroke();
+
+              // Horizontal targeting calibration bars ascending the sightline
+              ctxOverlay.setLineDash([]);
+              const tickCount = Math.floor(3 + easeCharge * 8);
+              for (let tk = 0; tk < tickCount; tk++) {
+                const ty = cy - ((tk + 1) / (tickCount + 1)) * cy;
+                const halfW = 14 + (1 - tk / tickCount) * (35 + easeCharge * 45);
+                ctxOverlay.strokeStyle = tk % 2 === 0 ? '#ffffff' : '#ff0000';
+                ctxOverlay.lineWidth = 1.25;
+                ctxOverlay.beginPath();
+                ctxOverlay.moveTo(cx - halfW, ty);
+                ctxOverlay.lineTo(cx + halfW, ty);
+                ctxOverlay.stroke();
+              }
+              ctxOverlay.restore();
+
+              // Blinding core flare right before ignition
+              const coreRadius = 8 + easeCharge * 36 + Math.sin(elapsed * 0.05) * 4;
+              ctxOverlay.beginPath();
+              ctxOverlay.arc(cx, cy, coreRadius, 0, Math.PI * 2);
+              ctxOverlay.fillStyle = '#ffffff';
+              ctxOverlay.fill();
+              ctxOverlay.lineWidth = 3;
+              ctxOverlay.strokeStyle = '#ff0000';
+              ctxOverlay.stroke();
+            }
+
+            // Subtle pre-ignition tremor on the UI
+            if (portfolioUi && !isBgOnlyMode && easeCharge > 0.35) {
+              const preShake = (easeCharge - 0.35) * 8;
+              portfolioUi.style.transform = `translate3d(${((Math.random() - 0.5) * preShake).toFixed(1)}px, ${((Math.random() - 0.5) * preShake).toFixed(1)}px, 0)`;
+            }
+
+            requestAnimationFrame(runMeltdownFrame);
+            return;
+          }
+
+          // PHASE 3: Lock viewport scroll, fire stationary 4D Hyper-Laser, and glitch the site
+          if (elapsed < laserEnd) {
+            lockViewportScroll();
+            if (isBgOnlyMode) {
+              toggleBackgroundView();
+            }
+
+            const lProgress = (elapsed - chargeEnd) / (laserEnd - chargeEnd);
+            const beamX = width / 2;
+            posX = beamX - size / 2 + (Math.random() - 0.5) * 6;
+            posY = bottomTargetY + (Math.random() - 0.5) * 4;
+            spinBoost = 1.15;
+            pulseEnergy = 1.8;
+
+            const beamTopY = 0;
+            const beamBottomY = posY + size / 2;
+            const pulseMod = 1 + Math.sin(elapsed * 0.07) * 0.14;
+
+            if (ctxOverlay) {
+              // 1. Wide crimson atmospheric shock-column
+              const outerWidth = 220 * pulseMod;
+              const beamGrad = ctxOverlay.createLinearGradient(beamX - outerWidth / 2, 0, beamX + outerWidth / 2, 0);
+              beamGrad.addColorStop(0, 'rgba(255, 0, 0, 0)');
+              beamGrad.addColorStop(0.25, 'rgba(255, 0, 0, 0.28)');
+              beamGrad.addColorStop(0.45, 'rgba(255, 0, 0, 0.85)');
+              beamGrad.addColorStop(0.5, 'rgba(255, 255, 255, 1)');
+              beamGrad.addColorStop(0.55, 'rgba(255, 0, 0, 0.85)');
+              beamGrad.addColorStop(0.75, 'rgba(255, 0, 0, 0.28)');
+              beamGrad.addColorStop(1, 'rgba(255, 0, 0, 0)');
+              ctxOverlay.fillStyle = beamGrad;
+              ctxOverlay.fillRect(beamX - outerWidth / 2, beamTopY, outerWidth, beamBottomY);
+
+              // 2. High-energy crimson containment sheath
+              const midWidth = 54 * pulseMod;
+              ctxOverlay.fillStyle = 'rgba(255, 0, 0, 0.9)';
+              ctxOverlay.fillRect(beamX - midWidth / 2, beamTopY, midWidth, beamBottomY);
+
+              // 3. Blinding #ffffff inner plasma core
+              const coreWidth = 18 * pulseMod;
+              ctxOverlay.fillStyle = '#ffffff';
+              ctxOverlay.fillRect(beamX - coreWidth / 2, beamTopY, coreWidth, beamBottomY);
+
+              // 4. Twin braided 4D phase-wave helices oscillating around the beam
+              ctxOverlay.save();
+              for (let strand = 0; strand < 2; strand++) {
+                ctxOverlay.beginPath();
+                const phaseOffset = strand * Math.PI;
+                for (let y = beamBottomY; y >= beamTopY; y -= 12) {
+                  const wave = Math.sin(y * 0.028 + elapsed * 0.025 + phaseOffset) * (36 * pulseMod);
+                  const wx = beamX + wave;
+                  if (y === beamBottomY) ctxOverlay.moveTo(wx, y);
+                  else ctxOverlay.lineTo(wx, y);
+                }
+                ctxOverlay.strokeStyle = strand === 0 ? '#ffffff' : '#ff0000';
+                ctxOverlay.lineWidth = strand === 0 ? 2.5 : 3.5;
+                ctxOverlay.stroke();
+              }
+              ctxOverlay.restore();
+
+              // 5. Scrolling 4D Tesseract wireframe cross-sections racing up the beam
+              const nodeCount = 7;
+              for (let n = 0; n < nodeCount; n++) {
+                const travel = ((elapsed * 0.0014 + n / nodeCount) % 1);
+                const ny = beamBottomY - travel * beamBottomY;
+                const glyphSize = 24 + Math.sin(travel * Math.PI) * 26;
+                drawTesseractGlyph(
+                  ctxOverlay,
+                  beamX,
+                  ny,
+                  glyphSize,
+                  elapsed * 0.004 + n,
+                  0.85
+                );
+              }
+
+              // 6. Emitter muzzle blast rings around the tesseract
+              drawTesseractGlyph(ctxOverlay, beamX, beamBottomY, 64 * pulseMod, elapsed * 0.006, 0.95);
+              ctxOverlay.beginPath();
+              ctxOverlay.arc(beamX, beamBottomY, 34 * pulseMod, 0, Math.PI * 2);
+              ctxOverlay.fillStyle = '#ffffff';
+              ctxOverlay.fill();
+              ctxOverlay.lineWidth = 4;
+              ctxOverlay.strokeStyle = '#ff0000';
+              ctxOverlay.stroke();
+
+              // 7. Top-screen impact crater & plasma spark shower
+              for (let s = 0; s < 9; s++) {
+                sparks.push({
+                  x: beamX + (Math.random() - 0.5) * 44,
+                  y: Math.random() * 28,
+                  vx: (Math.random() - 0.5) * 20,
+                  vy: Math.random() * 14 + 3,
+                  life: 1,
+                  isWhite: Math.random() < 0.45,
+                });
+              }
+
+              for (let i = sparks.length - 1; i >= 0; i--) {
+                const sp = sparks[i];
+                sp.x += sp.vx;
+                sp.y += sp.vy;
+                sp.vy += 0.42;
+                sp.life -= 0.032;
+                if (sp.life <= 0) {
+                  sparks.splice(i, 1);
+                  continue;
+                }
+                ctxOverlay.fillStyle = sp.isWhite ? '#ffffff' : '#ff0000';
+                ctxOverlay.globalAlpha = sp.life;
+                ctxOverlay.fillRect(sp.x, sp.y, 4.5, 4.5);
+              }
+              ctxOverlay.globalAlpha = 1;
+
+              // 8. Site-wide dimensional glitch tears, sync bars, and fault readouts during laser fire
+              const glitchSlices = 14;
+              for (let g = 0; g < glitchSlices; g++) {
+                const gy = Math.random() * height;
+                const gh = 2 + Math.random() * 22;
+                const gw = width * (0.18 + Math.random() * 0.82);
+                const gx = Math.random() * (width - gw * 0.35) + (Math.random() - 0.5) * 110;
+                const roll = Math.random();
+                ctxOverlay.fillStyle =
+                  roll < 0.48
+                    ? 'rgba(255, 0, 0, 0.34)'
+                    : roll < 0.8
+                    ? 'rgba(255, 255, 255, 0.28)'
+                    : 'rgba(0, 0, 0, 0.82)';
+                ctxOverlay.fillRect(gx, gy, gw, gh);
+              }
+
+              // Random hex fault readouts flashing across the glitching viewport
+              if (Math.random() < 0.75) {
+                for (let f = 0; f < 4; f++) {
+                  const code = laserGlitchCodes[Math.floor(Math.random() * laserGlitchCodes.length)];
+                  ctxOverlay.font = 'bold 12px "JetBrains Mono", monospace';
+                  ctxOverlay.fillStyle = Math.random() < 0.6 ? '#ff0000' : '#ffffff';
+                  ctxOverlay.fillText(code, Math.random() * (width - 110), Math.random() * height);
+                }
+              }
+
+              // Rolling CRT scanlines
+              ctxOverlay.fillStyle = 'rgba(255, 255, 255, 0.06)';
+              for (let syLine = 0; syLine < height; syLine += 5) {
+                ctxOverlay.fillRect(0, syLine, width, 1.5);
+              }
+            }
+
+            // Shatter and collapse UI blocks progressively as the laser destabilizes the page
+            breakableBlocks.forEach((b) => {
+              if (!b.broken && lProgress >= b.breakAt) {
+                b.broken = true;
+                b.el.style.borderColor = '#ff0000';
+                b.el.style.boxShadow = '0 0 24px rgba(255, 0, 0, 0.85)';
+              }
+              if (b.broken) {
+                b.dropVy += 0.38;
+                b.dropY += b.dropVy;
+                b.rot += b.rotV * 0.14;
+                const glitchJitterX = (Math.random() - 0.5) * 18;
+                const glitchSkew = (Math.random() - 0.5) * 5;
+                b.el.style.transform = `translate3d(${(b.shiftX * lProgress + glitchJitterX).toFixed(1)}px, ${b.dropY.toFixed(1)}px, 0) rotate(${b.rot.toFixed(1)}deg) skewX(${glitchSkew.toFixed(1)}deg)`;
+                b.el.style.opacity = String(Math.max(0.25, 1 - b.dropY / (height * 1.15)));
+              }
+            });
+
+            // Violent camera shake, skew glitch, and chromatic aberration across the UI
+            if (portfolioUi && !isBgOnlyMode) {
+              const sx = ((Math.random() - 0.5) * 24).toFixed(1);
+              const sy = ((Math.random() - 0.5) * 16).toFixed(1);
+              const skew = ((Math.random() - 0.5) * 4.2).toFixed(2);
+              portfolioUi.style.transform = `translate3d(${sx}px, ${sy}px, 0) skewX(${skew}deg)`;
+              portfolioUi.style.filter = 'drop-shadow(-4px 0 0 #ff0000) drop-shadow(4px 0 0 #ffffff)';
+            }
+            if (bgCanvas) {
+              const bx = ((Math.random() - 0.5) * 18).toFixed(1);
+              const by = ((Math.random() - 0.5) * 14).toFixed(1);
+              bgCanvas.style.transform = `translate3d(${bx}px, ${by}px, 0)`;
+            }
+
+            requestAnimationFrame(runMeltdownFrame);
+            return;
+          }
+
+          // PHASE 4: Tesseract surges to the exact center of the screen and compresses before detonation
+          if (elapsed < centerMoveEnd) {
+            const mProgress = (elapsed - laserEnd) / (centerMoveEnd - laserEnd);
+            const easeSurge = 1 - Math.pow(1 - mProgress, 3);
+            const centerTargetX = width / 2 - size / 2;
+            const centerTargetY = height / 2 - size / 2;
+
+            posX = bottomTargetX + (centerTargetX - bottomTargetX) * easeSurge + (Math.random() - 0.5) * (10 * mProgress);
+            posY = bottomTargetY + (centerTargetY - bottomTargetY) * easeSurge + (Math.random() - 0.5) * (10 * mProgress);
+            spinBoost = 1.2 + mProgress * 1.6;
+            pulseEnergy = 1.8 + mProgress * 1.2;
+
+            if (ctxOverlay) {
+              const cx = posX + size / 2;
+              const cy = posY + size / 2;
+
+              // Imploding 4D containment rings collapsing inward to center
+              for (let k = 0; k < 3; k++) {
+                const implodeR = Math.max(12, (1 - mProgress) * (180 + k * 55));
+                drawTesseractGlyph(
+                  ctxOverlay,
+                  cx,
+                  cy,
+                  implodeR,
+                  elapsed * 0.008 * (k % 2 === 0 ? 1 : -1),
+                  0.6 + mProgress * 0.4
+                );
+              }
+
+              // Blinding white/crimson singularity core
+              ctxOverlay.beginPath();
+              ctxOverlay.arc(cx, cy, 14 + mProgress * 32, 0, Math.PI * 2);
+              ctxOverlay.fillStyle = '#ffffff';
+              ctxOverlay.fill();
+              ctxOverlay.lineWidth = 4;
+              ctxOverlay.strokeStyle = '#ff0000';
+              ctxOverlay.stroke();
+            }
+
+            requestAnimationFrame(runMeltdownFrame);
+            return;
+          }
+
+          // PHASE 5: Massive Center-Screen 4D Geometric Explosion + Extreme Full-Site Glitch Storm
+          if (elapsed < explosionEnd) {
+            const eProgress = (elapsed - centerMoveEnd) / (explosionEnd - centerMoveEnd);
+            const glitchIntensity = 2.1 - eProgress * 0.45;
+            bgGlitchIntensity = 2.8 * (1 - eProgress * 0.3);
+            const cx = width / 2;
+            const cy = height / 2;
+            const maxDiag = Math.hypot(width, height) * 0.72;
+
+            if (!explosionInitialized) {
+              explosionInitialized = true;
+              canvas.style.opacity = '0';
+
+              // Snapshot every visible text node across the UI for total text corruption
+              if (portfolioUi) {
+                const walker = document.createTreeWalker(portfolioUi, NodeFilter.SHOW_TEXT, null);
+                let tNode;
+                while ((tNode = walker.nextNode())) {
+                  if (tNode.nodeValue && tNode.nodeValue.trim().length > 0) {
+                    explosionTextBackups.set(tNode, tNode.nodeValue);
+                  }
+                }
+              }
+
+              // Spawn 200 radial plasma sparks
+              for (let i = 0; i < 200; i++) {
+                const ang = Math.random() * Math.PI * 2;
+                const spd = 5 + Math.random() * 32;
+                explosionParticles.push({
+                  x: cx,
+                  y: cy,
+                  vx: Math.cos(ang) * spd,
+                  vy: Math.sin(ang) * spd,
+                  size: 2 + Math.random() * 6,
+                  life: 0.8 + Math.random() * 0.35,
+                  decay: 0.01 + Math.random() * 0.016,
+                  isWhite: Math.random() < 0.45,
+                });
+              }
+
+              // Spawn 54 rotating geometric 4D shrapnel shards
+              for (let s = 0; s < 54; s++) {
+                const ang = (s / 54) * Math.PI * 2 + (Math.random() - 0.5) * 0.25;
+                const spd = 6 + Math.random() * 26;
+                explosionShards.push({
+                  x: cx,
+                  y: cy,
+                  vx: Math.cos(ang) * spd,
+                  vy: Math.sin(ang) * spd,
+                  rot: Math.random() * Math.PI * 2,
+                  rotV: (Math.random() - 0.5) * 0.38,
+                  size: 10 + Math.random() * 28,
+                  isCrimson: s % 2 === 0,
+                });
+              }
+
+              // Blast any remaining UI blocks radially away from the center
+              breakableBlocks.forEach((b) => {
+                const rect = b.el.getBoundingClientRect();
+                const bx = rect.left + rect.width / 2 - cx;
+                const by = rect.top + rect.height / 2 - cy;
+                const dist = Math.max(1, Math.hypot(bx, by));
+                b.shiftX += (bx / dist) * 340;
+                b.dropVy += (by / dist) * 18 + 7;
+                b.rotV *= 3.4;
+              });
+            }
+
+            // Violently corrupt every visible UI text node into glitch glyphs & panic codes
+            explosionTextBackups.forEach((origVal, textNode) => {
+              if (Math.random() < 0.94) {
+                if (origVal.trim().length > 6 && Math.random() < 0.24) {
+                  textNode.nodeValue =
+                    explosionPanicCodes[Math.floor(Math.random() * explosionPanicCodes.length)];
+                } else {
+                  let scrambled = '';
+                  for (let ch = 0; ch < origVal.length; ch++) {
+                    const c = origVal[ch];
+                    if (c !== ' ' && c !== '\n' && Math.random() < 0.82) {
+                      scrambled += explosionGlyphs[Math.floor(Math.random() * explosionGlyphs.length)];
+                    } else {
+                      scrambled += c;
+                    }
+                  }
+                  textNode.nodeValue = scrambled;
+                }
+              } else {
+                textNode.nodeValue = origVal;
+              }
+            });
+
+            // Continue driving blasted UI blocks outward with aggressive polygon/inset slicing & jitter
+            breakableBlocks.forEach((b) => {
+              b.dropVy += 0.95;
+              b.dropY += b.dropVy;
+              b.rot += b.rotV * 0.32;
+              const jx = (Math.random() - 0.5) * 68;
+              const jy = (Math.random() - 0.5) * 44;
+              const skewX = (Math.random() - 0.5) * 22;
+              const skewY = (Math.random() - 0.5) * 10;
+              b.el.style.borderColor = Math.random() < 0.55 ? '#ff0000' : '#ffffff';
+              b.el.style.backgroundColor =
+                Math.random() < 0.18
+                  ? 'rgba(255, 0, 0, 0.25)'
+                  : Math.random() < 0.28
+                  ? 'rgba(255, 255, 255, 0.18)'
+                  : '';
+              b.el.style.boxShadow =
+                Math.random() < 0.5
+                  ? '0 0 34px rgba(255, 0, 0, 1)'
+                  : '0 0 28px rgba(255, 255, 255, 0.95)';
+              b.el.style.transform = `translate3d(${(b.shiftX * (0.4 + eProgress) + jx).toFixed(1)}px, ${(b.dropY + jy).toFixed(1)}px, 0) rotate(${b.rot.toFixed(1)}deg) skew(${skewX.toFixed(1)}deg, ${skewY.toFixed(1)}deg)`;
+              if (Math.random() < 0.78) {
+                const topCut = Math.floor(Math.random() * 48);
+                const bottomCut = Math.floor(Math.random() * 48);
+                const leftCut = Math.floor(Math.random() * 22);
+                const rightCut = Math.floor(Math.random() * 22);
+                b.el.style.clipPath = `inset(${topCut}% ${rightCut}% ${bottomCut}% ${leftCut}%)`;
+              } else {
+                b.el.style.clipPath = '';
+              }
+              b.el.style.opacity = String(Math.max(0.2, 1 - eProgress * 0.9));
+            });
+
+            // Extreme micro-glitch on every inner button, header, badge, link, input & SVG
+            explosionSubElements.forEach((sub) => {
+              if (Math.random() < 0.75) {
+                const sx = ((Math.random() - 0.5) * 48 * glitchIntensity).toFixed(1);
+                const sy = ((Math.random() - 0.5) * 28 * glitchIntensity).toFixed(1);
+                const sSkew = ((Math.random() - 0.5) * 24).toFixed(1);
+                const sScale = (0.85 + Math.random() * 0.4).toFixed(2);
+                sub.style.transform = `translate3d(${sx}px, ${sy}px, 0) skewX(${sSkew}deg) scale(${sScale})`;
+                if (Math.random() < 0.55) {
+                  sub.style.clipPath = `inset(${Math.floor(Math.random() * 40)}% 0 ${Math.floor(Math.random() * 40)}% 0)`;
+                } else {
+                  sub.style.clipPath = '';
+                }
+                if (Math.random() < 0.35) {
+                  sub.style.color = Math.random() < 0.55 ? '#ff0000' : '#ffffff';
+                } else {
+                  sub.style.color = '';
+                }
+              } else {
+                sub.style.transform = '';
+                sub.style.clipPath = '';
+                sub.style.color = '';
+              }
+            });
+
+            if (ctxOverlay) {
+              // 1. High-intensity #ffffff / #ff0000 / #000000 detonation strobe
+              if (eProgress < 0.25) {
+                const flashNorm = 1 - eProgress / 0.25;
+                ctxOverlay.fillStyle =
+                  Math.random() < 0.48
+                    ? `rgba(255, 255, 255, ${(flashNorm * 0.95).toFixed(2)})`
+                    : `rgba(255, 0, 0, ${(flashNorm * 0.85).toFixed(2)})`;
+                ctxOverlay.fillRect(0, 0, width, height);
+              } else {
+                const strobeRoll = Math.random();
+                ctxOverlay.fillStyle =
+                  strobeRoll < 0.2
+                    ? 'rgba(255, 255, 255, 0.32)'
+                    : strobeRoll < 0.44
+                    ? 'rgba(255, 0, 0, 0.34)'
+                    : `rgba(0, 0, 0, ${((eProgress - 0.25) * 0.62).toFixed(2)})`;
+                ctxOverlay.fillRect(0, 0, width, height);
+              }
+
+              // 2. Primary & Secondary Expanding Circular Shockwave Rings
+              const primaryR = Math.pow(eProgress, 0.72) * maxDiag * 1.25;
+              const secondaryR = Math.pow(Math.max(0, eProgress - 0.08), 0.78) * maxDiag * 1.1;
+
+              ctxOverlay.save();
+              ctxOverlay.beginPath();
+              ctxOverlay.arc(cx, cy, primaryR, 0, Math.PI * 2);
+              ctxOverlay.strokeStyle = '#ffffff';
+              ctxOverlay.globalAlpha = Math.max(0, 1 - eProgress * 1.1);
+              ctxOverlay.lineWidth = Math.max(3, (1 - eProgress) * 34);
+              ctxOverlay.stroke();
+
+              if (secondaryR > 0) {
+                ctxOverlay.beginPath();
+                ctxOverlay.arc(cx, cy, secondaryR, 0, Math.PI * 2);
+                ctxOverlay.strokeStyle = '#ff0000';
+                ctxOverlay.globalAlpha = Math.max(0, 0.95 - eProgress * 0.95);
+                ctxOverlay.lineWidth = Math.max(4, (1 - eProgress) * 54);
+                ctxOverlay.stroke();
+              }
+              ctxOverlay.restore();
+
+              // 3. Expanding 4D Hypercube Wireframe Shockwaves
+              for (let g = 0; g < 4; g++) {
+                const gP = Math.max(0, eProgress - g * 0.09);
+                if (gP <= 0) continue;
+                const glyphRadius = Math.pow(gP, 0.75) * maxDiag * 0.95;
+                const glyphAlpha = Math.max(0, (1 - gP) * 0.95);
+                drawTesseractGlyph(
+                  ctxOverlay,
+                  cx,
+                  cy,
+                  glyphRadius,
+                  gP * Math.PI * (g % 2 === 0 ? 1.6 : -1.6),
+                  glyphAlpha
+                );
+              }
+
+              // 4. Screen-Wide Dimensional Fracture Cracks Radiating from Center
+              const crackCount = 16;
+              for (let cr = 0; cr < crackCount; cr++) {
+                const baseAng = (cr / crackCount) * Math.PI * 2 + Math.sin(elapsed * 0.03 + cr) * 0.12;
+                const reach = Math.min(1, eProgress * 2.4) * maxDiag * 1.15;
+                ctxOverlay.beginPath();
+                ctxOverlay.moveTo(cx, cy);
+                let curX = cx;
+                let curY = cy;
+                const steps = 7;
+                for (let st = 1; st <= steps; st++) {
+                  const frac = st / steps;
+                  const perp = baseAng + Math.PI / 2;
+                  const jag = (Math.random() - 0.5) * 48;
+                  curX = cx + Math.cos(baseAng) * reach * frac + Math.cos(perp) * jag;
+                  curY = cy + Math.sin(baseAng) * reach * frac + Math.sin(perp) * jag;
+                  ctxOverlay.lineTo(curX, curY);
+                }
+                ctxOverlay.strokeStyle = cr % 2 === 0 ? '#ffffff' : '#ff0000';
+                ctxOverlay.lineWidth = cr % 3 === 0 ? 3.2 : 1.8;
+                ctxOverlay.globalAlpha = Math.max(0.25, 1 - eProgress * 0.75);
+                ctxOverlay.stroke();
+              }
+              ctxOverlay.globalAlpha = 1;
+
+              // 5. Rotating Geometric Shrapnel Shards
+              for (let s = 0; s < explosionShards.length; s++) {
+                const sh = explosionShards[s];
+                sh.x += sh.vx;
+                sh.y += sh.vy;
+                sh.vx *= 0.97;
+                sh.vy *= 0.97;
+                sh.rot += sh.rotV;
+
+                ctxOverlay.save();
+                ctxOverlay.translate(sh.x, sh.y);
+                ctxOverlay.rotate(sh.rot);
+                ctxOverlay.globalAlpha = Math.max(0, 1 - eProgress * 1.05);
+                ctxOverlay.fillStyle = '#000000';
+                ctxOverlay.strokeStyle = sh.isCrimson ? '#ff0000' : '#ffffff';
+                ctxOverlay.lineWidth = 2.2;
+                ctxOverlay.beginPath();
+                ctxOverlay.moveTo(0, -sh.size);
+                ctxOverlay.lineTo(sh.size * 0.75, sh.size * 0.65);
+                ctxOverlay.lineTo(-sh.size * 0.75, sh.size * 0.65);
+                ctxOverlay.closePath();
+                ctxOverlay.fill();
+                ctxOverlay.stroke();
+                ctxOverlay.restore();
+              }
+
+              // 6. High-Velocity Radial Plasma Sparks
+              for (let i = explosionParticles.length - 1; i >= 0; i--) {
+                const pt = explosionParticles[i];
+                const prevX = pt.x;
+                const prevY = pt.y;
+                pt.x += pt.vx;
+                pt.y += pt.vy;
+                pt.vx *= 0.955;
+                pt.vy *= 0.955;
+                pt.life -= pt.decay;
+                if (pt.life <= 0) {
+                  explosionParticles.splice(i, 1);
+                  continue;
+                }
+                ctxOverlay.beginPath();
+                ctxOverlay.moveTo(prevX, prevY);
+                ctxOverlay.lineTo(pt.x, pt.y);
+                ctxOverlay.strokeStyle = pt.isWhite ? '#ffffff' : '#ff0000';
+                ctxOverlay.globalAlpha = Math.max(0, pt.life);
+                ctxOverlay.lineWidth = pt.size;
+                ctxOverlay.stroke();
+              }
+              ctxOverlay.globalAlpha = 1;
+
+              // 7. EXTREME FULL-SCREEN GLITCH LAYER: Massive Horizontal Tear Slices
+              const extremeSlices = Math.floor(42 + Math.random() * 28);
+              for (let t = 0; t < extremeSlices; t++) {
+                const sy = Math.random() * height;
+                const sh = 2 + Math.random() * 48;
+                const sw = width * (0.25 + Math.random() * 0.75);
+                const sx = Math.random() * (width - sw * 0.25) + (Math.random() - 0.5) * 220;
+                const roll = Math.random();
+                ctxOverlay.fillStyle =
+                  roll < 0.45
+                    ? 'rgba(255, 0, 0, 0.58)'
+                    : roll < 0.8
+                    ? 'rgba(255, 255, 255, 0.5)'
+                    : 'rgba(0, 0, 0, 0.92)';
+                ctxOverlay.fillRect(sx, sy, sw, sh);
+              }
+
+              // 8. EXTREME VERTICAL SYNC-DROP COLUMNS
+              const extremeCols = Math.floor(16 + Math.random() * 18);
+              for (let c = 0; c < extremeCols; c++) {
+                const colX = Math.random() * width;
+                const colW = 3 + Math.random() * 36;
+                const colH = height * (0.3 + Math.random() * 0.7);
+                const colY = Math.random() * (height - colH * 0.35);
+                const roll = Math.random();
+                ctxOverlay.fillStyle =
+                  roll < 0.48
+                    ? 'rgba(255, 0, 0, 0.48)'
+                    : roll < 0.82
+                    ? 'rgba(255, 255, 255, 0.42)'
+                    : 'rgba(0, 0, 0, 0.9)';
+                ctxOverlay.fillRect(colX, colY, colW, colH);
+              }
+
+              // 9. JAGGED #000000 VOID PUNCTURES WITH #ff0000 / #ffffff WIREFRAME BORDERS
+              const voidBoxes = Math.floor(10 + Math.random() * 10);
+              for (let v = 0; v < voidBoxes; v++) {
+                const vw = 60 + Math.random() * 320;
+                const vh = 24 + Math.random() * 150;
+                const vx = Math.random() * (width - vw);
+                const vy = Math.random() * (height - vh);
+                ctxOverlay.fillStyle = '#000000';
+                ctxOverlay.fillRect(vx, vy, vw, vh);
+                ctxOverlay.strokeStyle = Math.random() < 0.6 ? '#ff0000' : '#ffffff';
+                ctxOverlay.lineWidth = 2;
+                ctxOverlay.strokeRect(vx, vy, vw, vh);
+              }
+
+              // 10. HIGH-FREQUENCY DIGITAL STATIC SNOW STORMS
+              for (let z = 0; z < 8; z++) {
+                const zx = Math.random() * width;
+                const zy = Math.random() * height;
+                const zw = 110 + Math.random() * 280;
+                const zh = 50 + Math.random() * 160;
+                for (let sp = 0; sp < 70; sp++) {
+                  ctxOverlay.fillStyle = Math.random() < 0.52 ? '#ffffff' : '#ff0000';
+                  ctxOverlay.fillRect(
+                    zx + Math.random() * zw,
+                    zy + Math.random() * zh,
+                    2 + Math.random() * 10,
+                    2 + Math.random() * 4
+                  );
+                }
+              }
+
+              // 11. DENSE KERNEL PANIC / HEX TELEMETRY BLEED
+              for (let p = 0; p < 18; p++) {
+                const panicText =
+                  explosionPanicCodes[Math.floor(Math.random() * explosionPanicCodes.length)];
+                const fontSize = Math.floor(12 + Math.random() * 18);
+                ctxOverlay.font = `bold ${fontSize}px "JetBrains Mono", monospace`;
+                ctxOverlay.fillStyle = Math.random() < 0.58 ? '#ff0000' : '#ffffff';
+                ctxOverlay.globalAlpha = 0.94;
+                ctxOverlay.fillText(
+                  panicText,
+                  Math.random() * (width - 150),
+                  Math.random() * height
+                );
+              }
+              ctxOverlay.globalAlpha = 1;
+
+              // 12. DUAL ROLLING CRT SYNC BARS & THICK SCANLINES
+              for (let rb = 0; rb < 2; rb++) {
+                const rollY = (((eProgress * (6 + rb * 3) + rb * 0.5) % 1) * height);
+                ctxOverlay.fillStyle = 'rgba(255, 0, 0, 0.34)';
+                ctxOverlay.fillRect(0, rollY - 40, width, 80);
+                ctxOverlay.fillStyle = 'rgba(255, 255, 255, 0.55)';
+                ctxOverlay.fillRect(0, rollY, width, 4);
+              }
+
+              ctxOverlay.fillStyle = 'rgba(255, 255, 255, 0.12)';
+              for (let syLine = 0; syLine < height; syLine += 4) {
+                ctxOverlay.fillRect(0, syLine, width, 2);
+              }
+
+              // 13. Residual Center Fireball Core
+              if (eProgress < 0.6) {
+                const coreNorm = 1 - eProgress / 0.6;
+                ctxOverlay.beginPath();
+                ctxOverlay.arc(cx, cy, coreNorm * 115 + 12, 0, Math.PI * 2);
+                ctxOverlay.fillStyle = eProgress < 0.25 ? '#ffffff' : '#ff0000';
+                ctxOverlay.globalAlpha = coreNorm * 0.95;
+                ctxOverlay.fill();
+                ctxOverlay.globalAlpha = 1;
+              }
+            }
+
+            // Extreme 3D perspective warp, chromatic split, contrast inversion & violent camera shake
+            const shakeMag = Math.max(22, (1 - eProgress * 0.45) * 74);
+            if (portfolioUi && !isBgOnlyMode) {
+              const sx = ((Math.random() - 0.5) * shakeMag).toFixed(1);
+              const sy = ((Math.random() - 0.5) * shakeMag).toFixed(1);
+              const skewX = ((Math.random() - 0.5) * 15).toFixed(2);
+              const skewY = ((Math.random() - 0.5) * 6).toFixed(2);
+              const rotX = ((Math.random() - 0.5) * 11).toFixed(2);
+              const rotY = ((Math.random() - 0.5) * 13).toFixed(2);
+              const scale = (1 + (Math.random() - 0.45) * 0.09).toFixed(4);
+              portfolioUi.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translate3d(${sx}px, ${sy}px, 0) skew(${skewX}deg, ${skewY}deg) scale(${scale})`;
+
+              const splitX = (8 + Math.random() * 14).toFixed(1);
+              const splitY = ((Math.random() - 0.5) * 12).toFixed(1);
+              const invertStr = Math.random() < 0.45 ? ' invert(1)' : '';
+              portfolioUi.style.filter = `drop-shadow(${-splitX}px ${-splitY}px 0 #ff0000) drop-shadow(${splitX}px ${splitY}px 0 #ffffff) contrast(175%)${invertStr}`;
+            }
+            if (bgCanvas) {
+              const bx = ((Math.random() - 0.5) * shakeMag * 1.1).toFixed(1);
+              const by = ((Math.random() - 0.5) * shakeMag * 1.1).toFixed(1);
+              const bSkew = ((Math.random() - 0.5) * 10).toFixed(2);
+              bgCanvas.style.transform = `translate3d(${bx}px, ${by}px, 0) skewX(${bSkew}deg) scale(${(1 + Math.random() * 0.06).toFixed(3)})`;
+              bgCanvas.style.filter = Math.random() < 0.4 ? 'invert(1) contrast(200%)' : 'contrast(160%)';
+            }
+            if (toggleBgBtn) {
+              const tx = ((Math.random() - 0.5) * 38).toFixed(1);
+              const ty = ((Math.random() - 0.5) * 38).toFixed(1);
+              toggleBgBtn.style.transform = `translate3d(${tx}px, ${ty}px, 0) skewX(${((Math.random() - 0.5) * 22).toFixed(1)}deg)`;
+              toggleBgBtn.style.filter = Math.random() < 0.45 ? 'invert(1)' : '';
+            }
+
+            requestAnimationFrame(runMeltdownFrame);
+            return;
+          }
+
+          // PHASE 6: System Blackout
+          if (elapsed < blackoutEnd) {
+            bgGlitchIntensity = 0;
+            if (ctxOverlay) {
+              ctxOverlay.fillStyle = '#000000';
+              ctxOverlay.fillRect(0, 0, width, height);
+            }
+            canvas.style.opacity = '0';
+            requestAnimationFrame(runMeltdownFrame);
+            return;
+          }
+
+          // PHASE 7: Automated Kernel Recovery / System Reboot
+          if (elapsed < rebootEnd) {
+            const rProgress = (elapsed - blackoutEnd) / (rebootEnd - blackoutEnd);
+            const pct = Math.min(100, Math.floor(rProgress * 100));
+
+            if (rebootScreen) {
+              rebootScreen.classList.remove('hidden');
+              rebootScreen.classList.add('flex');
+            }
+            if (rebootBar) rebootBar.style.width = `${pct}%`;
+            if (rebootPercent) rebootPercent.textContent = `${pct}%`;
+
+            const targetStep = Math.min(bootSteps.length, Math.floor(rProgress * bootSteps.length) + 1);
+            while (loggedStep < targetStep && rebootLogs) {
+              const line = document.createElement('div');
+              line.className = loggedStep === bootSteps.length - 1 ? 'text-crimson font-bold' : 'text-pure/90';
+              line.textContent = bootSteps[loggedStep];
+              rebootLogs.appendChild(line);
+              loggedStep++;
+            }
+
+            requestAnimationFrame(runMeltdownFrame);
+            return;
+          }
+
+          // COMPLETE: Restore all broken DOM elements and resume normal operation
+          bgGlitchIntensity = 0;
+          unlockViewportScroll();
+          explosionTextBackups.forEach((origVal, textNode) => {
+            textNode.nodeValue = origVal;
+          });
+          explosionTextBackups.clear();
+          explosionSubElements.forEach((sub) => {
+            sub.style.transform = '';
+            sub.style.clipPath = '';
+            sub.style.color = '';
+          });
+          breakableBlocks.forEach((b) => {
+            b.el.style.transform = '';
+            b.el.style.borderColor = '';
+            b.el.style.backgroundColor = '';
+            b.el.style.boxShadow = '';
+            b.el.style.clipPath = '';
+            b.el.style.opacity = '';
+          });
+          if (portfolioUi) {
+            portfolioUi.style.transform = '';
+            portfolioUi.style.filter = '';
+          }
+          if (bgCanvas) {
+            bgCanvas.style.transform = '';
+            bgCanvas.style.filter = '';
+          }
+          if (toggleBgBtn) {
+            toggleBgBtn.style.transform = '';
+            toggleBgBtn.style.filter = '';
+          }
+          if (hudClock && originalClockText) {
+            hudClock.textContent = originalClockText;
+          }
+          if (overlay) {
+            overlay.classList.add('hidden');
+          }
+          if (rebootScreen) {
+            rebootScreen.classList.add('hidden');
+            rebootScreen.classList.remove('flex');
+          }
+          if (rebootLogs) rebootLogs.innerHTML = '';
+          if (rebootBar) rebootBar.style.width = '0%';
+          if (rebootPercent) rebootPercent.textContent = '0%';
+
+          canvas.style.opacity = '1';
+          posX = Math.max(24, window.innerWidth - size - 48);
+          posY = Math.max(96, window.innerHeight * 0.28);
+          velX = -1.15;
+          velY = 0.85;
+          spinBoost = 0.16;
+          pulseEnergy = 0.7;
+          isLaserMode = false;
+          triggerTesseractGlitchSpeech();
+        }
+
+        requestAnimationFrame(runMeltdownFrame);
+      }
+
+      // Trigger random glitch (90%) or rare 4D hyper-laser meltdown (10%) on click
+      function handleTesseractActivate(e) {
+        if (e) e.stopPropagation();
+        if (isLaserMode) return;
+
+        // 10% chance: Tesseract drops to the bottom, fires a 4D hyper-laser, shatters the site, and reboots
+        if (Math.random() < 0.1) {
+          triggerTesseractLaserMeltdown();
+          return;
+        }
+
+        // 90% chance: Procedural site glitch + hyper-spin burst
+        spinBoost = 0.18;
+        pulseEnergy = 1.0;
+
+        // Launch along a crisp new diagonal vector
+        const launchAngle = Math.random() * Math.PI * 2;
+        const launchSpeed = 2.6;
+        velX = Math.cos(launchAngle) * launchSpeed;
+        velY = Math.sin(launchAngle) * launchSpeed;
+
+        triggerSiteGlitch(posX + size / 2, posY + size / 2);
+      }
+
+      canvas.addEventListener('mouseenter', () => {
+        isHovered = true;
+      });
+      canvas.addEventListener('mouseleave', () => {
+        isHovered = false;
+      });
+      canvas.addEventListener('click', handleTesseractActivate);
+      canvas.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleTesseractActivate(e);
+        }
+      });
+
+      // Project a 4D point (x, y, z, w) through 4D rotations down to 2D screen coordinates
+      function project4DTo2D(v4) {
+        let [x, y, z, w] = v4;
+
+        // XW plane rotation
+        let cos = Math.cos(angleXW);
+        let sin = Math.sin(angleXW);
+        let nx = x * cos - w * sin;
+        let nw = x * sin + w * cos;
+        x = nx;
+        w = nw;
+
+        // YW plane rotation
+        cos = Math.cos(angleYW);
+        sin = Math.sin(angleYW);
+        let ny = y * cos - w * sin;
+        nw = y * sin + w * cos;
+        y = ny;
+        w = nw;
+
+        // ZW plane rotation
+        cos = Math.cos(angleZW);
+        sin = Math.sin(angleZW);
+        let nz = z * cos - w * sin;
+        nw = z * sin + w * cos;
+        z = nz;
+        w = nw;
+
+        // XY 3D rotation
+        cos = Math.cos(angleXY);
+        sin = Math.sin(angleXY);
+        nx = x * cos - y * sin;
+        ny = x * sin + y * cos;
+        x = nx;
+        y = ny;
+
+        // Perspective projection from 4D -> 3D
+        const dist4D = 3.1;
+        const scale4D = 1 / (dist4D - w);
+        const x3 = x * scale4D;
+        const y3 = y * scale4D;
+        const z3 = z * scale4D;
+
+        // Perspective projection from 3D -> 2D
+        const dist3D = 3.4;
+        const scale3D = 1 / (dist3D - z3);
+        const scale = 128;
+
+        return {
+          x: size / 2 + x3 * scale3D * scale,
+          y: size / 2 + y3 * scale3D * scale,
+          depth: w + z3,
+        };
+      }
+
+      function animateTesseract() {
+        const margin = 12;
+        const maxX = Math.max(margin, window.innerWidth - size - margin);
+        const maxY = Math.max(margin, window.innerHeight - size - margin);
+
+        if (!isLaserMode) {
+          if (isBgOnlyMode && bgNetwork) {
+            const cx = posX + size / 2;
+            const cy = posY + size / 2;
+
+            if (hunterState === 'IDLE') {
+              const target = pickDensestDotCluster();
+              if (target) {
+                hunterTargetX = target.x;
+                hunterTargetY = target.y;
+              }
+              beginHunterAttack(pickNextHunterAttack());
+            }
+
+            hunterTimer++;
+
+            if (hunterState === 'SEEK') {
+              const target = pickDensestDotCluster();
+              if (target && hunterTimer % 22 === 1) {
+                hunterTargetX = target.x;
+                hunterTargetY = target.y;
+              }
+
+              const dx = hunterTargetX - cx;
+              const dy = hunterTargetY - cy;
+              const dist = Math.hypot(dx, dy);
+              const nextAttack = HUNTER_ATTACKS[hunterAttackIndex % HUNTER_ATTACKS.length];
+              const desiredRange = nextAttack === 'DASH' ? 260 : nextAttack === 'SNIPER' || nextAttack === 'CHAIN' ? 220 : 45;
+
+              if (dist > 1) {
+                const steerSpeed = 6.6;
+                velX += ((dx / dist) * steerSpeed - velX) * 0.15;
+                velY += ((dy / dist) * steerSpeed - velY) * 0.15;
+              }
+              posX += velX;
+              posY += velY;
+              spinBoost = Math.max(spinBoost, 0.045);
+
+              // Vaporize any dot touched directly while flying
+              for (let i = 0; i < bgNetwork.nodes.length; i++) {
+                const n = bgNetwork.nodes[i];
+                if (n.alive && Math.hypot(n.x - cx, n.y - cy) < 38) {
+                  bgNetwork.destroyNode(n, velX, velY);
+                  pulseEnergy = Math.max(pulseEnergy, 0.45);
+                }
+              }
+
+              if ((nextAttack === 'DASH' && dist >= 160 && dist <= 420) || dist <= desiredRange || hunterTimer > 65) {
+                beginHunterAttack(pickNextHunterAttack());
+              }
+            } else if (hunterState === 'DASH') {
+              // Phase A (frames 1..14): Lock target & project crimson trajectory line
+              if (hunterTimer <= 14) {
+                if (hunterTimer === 1) {
+                  const target = pickDensestDotCluster();
+                  if (target) {
+                    hunterTargetX = target.x;
+                    hunterTargetY = target.y;
+                  } else {
+                    hunterTargetX = Math.random() * (window.innerWidth - 160) + 80;
+                    hunterTargetY = Math.random() * (window.innerHeight - 160) + 80;
+                  }
+                  const dx = hunterTargetX - cx;
+                  const dy = hunterTargetY - cy;
+                  const dist = Math.max(1, Math.hypot(dx, dy));
+                  const dashSpeed = 24;
+                  hunterDashVx = (dx / dist) * dashSpeed;
+                  hunterDashVy = (dy / dist) * dashSpeed;
+                }
+                spinBoost = 0.24;
+                bgNetwork.attackEffects.push({
+                  type: 'AIM_LINE',
+                  x1: cx,
+                  y1: cy,
+                  x2: hunterTargetX + hunterDashVx * 4,
+                  y2: hunterTargetY + hunterDashVy * 4,
+                  life: 0.9,
+                  decay: 0.45,
+                });
+              } else if (hunterTimer <= 32) {
+                // Phase B (frames 15..32): Blinding hyper-dash slash through the dot network
+                const prevCx = cx;
+                const prevCy = cy;
+                posX += hunterDashVx;
+                posY += hunterDashVy;
+                const newCx = posX + size / 2;
+                const newCy = posY + size / 2;
+                spinBoost = 0.34;
+                pulseEnergy = 0.9;
+
+                bgNetwork.attackEffects.push({
+                  type: 'DASH_TRAIL',
+                  x1: prevCx,
+                  y1: prevCy,
+                  x2: newCx,
+                  y2: newCy,
+                  life: 1,
+                  decay: 0.065,
+                });
+
+                for (let i = 0; i < bgNetwork.nodes.length; i++) {
+                  const n = bgNetwork.nodes[i];
+                  if (n.alive && Math.hypot(n.x - newCx, n.y - newCy) < 68) {
+                    bgNetwork.destroyNode(n, hunterDashVx, hunterDashVy);
+                  }
+                }
+              } else {
+                hunterDashRemaining--;
+                if (hunterDashRemaining > 0) {
+                  hunterTimer = 0;
+                } else {
+                  velX = hunterDashVx * 0.15;
+                  velY = hunterDashVy * 0.15;
+                  hunterState = 'SEEK';
+                  hunterTimer = 0;
+                }
+              }
+            } else if (hunterState === 'SNIPER') {
+              // Hovers and fires precision #ff0000 / #ffffff 4D laser beams at nearby dots
+              posX += Math.cos(hunterTimer * 0.15) * 0.8;
+              posY += Math.sin(hunterTimer * 0.15) * 0.8;
+              spinBoost = 0.16;
+
+              if (hunterTimer % 12 === 1 && hunterShotsRemaining > 0) {
+                hunterShotsRemaining--;
+                const alive = bgNetwork.nodes.filter((n) => n.alive);
+                if (alive.length > 0) {
+                  alive.sort(
+                    (a, b) => Math.hypot(a.x - cx, a.y - cy) - Math.hypot(b.x - cx, b.y - cy)
+                  );
+                  const pickPool = alive.slice(0, Math.min(5, alive.length));
+                  const victim = pickPool[Math.floor(Math.random() * pickPool.length)];
+                  bgNetwork.attackEffects.push({
+                    type: 'SNIPER_BEAM',
+                    x1: cx,
+                    y1: cy,
+                    x2: victim.x,
+                    y2: victim.y,
+                    life: 1,
+                    decay: 0.085,
+                  });
+                  bgNetwork.destroyNode(victim, (victim.x - cx) * 0.04, (victim.y - cy) * 0.04);
+                  pulseEnergy = 0.85;
+                }
+              }
+
+              if (hunterShotsRemaining <= 0 && hunterTimer > 82) {
+                hunterState = 'SEEK';
+                hunterTimer = 0;
+              }
+            } else if (hunterState === 'CHAIN') {
+              // Fires 4D arc lightning that chains across up to 7 connected dots per discharge
+              posX += Math.sin(hunterTimer * 0.18) * 1.1;
+              posY += Math.cos(hunterTimer * 0.18) * 1.1;
+              spinBoost = 0.24;
+
+              if (hunterTimer % 18 === 1 && hunterChainsRemaining > 0) {
+                hunterChainsRemaining--;
+                const visited = new Set();
+                let curX = cx;
+                let curY = cy;
+
+                for (let hop = 0; hop < 7; hop++) {
+                  let nearest = null;
+                  let nearestDist = hop === 0 ? 440 : 250;
+                  for (let i = 0; i < bgNetwork.nodes.length; i++) {
+                    const candidate = bgNetwork.nodes[i];
+                    if (!candidate.alive || visited.has(candidate)) continue;
+                    const d = Math.hypot(candidate.x - curX, candidate.y - curY);
+                    if (d < nearestDist) {
+                      nearestDist = d;
+                      nearest = candidate;
+                    }
+                  }
+                  if (!nearest) break;
+                  visited.add(nearest);
+
+                  bgNetwork.attackEffects.push({
+                    type: 'CHAIN_BOLT',
+                    x1: curX,
+                    y1: curY,
+                    x2: nearest.x,
+                    y2: nearest.y,
+                    life: 1,
+                    decay: 0.065,
+                  });
+                  bgNetwork.destroyNode(nearest, (nearest.x - curX) * 0.05, (nearest.y - curY) * 0.05);
+                  curX = nearest.x;
+                  curY = nearest.y;
+                }
+
+                if (visited.size > 0) {
+                  pulseEnergy = 1.05;
+                }
+              }
+
+              if (hunterChainsRemaining <= 0 && hunterTimer > 76) {
+                hunterState = 'SEEK';
+                hunterTimer = 0;
+              }
+            } else if (hunterState === 'VORTEX') {
+              // Gravitational 4D singularity well pulling dots inward and crushing them
+              spinBoost = 0.3;
+              pulseEnergy = 0.75;
+              const vortexRadius = 250;
+
+              if (hunterTimer % 4 === 1) {
+                bgNetwork.attackEffects.push({
+                  type: 'VORTEX_WELL',
+                  x: cx,
+                  y: cy,
+                  radius: vortexRadius,
+                  rot: hunterTimer * 0.14,
+                  life: 0.95,
+                  decay: 0.22,
+                });
+              }
+
+              for (let i = 0; i < bgNetwork.nodes.length; i++) {
+                const n = bgNetwork.nodes[i];
+                if (!n.alive) continue;
+                const dx = cx - n.x;
+                const dy = cy - n.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < vortexRadius && dist > 1) {
+                  // Tangential swirl + inward gravitational pull
+                  const pull = (1 - dist / vortexRadius) * 2.4 + 0.65;
+                  const nx = dx / dist;
+                  const ny = dy / dist;
+                  n.vx += nx * pull - ny * pull * 0.72;
+                  n.vy += ny * pull + nx * pull * 0.72;
+
+                  if (dist < 44) {
+                    bgNetwork.destroyNode(n, -nx * 4, -ny * 4);
+                  }
+                }
+              }
+
+              if (hunterTimer >= 95) {
+                hunterState = 'SEEK';
+                hunterTimer = 0;
+              }
+            } else if (hunterState === 'ORBITAL') {
+              // Projects 4 spinning 4D plasma saw blades while sweeping aggressively through dot clusters
+              if (hunterTimer % 24 === 1) {
+                const target = pickDensestDotCluster();
+                if (target) {
+                  hunterTargetX = target.x;
+                  hunterTargetY = target.y;
+                }
+              }
+
+              const dx = hunterTargetX - cx;
+              const dy = hunterTargetY - cy;
+              const dist = Math.hypot(dx, dy);
+              if (dist > 1) {
+                const sawSpeed = 8.4;
+                velX += ((dx / dist) * sawSpeed - velX) * 0.14;
+                velY += ((dy / dist) * sawSpeed - velY) * 0.14;
+              }
+              posX += velX;
+              posY += velY;
+              spinBoost = 0.34;
+              pulseEnergy = 0.85;
+
+              const bladeRadius = 78;
+              bgNetwork.attackEffects.push({
+                type: 'ORBITAL_BLADE',
+                x: cx,
+                y: cy,
+                radius: bladeRadius,
+                rot: hunterTimer * 0.22,
+                life: 0.95,
+                decay: 0.55,
+              });
+
+              for (let i = 0; i < bgNetwork.nodes.length; i++) {
+                const n = bgNetwork.nodes[i];
+                if (!n.alive) continue;
+                const d = Math.hypot(n.x - cx, n.y - cy);
+                if (d <= bladeRadius + 12) {
+                  const tangentAng = Math.atan2(n.y - cy, n.x - cx) + Math.PI / 2;
+                  bgNetwork.destroyNode(n, Math.cos(tangentAng) * 8 + velX * 0.4, Math.sin(tangentAng) * 8 + velY * 0.4);
+                }
+              }
+
+              if (hunterTimer >= 115) {
+                hunterState = 'SEEK';
+                hunterTimer = 0;
+              }
+            } else if (hunterState === 'NOVA') {
+              // Charge & detonate an expanding 4D hypercube shockwave ring
+              if (hunterTimer < 26) {
+                spinBoost = 0.36;
+                pulseEnergy = hunterTimer / 26;
+                posX += (Math.random() - 0.5) * 4;
+                posY += (Math.random() - 0.5) * 4;
+              } else {
+                if (hunterTimer === 26) {
+                  pulseEnergy = 1.4;
+                }
+                hunterNovaRadius += 11.5;
+                if (hunterTimer % 3 === 0) {
+                  bgNetwork.attackEffects.push({
+                    type: 'NOVA_WAVE',
+                    x: cx,
+                    y: cy,
+                    radius: hunterNovaRadius,
+                    rot: hunterTimer * 0.12,
+                    life: 1,
+                    decay: 0.18,
+                  });
+                }
+
+                for (let i = 0; i < bgNetwork.nodes.length; i++) {
+                  const n = bgNetwork.nodes[i];
+                  if (!n.alive) continue;
+                  const dist = Math.hypot(n.x - cx, n.y - cy);
+                  if (dist <= hunterNovaRadius + 14) {
+                    const ang = Math.atan2(n.y - cy, n.x - cx);
+                    bgNetwork.destroyNode(n, Math.cos(ang) * 9, Math.sin(ang) * 9);
+                  }
+                }
+
+                if (hunterNovaRadius >= 310) {
+                  hunterState = 'SEEK';
+                  hunterTimer = 0;
+                }
+              }
+            }
+
+            // Keep tesseract safely clamped within viewport bounds during hunter maneuvers
+            if (posX < margin) {
+              posX = margin;
+              velX = Math.abs(velX);
+              hunterDashVx = Math.abs(hunterDashVx);
+            } else if (posX > maxX) {
+              posX = maxX;
+              velX = -Math.abs(velX);
+              hunterDashVx = -Math.abs(hunterDashVx);
+            }
+            if (posY < margin) {
+              posY = margin;
+              velY = Math.abs(velY);
+              hunterDashVy = Math.abs(hunterDashVy);
+            } else if (posY > maxY) {
+              posY = maxY;
+              velY = -Math.abs(velY);
+              hunterDashVy = -Math.abs(hunterDashVy);
+            }
+          } else {
+            if (hunterState !== 'IDLE') {
+              hunterState = 'IDLE';
+              hunterTimer = 0;
+            }
+
+            // Smooth orbital drift + velocity damping
+            driftPhase += 0.015;
+            const speedScale = isHovered ? 0.35 : 1;
+            posX += (velX + Math.cos(driftPhase) * 0.22) * speedScale;
+            posY += (velY + Math.sin(driftPhase * 0.85) * 0.22) * speedScale;
+
+            // Gently settle speed back to cruising pace after click boost
+            const currentSpeed = Math.hypot(velX, velY);
+            const cruiseSpeed = 1.35;
+            if (currentSpeed > cruiseSpeed) {
+              velX *= 0.985;
+              velY *= 0.985;
+            }
+
+            // Bounce cleanly off viewport boundaries
+            if (posX <= margin) {
+              posX = margin;
+              velX = Math.abs(velX);
+            } else if (posX >= maxX) {
+              posX = maxX;
+              velX = -Math.abs(velX);
+            }
+
+            if (posY <= margin) {
+              posY = margin;
+              velY = Math.abs(velY);
+            } else if (posY >= maxY) {
+              posY = maxY;
+              velY = -Math.abs(velY);
+            }
+          }
+        }
+
+        // Advance 4D rotation angles
+        const baseSpeed = isHovered ? 0.006 : 0.013;
+        const totalSpeed = baseSpeed + spinBoost;
+        angleXW += totalSpeed * 1.15;
+        angleYW += totalSpeed * 0.85;
+        angleZW += totalSpeed * 0.65;
+        angleXY += totalSpeed * 0.45;
+
+        spinBoost *= 0.94;
+        pulseEnergy *= 0.92;
+
+        // Move floating canvas container across viewport
+        canvas.style.transform = `translate3d(${posX.toFixed(1)}px, ${posY.toFixed(1)}px, 0)`;
+
+        // Render 4D Tesseract wireframe
+        ctx.clearRect(0, 0, size, size);
+        const center = size / 2;
+
+        if (pulseEnergy > 0.03) {
+          const ringRadius = 26 + (1 - Math.min(1, pulseEnergy)) * 28;
+          ctx.beginPath();
+          ctx.arc(center, center, ringRadius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(255, 0, 0, ${Math.min(0.9, pulseEnergy * 0.75).toFixed(3)})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.arc(center, center, 48, 0, Math.PI * 2);
+        ctx.strokeStyle = isHovered || isBgOnlyMode ? 'rgba(255, 0, 0, 0.55)' : 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 6]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const projected = vertices4D.map(project4DTo2D);
+
+        for (let i = 0; i < edges.length; i++) {
+          const edge = edges[i];
+          const pA = projected[edge.a];
+          const pB = projected[edge.b];
+          const avgDepth = (pA.depth + pB.depth) * 0.5;
+          const alpha = Math.max(0.35, Math.min(1, 0.72 + avgDepth * 0.18));
+
+          ctx.beginPath();
+          ctx.moveTo(pA.x, pA.y);
+          ctx.lineTo(pB.x, pB.y);
+          if (edge.isWEdge) {
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
+            ctx.lineWidth = isHovered ? 1.8 : 1.35;
+          } else {
+            ctx.strokeStyle = `rgba(255, 0, 0, ${alpha.toFixed(3)})`;
+            ctx.lineWidth = isHovered ? 2.4 : 1.9;
+          }
+          ctx.stroke();
+        }
+
+        for (let i = 0; i < projected.length; i++) {
+          const p = projected[i];
+          const r = Math.max(1.8, 2.6 + p.depth * 0.55 + pulseEnergy * 1.1);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = i < 8 ? TESSERACT_STYLE.nodeColor : TESSERACT_STYLE.mainColor;
           ctx.fill();
         }
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateTesseract);
       }
 
-      resizeCanvas();
-      animate();
+      animateTesseract();
     }
 
-    // Boot all portfolio systems safely
-    function initPortfolio() {
-      try {
-        if (footerYear) {
-          footerYear.textContent = new Date().getFullYear();
+    // Initialize Application
+    window.addEventListener('DOMContentLoaded', () => {
+      if (footerYear) {
+        footerYear.textContent = String(new Date().getFullYear());
+      }
+
+      updateHudClock();
+      setInterval(updateHudClock, 1000);
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value || '';
+          renderProjects();
+        });
+      }
+
+      if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', () => {
+          activeCategory = 'All';
+          searchQuery = '';
+          if (searchInput) searchInput.value = '';
+          renderCategoryButtons();
+          renderProjects();
+        });
+      }
+
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeProjectModal);
+      }
+
+      if (projectModal) {
+        projectModal.addEventListener('click', (e) => {
+          if (e.target === projectModal) {
+            closeProjectModal();
+          }
+        });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && selectedProject) {
+          closeProjectModal();
         }
-        updateHudClock();
-        setInterval(updateHudClock, 1000);
-        renderCategoryButtons();
-        renderProjects();
-        initBackgroundCanvas();
-      } catch (error) {
-        console.error('Portfolio initialization error:', error);
-      }
-    }
+      });
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initPortfolio);
-    } else {
-      initPortfolio();
-    }
+      if (modalCopyBtn) {
+        modalCopyBtn.addEventListener('click', () => {
+          const url = selectedProject && selectedProject.liveUrl ? selectedProject.liveUrl : window.location.href;
+          copyTextToClipboard(url);
+        });
+      }
+
+      if (toggleBgBtn) {
+        toggleBgBtn.addEventListener('click', toggleBackgroundView);
+      }
+
+      renderMainProjects();
+      renderCategoryButtons();
+      renderProjects();
+      initBackgroundCanvas();
+      initTesseractRoamer();
+    });
   </script>
 </body>
 </html>
