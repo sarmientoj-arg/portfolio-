@@ -449,7 +449,15 @@
     const GITHUB_URL = 'https://github.com';
 
     // Project Entries (Add builds here; label with category: 'Main' or ['Main', 'Games'] to feature above the category bar)
-    const PROJECTS_DATA = [];
+    const PROJECTS_DATA = [
+      {
+        title: 'space sim',
+        category: 'Sims',
+        description: 'Interactive space simulation.',
+        tags: ['Simulation', 'Space'],
+        liveUrl: 'https://sarmientoj-arg.github.io/space/',
+      },
+    ];
 
     // Filter Bar Categories
     const CATEGORIES = ['Sims', 'Sites', 'Games', 'Other', 'All'];
@@ -575,8 +583,16 @@
 
       const mainProjects = PROJECTS_DATA.filter((p) => projectHasCategory(p, 'Main'));
       mainProjects.forEach((project) => {
-        const card = document.createElement('button');
-        card.type = 'button';
+        const hasDirectLink = Boolean(project.liveUrl && project.directLink !== false);
+        const card = document.createElement(hasDirectLink ? 'a' : 'button');
+        if (hasDirectLink) {
+          card.href = project.liveUrl;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+        } else {
+          card.type = 'button';
+          card.addEventListener('click', () => openProjectModal(project));
+        }
         card.dataset.dynamicMain = 'true';
         card.className =
           'group text-left border border-crimson/70 hover:border-crimson bg-void/90 backdrop-blur-md rounded-xl p-3.5 flex flex-col justify-between gap-2.5 shadow-red-glow transition-all duration-200 hover:-translate-y-0.5 hover:shadow-red-glow-strong cursor-pointer';
@@ -596,11 +612,10 @@
             </p>
           </div>
           <div class="pt-2 border-t border-pure/15 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-pure group-hover:text-crimson">
-            <span>Inspect</span>
+            <span>${hasDirectLink ? 'Open' : 'Inspect'}</span>
             <span>&rarr;</span>
           </div>
         `;
-        card.addEventListener('click', () => openProjectModal(project));
         mainItemsGrid.appendChild(card);
       });
     }
@@ -753,8 +768,16 @@
         const displayCat = Array.isArray(project.category)
           ? project.category.find((c) => c !== 'Main') || project.category[0] || 'BUILD'
           : project.category || 'BUILD';
+        const hasDirectLink = Boolean(project.liveUrl && project.directLink !== false);
 
-        const card = document.createElement('article');
+        const card = document.createElement(hasDirectLink ? 'a' : 'article');
+        if (hasDirectLink) {
+          card.href = project.liveUrl;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+        } else {
+          card.addEventListener('click', () => openProjectModal(project));
+        }
         card.className =
           'group relative border border-pure/20 hover:border-crimson bg-void/90 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between gap-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-red-glow cursor-pointer';
         card.innerHTML = `
@@ -782,12 +805,11 @@
                 .join('')}
             </div>
             <div class="pt-3 border-t border-pure/15 flex items-center justify-between font-mono text-xs uppercase tracking-wider text-pure group-hover:text-crimson">
-              <span>Inspect Module</span>
+              <span>${hasDirectLink ? 'Open' : 'Inspect Module'}</span>
               <span>&rarr;</span>
             </div>
           </div>
         `;
-        card.addEventListener('click', () => openProjectModal(project));
         projectsGrid.appendChild(card);
       });
     }
@@ -1212,8 +1234,8 @@
           vx: Math.cos(patrolAngle) * 0.48,
           vy: Math.sin(patrolAngle) * 0.48,
           angle: arriveAngle,
-          hp: 150,
-          maxHp: 150,
+          hp: 100,
+          maxHp: 100,
           fireCooldown: 20,
           launchCooldown: 240,
           hueOffset: Math.random() * 360,
@@ -1298,7 +1320,7 @@
           angle,
           faction: factionId,
           hueOffset,
-          damage: isHeavy ? 12 : upgradeTier === 3 ? 7 : upgradeTier === 2 ? 6 : 5,
+          damage: isHeavy ? 12 : 1,
           isHeavy,
           upgradeTier,
           isUpgraded: upgradeTier >= 2,
@@ -2556,7 +2578,7 @@
                       speed: 0.055,
                       life: 1,
                       decay: 0.005,
-                      healAmount: 25,
+                      healAmount: 5,
                       faction: ship.faction,
                       hueOffset: ship.hueOffset,
                     });
@@ -3075,7 +3097,7 @@
             ctx.fill();
 
             if (ef.progress >= 1) {
-              targetMs.hp = Math.min(targetMs.maxHp, targetMs.hp + (ef.healAmount || 25));
+              targetMs.hp = Math.min(targetMs.maxHp, targetMs.hp + (ef.healAmount || 5));
               fleetEffects.push({
                 type: 'MOTHERSHIP_HEAL_RING',
                 x: targetMs.x,
@@ -3084,7 +3106,7 @@
                 maxRadius: 56,
                 life: 1,
                 decay: 0.032,
-                healAmount: ef.healAmount || 25,
+                healAmount: ef.healAmount || 5,
                 faction: ef.faction,
                 hueOffset: ef.hueOffset,
               });
