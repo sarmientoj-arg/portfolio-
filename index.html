@@ -356,40 +356,86 @@
         <div id="modal-tags" class="flex flex-wrap gap-2"></div>
       </div>
 
-      <!-- Modal Action Buttons -->
-      <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-pure/15">
-        <a id="modal-live-link" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-center px-6 py-3 rounded-xl bg-crimson text-pure font-mono text-xs font-bold uppercase tracking-wider hover:shadow-red-glow transition-all">
-          Launch Live Build &rarr;
-        </a>
-        <a id="modal-repo-link" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-center px-6 py-3 rounded-xl border border-pure/30 hover:border-crimson text-pure font-mono text-xs font-bold uppercase tracking-wider transition-all">
-          GitHub Source
-        </a>
-        <button id="modal-copy-btn" class="w-full sm:w-auto sm:ml-auto px-4 py-3 rounded-xl border border-pure/20 hover:border-pure text-pure font-mono text-xs uppercase tracking-wider transition-all cursor-pointer">
-          Copy Link
+      <!-- Modal Action Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-pure/15 font-mono text-xs">
+        <div class="flex flex-wrap items-center gap-3">
+          <a
+            id="modal-live-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2.5 rounded-xl bg-crimson text-pure font-bold uppercase tracking-wider hover:shadow-red-glow transition-all"
+          >
+            Launch Build &rarr;
+          </a>
+          <a
+            id="modal-repo-link"
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2.5 rounded-xl border border-pure/25 hover:border-crimson text-pure font-semibold uppercase tracking-wider transition-all"
+          >
+            Source Code
+          </a>
+        </div>
+        <button
+          id="modal-copy-btn"
+          type="button"
+          class="px-4 py-2.5 rounded-xl border border-crimson/70 hover:bg-crimson text-pure font-semibold uppercase tracking-wider transition-all cursor-pointer"
+        >
+          Copy Uplink
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Floating Bottom-Left Eye Toggle Button for Pure Background View -->
-  <button
-    id="toggle-bg-btn"
-    type="button"
-    aria-label="Toggle background-only view"
-    aria-pressed="false"
-    title="Toggle Background View"
-    class="fixed bottom-5 left-5 z-40 p-3.5 rounded-xl border border-crimson bg-void/90 backdrop-blur-md text-pure hover:bg-crimson hover:shadow-red-glow transition-all cursor-pointer flex items-center justify-center shadow-red-glow"
-  >
-    <!-- Eye Open Icon (shown when HUD is visible) -->
-    <svg id="eye-open-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-    </svg>
-    <!-- Eye Closed / Restore HUD Icon (shown when in BG-only mode) -->
-    <svg id="eye-closed-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-    </svg>
-  </button>
+  <!-- Floating Bottom-Left Controls for Pure Background View -->
+  <div class="fixed bottom-5 left-5 z-40 flex flex-wrap items-center gap-3">
+    <button
+      id="toggle-bg-btn"
+      type="button"
+      aria-label="Toggle background-only view"
+      aria-pressed="false"
+      title="Toggle Background View"
+      class="p-3.5 rounded-xl border border-crimson bg-void/90 backdrop-blur-md text-pure hover:bg-crimson hover:shadow-red-glow transition-all cursor-pointer flex items-center justify-center shadow-red-glow"
+    >
+      <!-- Eye Open Icon (shown when HUD is visible) -->
+      <svg id="eye-open-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+      </svg>
+      <!-- Eye Closed / Restore HUD Icon (shown when in BG-only mode) -->
+      <svg id="eye-closed-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+      </svg>
+    </button>
+
+    <!-- BG-View Only Button: Toggle Tesseract Attack Mode -->
+    <button
+      id="toggle-attack-btn"
+      type="button"
+      aria-label="Toggle tesseract attack mode"
+      aria-pressed="true"
+      title="Turn Off Tesseract Attack Mode"
+      class="hidden items-center gap-2.5 px-4 py-3.5 rounded-xl border border-crimson bg-void/90 backdrop-blur-md text-pure hover:bg-crimson hover:shadow-red-glow transition-all cursor-pointer font-mono text-xs font-bold uppercase tracking-wider shadow-red-glow"
+    >
+      <span id="attack-status-dot" class="w-2 h-2 rounded-full bg-crimson animate-pulse"></span>
+      <span id="attack-btn-label">Attack: ON</span>
+    </button>
+
+    <!-- BG-View Only Button: Toggle Colony Ships (Hyper-Jump Exit) -->
+    <button
+      id="toggle-ships-btn"
+      type="button"
+      aria-label="Toggle colony ships"
+      aria-pressed="true"
+      title="Turn Off Colony Ships"
+      class="hidden items-center gap-2.5 px-4 py-3.5 rounded-xl border border-crimson bg-void/90 backdrop-blur-md text-pure hover:bg-crimson hover:shadow-red-glow transition-all cursor-pointer font-mono text-xs font-bold uppercase tracking-wider shadow-red-glow"
+    >
+      <span id="ships-status-dot" class="w-2 h-2 rounded-full bg-crimson animate-pulse"></span>
+      <span id="ships-btn-label">Ships: ON</span>
+    </button>
+  </div>
 
   <!-- Non-blocking Toast Notification -->
   <div id="toast-banner" class="fixed bottom-20 left-5 z-50 hidden items-center gap-3 px-5 py-3 rounded-xl border border-crimson bg-void text-pure font-mono text-xs shadow-red-glow">
@@ -413,9 +459,13 @@
     let searchQuery = '';
     let selectedProject = null;
     let isBgOnlyMode = false;
+    let isLaserMode = false;
+    let isTesseractAttackEnabled = true;
+    let isShipsEnabled = true;
     let toastTimeout = null;
     let bgGlitchIntensity = 0;
     let bgNetwork = null;
+    let tesseractTelemetry = { x: 0, y: 0, isAttacking: false };
 
     // DOM Element References
     const portfolioUi = document.getElementById('portfolio-ui');
@@ -448,18 +498,26 @@
     const toggleBgBtn = document.getElementById('toggle-bg-btn');
     const eyeOpenIcon = document.getElementById('eye-open-icon');
     const eyeClosedIcon = document.getElementById('eye-closed-icon');
+    const toggleAttackBtn = document.getElementById('toggle-attack-btn');
+    const attackStatusDot = document.getElementById('attack-status-dot');
+    const attackBtnLabel = document.getElementById('attack-btn-label');
+    const toggleShipsBtn = document.getElementById('toggle-ships-btn');
+    const shipsStatusDot = document.getElementById('ships-status-dot');
+    const shipsBtnLabel = document.getElementById('ships-btn-label');
     const toastBanner = document.getElementById('toast-banner');
     const toastMessage = document.getElementById('toast-message');
 
     /**
-     * Non-blocking toast banner feedback
+     * Displays a non-blocking high-tech notification toast
      */
-    function showToast(msg) {
+    function showToast(message) {
       if (!toastBanner || !toastMessage) return;
-      toastMessage.textContent = msg;
+      toastMessage.textContent = message;
       toastBanner.classList.remove('hidden');
       toastBanner.classList.add('flex');
-      if (toastTimeout) clearTimeout(toastTimeout);
+      if (toastTimeout) {
+        clearTimeout(toastTimeout);
+      }
       toastTimeout = setTimeout(() => {
         toastBanner.classList.add('hidden');
         toastBanner.classList.remove('flex');
@@ -467,27 +525,7 @@
     }
 
     /**
-     * iFrame-safe clipboard copy helper using document.execCommand('copy')
-     */
-    function copyTextToClipboard(text) {
-      try {
-        const tempInput = document.createElement('textarea');
-        tempInput.value = text;
-        tempInput.setAttribute('readonly', '');
-        tempInput.style.position = 'fixed';
-        tempInput.style.opacity = '0';
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        showToast('Link copied to clipboard.');
-      } catch (err) {
-        showToast('Unable to copy link.');
-      }
-    }
-
-    /**
-     * Live UTC Telemetry Clock
+     * Updates the top HUD telemetry clock in UTC
      */
     function updateHudClock() {
       if (!hudClock) return;
@@ -499,58 +537,53 @@
     }
 
     /**
-     * Normalizes a project's category field (supports string or array of strings)
+     * Copies text to clipboard using iframe-safe execCommand fallback
      */
-    function getProjectCategories(project) {
-      if (!project || !project.category) return ['Other'];
-      return Array.isArray(project.category) ? project.category : [project.category];
+    function copyTextToClipboard(text) {
+      try {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        tempInput.style.position = 'fixed';
+        tempInput.style.opacity = '0';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        showToast('Uplink URL copied to clipboard.');
+      } catch (err) {
+        showToast('Clipboard access unavailable.');
+      }
     }
 
     /**
-     * Generates a high-tech #000000 / #ff0000 / #ffffff SVG schematic for a project
+     * Checks whether a project belongs to a given category
      */
-    function createSchematicSvg(project) {
-      const cats = getProjectCategories(project);
-      const primary = cats[0] || 'Module';
-      return `
-        <svg viewBox="0 0 320 140" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="320" height="140" fill="#000000" />
-          <g stroke="#ffffff" stroke-opacity="0.12" stroke-width="1">
-            <line x1="0" y1="35" x2="320" y2="35" />
-            <line x1="0" y1="70" x2="320" y2="70" />
-            <line x1="0" y1="105" x2="320" y2="105" />
-            <line x1="80" y1="0" x2="80" y2="140" />
-            <line x1="160" y1="0" x2="160" y2="140" />
-            <line x1="240" y1="0" x2="240" y2="140" />
-          </g>
-          <polygon points="160,22 212,70 160,118 108,70" fill="none" stroke="#ff0000" stroke-width="2" />
-          <rect x="134" y="44" width="52" height="52" fill="none" stroke="#ffffff" stroke-width="1.25" stroke-dasharray="4 3" />
-          <circle cx="160" cy="70" r="6" fill="#ff0000" />
-          <text x="14" y="22" fill="#ffffff" fill-opacity="0.65" font-family="monospace" font-size="10">SECTOR // ${primary.toUpperCase()}</text>
-          <text x="14" y="128" fill="#ff0000" font-family="monospace" font-size="10">STATUS: READY</text>
-        </svg>
-      `;
+    function projectHasCategory(project, category) {
+      if (category === 'All') return true;
+      if (Array.isArray(project.category)) {
+        return project.category.includes(category);
+      }
+      return project.category === category;
     }
 
     /**
-     * Renders any projects tagged with "Main" inside the top Featured Uplinks showcase
+     * Renders any projects tagged with "Main" into the Featured Uplinks grid
      */
     function renderMainProjects() {
       if (!mainItemsGrid) return;
-      const dynamicCards = mainItemsGrid.querySelectorAll('[data-dynamic-main="true"]');
-      dynamicCards.forEach((el) => el.remove());
+      mainItemsGrid.querySelectorAll('[data-dynamic-main="true"]').forEach((el) => el.remove());
 
-      const mainProjects = PROJECTS_DATA.filter((p) => getProjectCategories(p).includes('Main'));
+      const mainProjects = PROJECTS_DATA.filter((p) => projectHasCategory(p, 'Main'));
       mainProjects.forEach((project) => {
         const card = document.createElement('button');
         card.type = 'button';
-        card.setAttribute('data-dynamic-main', 'true');
+        card.dataset.dynamicMain = 'true';
         card.className =
-          'text-left group border border-crimson/70 hover:border-crimson bg-void/90 backdrop-blur-md rounded-xl p-3.5 flex flex-col justify-between gap-2.5 shadow-red-glow transition-all duration-200 hover:-translate-y-0.5 hover:shadow-red-glow-strong cursor-pointer';
+          'group text-left border border-crimson/70 hover:border-crimson bg-void/90 backdrop-blur-md rounded-xl p-3.5 flex flex-col justify-between gap-2.5 shadow-red-glow transition-all duration-200 hover:-translate-y-0.5 hover:shadow-red-glow-strong cursor-pointer';
         card.innerHTML = `
           <div class="flex items-center justify-between gap-2">
             <div class="w-8 h-8 rounded-lg border border-crimson bg-crimson/15 text-pure flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-              4D
+              01
             </div>
             <span class="font-mono text-[10px] uppercase tracking-wider text-crimson">MAIN</span>
           </div>
@@ -559,7 +592,7 @@
               ${project.title || 'Untitled Module'}
             </h3>
             <p class="text-[11px] text-pure/70 line-clamp-1 mt-0.5">
-              ${project.summary || project.description || 'Featured module'}
+              ${project.description || 'Featured build'}
             </p>
           </div>
           <div class="pt-2 border-t border-pure/15 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-pure group-hover:text-crimson">
@@ -573,7 +606,7 @@
     }
 
     /**
-     * Renders the category filter buttons with live counts
+     * Renders the category filter buttons with live module counts
      */
     function renderCategoryButtons() {
       if (!categoryButtonsContainer) return;
@@ -583,22 +616,20 @@
         const count =
           cat === 'All'
             ? PROJECTS_DATA.length
-            : PROJECTS_DATA.filter((p) => getProjectCategories(p).includes(cat)).length;
+            : PROJECTS_DATA.filter((p) => projectHasCategory(p, cat)).length;
         const isActive = activeCategory === cat;
 
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = isActive
-          ? 'px-4 py-2 rounded-xl bg-crimson text-pure border border-crimson font-mono text-xs font-bold uppercase tracking-wider shadow-red-glow transition-all cursor-pointer'
-          : 'px-4 py-2 rounded-xl bg-void text-pure border border-pure/25 hover:border-crimson font-mono text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer';
+          ? 'px-3.5 py-2 rounded-xl border border-crimson bg-crimson text-pure font-mono text-xs font-bold uppercase tracking-wider shadow-red-glow transition-all cursor-pointer'
+          : 'px-3.5 py-2 rounded-xl border border-pure/20 hover:border-crimson bg-void text-pure/80 hover:text-pure font-mono text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer';
         btn.textContent = `${cat} (${count})`;
-
         btn.addEventListener('click', () => {
           activeCategory = cat;
           renderCategoryButtons();
           renderProjects();
         });
-
         categoryButtonsContainer.appendChild(btn);
       });
     }
@@ -610,30 +641,47 @@
       if (!projectModal || !project) return;
       selectedProject = project;
 
-      const cats = getProjectCategories(project).filter((c) => c !== 'Main');
-      if (modalCategory) modalCategory.textContent = cats[0] || 'MODULE';
+      const primaryCat = Array.isArray(project.category)
+        ? project.category.find((c) => c !== 'Main') || project.category[0] || 'MODULE'
+        : project.category || 'MODULE';
+
+      if (modalCategory) modalCategory.textContent = primaryCat;
       if (modalVersion) modalVersion.textContent = project.version || 'BUILD v1.0';
       if (modalTitle) modalTitle.textContent = project.title || 'Untitled Module';
-      if (modalVisual) modalVisual.innerHTML = createSchematicSvg(project);
       if (modalDescription) {
-        modalDescription.textContent =
-          project.description || project.summary || 'No telemetry description provided.';
+        modalDescription.textContent = project.description || 'No telemetry description provided.';
       }
-
+      if (modalVisual) {
+        modalVisual.innerHTML = `
+          <svg class="w-full h-full" viewBox="0 0 400 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="160" fill="#000000" />
+            <path d="M0 40H400M0 80H400M0 120H400M80 0V160M160 0V160M240 0V160M320 0V160" stroke="#ffffff" stroke-opacity="0.1" />
+            <rect x="145" y="35" width="110" height="90" stroke="#ff0000" stroke-width="2" />
+            <rect x="165" y="52" width="70" height="56" stroke="#ffffff" stroke-width="1.5" />
+            <line x1="145" y1="35" x2="165" y2="52" stroke="#ff0000" stroke-width="1.2" />
+            <line x1="255" y1="35" x2="235" y2="52" stroke="#ff0000" stroke-width="1.2" />
+            <line x1="255" y1="125" x2="235" y2="108" stroke="#ff0000" stroke-width="1.2" />
+            <line x1="145" y1="125" x2="165" y2="108" stroke="#ff0000" stroke-width="1.2" />
+          </svg>
+        `;
+      }
       if (modalTags) {
         modalTags.innerHTML = '';
-        const tags = Array.isArray(project.tags) ? project.tags : ['HTML5', 'JavaScript', 'Tailwind'];
-        tags.forEach((tag) => {
+        (project.tags || []).forEach((tag) => {
           const span = document.createElement('span');
           span.className =
-            'px-3 py-1 rounded-lg border border-pure/20 bg-void font-mono text-xs text-pure/90';
+            'px-2.5 py-1 rounded-md border border-crimson/60 bg-crimson/10 font-mono text-xs text-pure';
           span.textContent = tag;
           modalTags.appendChild(span);
         });
       }
-
-      if (modalLiveLink) modalLiveLink.href = project.liveUrl || GITHUB_URL;
-      if (modalRepoLink) modalRepoLink.href = project.repoUrl || GITHUB_URL;
+      if (modalLiveLink) {
+        modalLiveLink.href = project.liveUrl || '#';
+        modalLiveLink.classList.toggle('hidden', !project.liveUrl);
+      }
+      if (modalRepoLink) {
+        modalRepoLink.href = project.repoUrl || GITHUB_URL;
+      }
 
       projectModal.classList.remove('hidden');
       projectModal.classList.add('flex');
@@ -644,131 +692,192 @@
      */
     function closeProjectModal() {
       if (!projectModal) return;
-      selectedProject = null;
       projectModal.classList.add('hidden');
       projectModal.classList.remove('flex');
+      selectedProject = null;
     }
 
     /**
-     * Renders the filtered project grid or empty state
+     * Filters and renders project cards into the main portfolio grid
      */
     function renderProjects() {
-      if (!projectsGrid) return;
-
       if (statTotal) {
         statTotal.textContent = String(PROJECTS_DATA.length).padStart(2, '0');
       }
 
       const query = searchQuery.trim().toLowerCase();
       const filtered = PROJECTS_DATA.filter((project) => {
-        const cats = getProjectCategories(project);
-        const matchesCat = activeCategory === 'All' || cats.includes(activeCategory);
+        const matchesCat = projectHasCategory(project, activeCategory);
         if (!matchesCat) return false;
         if (!query) return true;
 
-        const haystack = [
-          project.title || '',
-          project.summary || '',
-          project.description || '',
-          ...(Array.isArray(project.tags) ? project.tags : []),
-          ...cats,
-        ]
-          .join(' ')
-          .toLowerCase();
-        return haystack.includes(query);
+        const inTitle = (project.title || '').toLowerCase().includes(query);
+        const inDesc = (project.description || '').toLowerCase().includes(query);
+        const inTags = (project.tags || []).some((t) => t.toLowerCase().includes(query));
+        return inTitle || inDesc || inTags;
       });
 
       if (sectionHeading) {
         sectionHeading.textContent = `Category: ${activeCategory} (${filtered.length})`;
       }
 
+      if (!projectsGrid) return;
       projectsGrid.innerHTML = '';
 
       if (filtered.length === 0) {
-        if (emptyState) emptyState.classList.remove('hidden');
-        const hasFilters = activeCategory !== 'All' || query.length > 0;
-        if (emptyStateTitle) {
-          emptyStateTitle.textContent = hasFilters
-            ? 'No Matching Modules Found'
-            : 'Awaiting Module Deployment';
-        }
-        if (emptyStateDesc) {
-          emptyStateDesc.textContent = hasFilters
-            ? 'No modules matched your current filter or search query.'
-            : 'No modules have been deployed to this sector yet.';
-        }
-        if (resetFiltersBtn) {
-          if (hasFilters) {
-            resetFiltersBtn.classList.remove('hidden');
-          } else {
-            resetFiltersBtn.classList.add('hidden');
+        if (emptyState) {
+          emptyState.classList.remove('hidden');
+          const hasAnyProjects = PROJECTS_DATA.length > 0;
+          if (emptyStateTitle) {
+            emptyStateTitle.textContent = hasAnyProjects
+              ? 'No Matching Modules Found'
+              : 'Awaiting Module Deployment';
+          }
+          if (emptyStateDesc) {
+            emptyStateDesc.textContent = hasAnyProjects
+              ? 'No builds match your active category or search filter.'
+              : 'No modules have been deployed to this sector yet.';
+          }
+          if (resetFiltersBtn) {
+            resetFiltersBtn.classList.toggle('hidden', !hasAnyProjects);
           }
         }
         return;
       }
 
-      if (emptyState) emptyState.classList.add('hidden');
+      if (emptyState) {
+        emptyState.classList.add('hidden');
+      }
 
       filtered.forEach((project) => {
-        const cats = getProjectCategories(project).filter((c) => c !== 'Main');
-        const primaryCat = cats[0] || 'Module';
-        const tags = Array.isArray(project.tags) ? project.tags.slice(0, 3) : [];
+        const displayCat = Array.isArray(project.category)
+          ? project.category.find((c) => c !== 'Main') || project.category[0] || 'BUILD'
+          : project.category || 'BUILD';
 
         const card = document.createElement('article');
         card.className =
-          'group border border-pure/20 hover:border-crimson bg-void/90 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between gap-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-red-glow animate-fade-up';
+          'group relative border border-pure/20 hover:border-crimson bg-void/90 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between gap-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-red-glow cursor-pointer';
         card.innerHTML = `
           <div>
-            <div class="w-full h-36 rounded-xl border border-pure/15 overflow-hidden mb-4">
-              ${createSchematicSvg(project)}
-            </div>
-            <div class="flex items-center justify-between gap-2 mb-2 font-mono text-xs">
-              <span class="px-2.5 py-0.5 rounded-md bg-crimson/15 border border-crimson text-crimson font-bold uppercase tracking-wider">
-                ${primaryCat}
+            <div class="flex items-center justify-between gap-2 mb-4 font-mono text-xs">
+              <span class="px-2.5 py-1 rounded-md border border-crimson bg-crimson/15 text-pure font-bold uppercase tracking-wider">
+                ${displayCat}
               </span>
-              <span class="text-pure/60">${project.version || 'v1.0'}</span>
+              <span class="text-pure/50">${project.version || 'v1.0'}</span>
             </div>
-            <h3 class="font-display text-lg font-bold uppercase tracking-wide text-pure group-hover:text-crimson transition-colors mb-2">
+            <h3 class="font-display text-xl font-bold uppercase tracking-wide text-pure group-hover:text-crimson transition-colors mb-2">
               ${project.title || 'Untitled Module'}
             </h3>
-            <p class="text-sm text-pure/75 line-clamp-2 leading-relaxed">
-              ${project.summary || project.description || 'System module ready for inspection.'}
+            <p class="text-sm text-pure/75 leading-relaxed line-clamp-3">
+              ${project.description || ''}
             </p>
           </div>
-
           <div>
             <div class="flex flex-wrap gap-1.5 mb-4">
-              ${tags
+              ${(project.tags || [])
                 .map(
-                  (t) =>
-                    `<span class="px-2 py-0.5 rounded-md border border-pure/15 font-mono text-[11px] text-pure/75">${t}</span>`
+                  (tag) =>
+                    `<span class="px-2 py-0.5 rounded border border-pure/15 font-mono text-[11px] text-pure/80">${tag}</span>`
                 )
                 .join('')}
             </div>
-            <div class="pt-3 border-t border-pure/15 flex items-center justify-between gap-2">
-              <button type="button" class="inspect-btn px-4 py-2 rounded-xl bg-crimson text-pure font-mono text-xs font-bold uppercase tracking-wider hover:shadow-red-glow transition-all cursor-pointer">
-                Inspect Module
-              </button>
-              <a href="${project.liveUrl || GITHUB_URL}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl border border-pure/25 hover:border-crimson text-pure font-mono text-xs uppercase tracking-wider transition-all">
-                Launch &rarr;
-              </a>
+            <div class="pt-3 border-t border-pure/15 flex items-center justify-between font-mono text-xs uppercase tracking-wider text-pure group-hover:text-crimson">
+              <span>Inspect Module</span>
+              <span>&rarr;</span>
             </div>
           </div>
         `;
-
-        const inspectBtn = card.querySelector('.inspect-btn');
-        if (inspectBtn) {
-          inspectBtn.addEventListener('click', () => openProjectModal(project));
-        }
-
+        card.addEventListener('click', () => openProjectModal(project));
         projectsGrid.appendChild(card);
       });
+    }
+
+    /**
+     * Syncs the BG-only Tesseract Attack Mode button visuals and ARIA state
+     */
+    function updateAttackButtonUi() {
+      if (!toggleAttackBtn) return;
+      toggleAttackBtn.setAttribute('aria-pressed', String(isTesseractAttackEnabled));
+      toggleAttackBtn.title = isTesseractAttackEnabled
+        ? 'Turn Off Tesseract Attack Mode'
+        : 'Turn On Tesseract Attack Mode';
+
+      if (attackBtnLabel) {
+        attackBtnLabel.textContent = isTesseractAttackEnabled ? 'Attack: ON' : 'Attack: OFF';
+      }
+      if (attackStatusDot) {
+        attackStatusDot.className = isTesseractAttackEnabled
+          ? 'w-2 h-2 rounded-full bg-crimson animate-pulse'
+          : 'w-2 h-2 rounded-full bg-pure/40';
+      }
+      if (isTesseractAttackEnabled) {
+        toggleAttackBtn.classList.add('border-crimson', 'shadow-red-glow');
+        toggleAttackBtn.classList.remove('border-pure/30');
+      } else {
+        toggleAttackBtn.classList.remove('border-crimson', 'shadow-red-glow');
+        toggleAttackBtn.classList.add('border-pure/30');
+      }
+    }
+
+    /**
+     * Toggles the 4D tesseract's background dot-hunting attack mode on or off
+     */
+    function toggleTesseractAttackMode() {
+      isTesseractAttackEnabled = !isTesseractAttackEnabled;
+      updateAttackButtonUi();
+      showToast(
+        isTesseractAttackEnabled
+          ? 'Tesseract attack mode: ENABLED.'
+          : 'Tesseract attack mode: DISABLED.'
+      );
+    }
+
+    /**
+     * Syncs the BG-only Colony Ships button visuals and ARIA state
+     */
+    function updateShipsButtonUi() {
+      if (!toggleShipsBtn) return;
+      toggleShipsBtn.setAttribute('aria-pressed', String(isShipsEnabled));
+      toggleShipsBtn.title = isShipsEnabled ? 'Turn Off Colony Ships' : 'Turn On Colony Ships';
+
+      if (shipsBtnLabel) {
+        shipsBtnLabel.textContent = isShipsEnabled ? 'Ships: ON' : 'Ships: OFF';
+      }
+      if (shipsStatusDot) {
+        shipsStatusDot.className = isShipsEnabled
+          ? 'w-2 h-2 rounded-full bg-crimson animate-pulse'
+          : 'w-2 h-2 rounded-full bg-pure/40';
+      }
+      if (isShipsEnabled) {
+        toggleShipsBtn.classList.add('border-crimson', 'shadow-red-glow');
+        toggleShipsBtn.classList.remove('border-pure/30');
+      } else {
+        toggleShipsBtn.classList.remove('border-crimson', 'shadow-red-glow');
+        toggleShipsBtn.classList.add('border-pure/30');
+      }
+    }
+
+    /**
+     * Toggles the autonomous colony ships on or off (triggers hyper-speed jump exit when turned off)
+     */
+    function toggleShipsMode() {
+      isShipsEnabled = !isShipsEnabled;
+      updateShipsButtonUi();
+      if (bgNetwork && bgNetwork.setShipsEnabled) {
+        bgNetwork.setShipsEnabled(isShipsEnabled);
+      }
+      showToast(
+        isShipsEnabled
+          ? 'Colony fleets: ONLINE.'
+          : 'Colony fleets: CHARGING HYPERDRIVE...'
+      );
     }
 
     /**
      * Toggles pure background view (hides portfolio UI so the tesseract hunts background dots)
      */
     function toggleBackgroundView() {
+      if (isLaserMode && !isBgOnlyMode) return;
       isBgOnlyMode = !isBgOnlyMode;
       if (portfolioUi) {
         portfolioUi.classList.toggle('hidden', isBgOnlyMode);
@@ -782,6 +891,26 @@
       }
       if (toggleBgBtn) {
         toggleBgBtn.setAttribute('aria-pressed', String(isBgOnlyMode));
+      }
+      if (toggleAttackBtn) {
+        if (isBgOnlyMode) {
+          updateAttackButtonUi();
+          toggleAttackBtn.classList.remove('hidden');
+          toggleAttackBtn.classList.add('flex');
+        } else {
+          toggleAttackBtn.classList.add('hidden');
+          toggleAttackBtn.classList.remove('flex');
+        }
+      }
+      if (toggleShipsBtn) {
+        if (isBgOnlyMode) {
+          updateShipsButtonUi();
+          toggleShipsBtn.classList.remove('hidden');
+          toggleShipsBtn.classList.add('flex');
+        } else {
+          toggleShipsBtn.classList.add('hidden');
+          toggleShipsBtn.classList.remove('flex');
+        }
       }
       if (!isBgOnlyMode && bgNetwork) {
         bgNetwork.respawnAll();
@@ -916,7 +1045,2096 @@
         respawnAll,
       };
 
-      function animateBg() {
+      // =========================================================================
+      // AUTONOMOUS COLONY FLEETS & MOTHERSHIP SIMULATION
+      // Factions: 'CRIMSON_WHITE' (#ff0000/#ffffff), 'RGB' (Chromatic), 'MONOCHROME' (#ffffff/#888888/#000000)
+      // =========================================================================
+      const FACTIONS = {
+        CRIMSON_WHITE: {
+          id: 'CRIMSON_WHITE',
+          label: 'RED//WHT',
+          homeXRatio: 0.2,
+          homeYRatio: 0.28,
+          mothership: null,
+        },
+        RGB: {
+          id: 'RGB',
+          label: 'RGB//SYS',
+          homeXRatio: 0.8,
+          homeYRatio: 0.3,
+          mothership: null,
+        },
+        MONOCHROME: {
+          id: 'MONOCHROME',
+          label: 'MONO//01',
+          homeXRatio: 0.5,
+          homeYRatio: 0.78,
+          mothership: null,
+        },
+      };
+
+      const FACTION_KEYS = Object.keys(FACTIONS);
+      const SHIP_SCALE = 0.74;
+      const MOTHERSHIP_SCALE = 0.78;
+      const colonyShips = [];
+      const fleetLasers = [];
+      const fleetEffects = [];
+      const respawnQueue = [];
+      const factionStandoffs = {};
+      let fleetTime = 0;
+      let lastFleetFrameMs = performance.now();
+      let lastMothershipRollTime = performance.now();
+
+      function getFactionPairKey(fA, fB) {
+        return fA < fB ? `${fA}:${fB}` : `${fB}:${fA}`;
+      }
+
+      function areFactionsHostile(fA, fB) {
+        if (fA === fB) return false;
+        const entry = factionStandoffs[getFactionPairKey(fA, fB)];
+        return Boolean(entry && entry.hostile);
+      }
+
+      function getFactionColor(factionId, timeMs, offset = 0, alpha = 1) {
+        if (factionId === 'CRIMSON_WHITE') {
+          return alpha < 1 ? `rgba(255, 0, 0, ${alpha})` : '#ff0000';
+        }
+        if (factionId === 'MONOCHROME') {
+          return alpha < 1 ? `rgba(255, 255, 255, ${alpha})` : '#ffffff';
+        }
+        // RGB faction dynamic chromatic spectrum
+        const hue = Math.floor((timeMs * 0.2 + offset) % 360);
+        return alpha < 1 ? `hsla(${hue}, 100%, 55%, ${alpha})` : `hsl(${hue}, 100%, 55%)`;
+      }
+
+      function getFactionSecondaryColor(factionId, timeMs, offset = 0, alpha = 1) {
+        if (factionId === 'CRIMSON_WHITE') {
+          return alpha < 1 ? `rgba(255, 255, 255, ${alpha})` : '#ffffff';
+        }
+        if (factionId === 'MONOCHROME') {
+          return alpha < 1 ? `rgba(155, 155, 155, ${alpha})` : '#9b9b9b';
+        }
+        const hue = Math.floor((timeMs * 0.2 + offset + 120) % 360);
+        return alpha < 1 ? `hsla(${hue}, 100%, 60%, ${alpha})` : `hsl(${hue}, 100%, 60%)`;
+      }
+
+      function spawnColonyShip(factionId, customX, customY) {
+        const f = FACTIONS[factionId];
+        const rawDestX =
+          typeof customX === 'number'
+            ? customX + (Math.random() - 0.5) * 36
+            : width * f.homeXRatio + (Math.random() - 0.5) * 85;
+        const rawDestY =
+          typeof customY === 'number'
+            ? customY + (Math.random() - 0.5) * 36
+            : height * f.homeYRatio + (Math.random() - 0.5) * 85;
+
+        const destX = Math.max(36, Math.min(width - 36, rawDestX));
+        const destY = Math.max(36, Math.min(height - 36, rawDestY));
+
+        // Launch from beyond the nearest screen edge so the ship hyper-jumps into position
+        const exitAngle = computeNearestEdgeAngle(destX, destY, width, height);
+        const arriveAngle = exitAngle + Math.PI;
+        const jumpDistance = Math.max(180, Math.hypot(width, height) * 0.45) + Math.random() * 140;
+        const startX = destX - Math.cos(arriveAngle) * jumpDistance;
+        const startY = destY - Math.sin(arriveAngle) * jumpDistance;
+
+        colonyShips.push({
+          faction: factionId,
+          x: startX,
+          y: startY,
+          vx: Math.cos(arriveAngle) * 1.4,
+          vy: Math.sin(arriveAngle) * 1.4,
+          angle: arriveAngle,
+          hp: 26,
+          maxHp: 26,
+          upgradeTier: 1,
+          isUpgraded: false,
+          mineProgress: 0,
+          mineDuration: 72,
+          state: 'HYPER_ARRIVE', // 'HYPER_ARRIVE' | 'SCOUT' | 'EXAMINE_DOT' | 'MINE_DOT' | 'EXAMINE_TESSERACT' | 'COMBAT' | 'BACKUP' | 'HYPER_CHARGE' | 'HYPER_DASH'
+          stateTimer: 60 + Math.floor(Math.random() * 120),
+          arriveDestX: destX,
+          arriveDestY: destY,
+          hyperAngle: arriveAngle,
+          hyperSpeed: 34,
+          targetNode: null,
+          targetEnemy: null,
+          backupX: 0,
+          backupY: 0,
+          backupCooldown: 0,
+          fireCooldown: Math.floor(Math.random() * 25),
+          hueOffset: Math.random() * 360,
+          trail: [],
+        });
+      }
+
+      function spawnMothership(factionId) {
+        const f = FACTIONS[factionId];
+        if (f.mothership) return;
+
+        // Enter via hyperdrive from a clean perimeter sector
+        const edge = Math.floor(Math.random() * 4);
+        let destX = width * 0.5;
+        let destY = height * 0.5;
+        let startX = destX;
+        let startY = destY;
+
+        if (edge === 0) {
+          destX = 72;
+          destY = 90 + Math.random() * Math.max(40, height - 180);
+          startX = -150;
+          startY = destY + (Math.random() - 0.5) * 60;
+        } else if (edge === 1) {
+          destX = width - 72;
+          destY = 90 + Math.random() * Math.max(40, height - 180);
+          startX = width + 150;
+          startY = destY + (Math.random() - 0.5) * 60;
+        } else if (edge === 2) {
+          destX = 90 + Math.random() * Math.max(40, width - 180);
+          destY = 72;
+          startX = destX + (Math.random() - 0.5) * 60;
+          startY = -150;
+        } else {
+          destX = 90 + Math.random() * Math.max(40, width - 180);
+          destY = height - 72;
+          startX = destX + (Math.random() - 0.5) * 60;
+          startY = height + 150;
+        }
+
+        const arriveAngle = Math.atan2(destY - startY, destX - startX);
+        const patrolAngle = Math.atan2(height * 0.5 - destY, width * 0.5 - destX) + (Math.random() - 0.5) * 0.45;
+
+        f.mothership = {
+          faction: factionId,
+          x: startX,
+          y: startY,
+          vx: Math.cos(patrolAngle) * 0.48,
+          vy: Math.sin(patrolAngle) * 0.48,
+          angle: arriveAngle,
+          hp: 150,
+          maxHp: 150,
+          fireCooldown: 20,
+          launchCooldown: 240,
+          hueOffset: Math.random() * 360,
+          pulsePhase: 0,
+          hyperState: 'HYPER_ARRIVE',
+          arriveDestX: destX,
+          arriveDestY: destY,
+          hyperAngle: arriveAngle,
+          hyperSpeed: 28,
+        };
+
+        // Deploy 2 immediate escort fighters jumping in alongside the Mothership
+        spawnColonyShip(factionId, destX + (Math.random() - 0.5) * 48, destY + (Math.random() - 0.5) * 48);
+        spawnColonyShip(factionId, destX + (Math.random() - 0.5) * 48, destY + (Math.random() - 0.5) * 48);
+      }
+
+      function triggerBackupCall(caller) {
+        caller.backupCooldown = 480; // ~8 second cooldown before broadcasting again
+
+        // Visual expanding distress / backup radar pulse
+        fleetEffects.push({
+          type: 'BACKUP_CALL',
+          x: caller.x,
+          y: caller.y,
+          radius: 8,
+          maxRadius: 150,
+          life: 1,
+          decay: 0.025,
+          faction: caller.faction,
+          hueOffset: caller.hueOffset,
+        });
+
+        // Alert allied ships within 460px to converge on the fight
+        const backupRange = 460;
+        for (let i = 0; i < colonyShips.length; i++) {
+          const ally = colonyShips[i];
+          if (ally === caller || ally.faction !== caller.faction) continue;
+          if (ally.state === 'COMBAT') continue;
+          const dist = Math.hypot(ally.x - caller.x, ally.y - caller.y);
+          if (dist <= backupRange) {
+            ally.state = 'BACKUP';
+            ally.backupX = caller.x + (Math.random() - 0.5) * 50;
+            ally.backupY = caller.y + (Math.random() - 0.5) * 50;
+            ally.stateTimer = 240;
+          }
+        }
+
+        // Also steer the faction's Mothership toward the battle if active
+        const ms = FACTIONS[caller.faction].mothership;
+        if (ms) {
+          const dx = caller.x - ms.x;
+          const dy = caller.y - ms.y;
+          const d = Math.max(1, Math.hypot(dx, dy));
+          ms.vx = (dx / d) * 0.68;
+          ms.vy = (dy / d) * 0.68;
+        }
+      }
+
+      function computeLeadAngle(sx, sy, tx, ty, tvx, tvy, projSpeed) {
+        const dx = tx - sx;
+        const dy = ty - sy;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 1) return Math.atan2(dy, dx);
+
+        const t1 = dist / projSpeed;
+        const p1x = tx + (tvx || 0) * t1;
+        const p1y = ty + (tvy || 0) * t1;
+        const t2 = Math.hypot(p1x - sx, p1y - sy) / projSpeed;
+        const leadX = tx + (tvx || 0) * t2;
+        const leadY = ty + (tvy || 0) * t2;
+        return Math.atan2(leadY - sy, leadX - sx);
+      }
+
+      function fireFleetLaser(x, y, angle, factionId, hueOffset, isHeavy = false, upgradeTier = 1) {
+        const speed = isHeavy ? 6.8 : upgradeTier === 3 ? 10.6 : upgradeTier === 2 ? 9.0 : 7.6;
+        const muzzleOffset = isHeavy ? 21 : upgradeTier === 3 ? 12 : upgradeTier === 2 ? 10 : 8;
+        fleetLasers.push({
+          x: x + Math.cos(angle) * muzzleOffset,
+          y: y + Math.sin(angle) * muzzleOffset,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          angle,
+          faction: factionId,
+          hueOffset,
+          damage: isHeavy ? 12 : upgradeTier === 3 ? 7 : upgradeTier === 2 ? 6 : 5,
+          isHeavy,
+          upgradeTier,
+          isUpgraded: upgradeTier >= 2,
+          life: isHeavy ? 62 : upgradeTier === 3 ? 52 : upgradeTier === 2 ? 48 : 44,
+        });
+      }
+
+      function explodeCraft(x, y, factionId, hueOffset, isMothership = false) {
+        const count = isMothership ? 34 : 12;
+        for (let i = 0; i < count; i++) {
+          const ang = Math.random() * Math.PI * 2;
+          const spd = (isMothership ? 1.5 : 1.0) + Math.random() * (isMothership ? 5.2 : 3.2);
+          fleetEffects.push({
+            type: 'SHARD',
+            x,
+            y,
+            vx: Math.cos(ang) * spd,
+            vy: Math.sin(ang) * spd,
+            size: isMothership ? 3 + Math.random() * 4 : 1.8 + Math.random() * 2.2,
+            life: 1,
+            decay: isMothership ? 0.02 + Math.random() * 0.015 : 0.035 + Math.random() * 0.02,
+            faction: factionId,
+            hueOffset: hueOffset + i * 22,
+          });
+        }
+
+        fleetEffects.push({
+          type: 'WARP_RING',
+          x,
+          y,
+          radius: 4,
+          maxRadius: isMothership ? 88 : 32,
+          life: 1,
+          decay: isMothership ? 0.025 : 0.05,
+          faction: factionId,
+          hueOffset,
+        });
+      }
+
+      // Initialize starting colonies (5 agile ships per faction)
+      FACTION_KEYS.forEach((fKey) => {
+        for (let i = 0; i < 5; i++) {
+          spawnColonyShip(fKey);
+        }
+      });
+
+      function computeNearestEdgeAngle(x, y, w, h) {
+        const distLeft = x;
+        const distRight = w - x;
+        const distTop = y;
+        const distBottom = h - y;
+        const minDist = Math.min(distLeft, distRight, distTop, distBottom);
+
+        let baseAngle = 0;
+        if (minDist === distLeft) baseAngle = Math.PI;
+        else if (minDist === distRight) baseAngle = 0;
+        else if (minDist === distTop) baseAngle = -Math.PI / 2;
+        else baseAngle = Math.PI / 2;
+
+        return baseAngle + (Math.random() - 0.5) * 0.32;
+      }
+
+      function setShipsEnabled(enabled) {
+        if (!enabled) {
+          respawnQueue.length = 0;
+
+          // Command every active colony ship to spool up hyperdrive and dash off-screen
+          for (let i = colonyShips.length - 1; i >= 0; i--) {
+            const ship = colonyShips[i];
+            if (ship.state === 'HYPER_CHARGE' || ship.state === 'HYPER_DASH') continue;
+            if (ship.state === 'HYPER_ARRIVE') {
+              // If still outside viewport bounds during hyper-entry, abort jump immediately
+              if (ship.x < 0 || ship.x > width || ship.y < 0 || ship.y > height) {
+                colonyShips.splice(i, 1);
+                continue;
+              }
+            }
+            ship.state = 'HYPER_CHARGE';
+            ship.hyperChargeTimer = 0;
+            ship.hyperChargeDuration = 34 + Math.floor(Math.random() * 18);
+            ship.hyperAngle = computeNearestEdgeAngle(ship.x, ship.y, width, height);
+            ship.hyperSpeed = 0;
+            ship.targetEnemy = null;
+            ship.targetNode = null;
+          }
+
+          // Command any active Motherships to charge hyperdrive and jump out too
+          for (let k = 0; k < FACTION_KEYS.length; k++) {
+            const ms = FACTIONS[FACTION_KEYS[k]].mothership;
+            if (!ms) continue;
+            if (ms.hyperState === 'HYPER_CHARGE' || ms.hyperState === 'HYPER_DASH') continue;
+            if (ms.hyperState === 'HYPER_ARRIVE' && (ms.x < 0 || ms.x > width || ms.y < 0 || ms.y > height)) {
+              FACTIONS[FACTION_KEYS[k]].mothership = null;
+              continue;
+            }
+            ms.hyperState = 'HYPER_CHARGE';
+            ms.hyperChargeTimer = 0;
+            ms.hyperChargeDuration = 52;
+            ms.hyperAngle = computeNearestEdgeAngle(ms.x, ms.y, width, height);
+            ms.hyperSpeed = 0;
+          }
+        } else {
+          // Re-engage fleets: abort any pending hyper-charge and hyper-jump in missing colony ships
+          for (let i = 0; i < colonyShips.length; i++) {
+            if (colonyShips[i].state === 'HYPER_CHARGE') {
+              colonyShips[i].state = 'SCOUT';
+              colonyShips[i].stateTimer = 60;
+            }
+          }
+          for (let k = 0; k < FACTION_KEYS.length; k++) {
+            const fKey = FACTION_KEYS[k];
+            const ms = FACTIONS[fKey].mothership;
+            if (ms && ms.hyperState === 'HYPER_CHARGE') {
+              ms.hyperState = null;
+            }
+            const activeCount = colonyShips.filter(
+              (s) => s.faction === fKey && s.state !== 'HYPER_DASH'
+            ).length;
+            for (let n = activeCount; n < 5; n++) {
+              spawnColonyShip(fKey);
+            }
+          }
+        }
+      }
+
+      function getActiveFleetTargets() {
+        const targets = [];
+        for (let i = 0; i < colonyShips.length; i++) {
+          if (colonyShips[i].state === 'HYPER_DASH' || colonyShips[i].state === 'HYPER_ARRIVE') continue;
+          targets.push({
+            kind: 'SHIP',
+            ref: colonyShips[i],
+            x: colonyShips[i].x,
+            y: colonyShips[i].y,
+          });
+        }
+        for (let k = 0; k < FACTION_KEYS.length; k++) {
+          const fKey = FACTION_KEYS[k];
+          const ms = FACTIONS[fKey].mothership;
+          if (ms && ms.hyperState !== 'HYPER_ARRIVE' && ms.hyperState !== 'HYPER_DASH') {
+            targets.push({
+              kind: 'MOTHERSHIP',
+              factionKey: fKey,
+              ref: ms,
+              x: ms.x,
+              y: ms.y,
+            });
+          }
+        }
+        return targets;
+      }
+
+      function destroyFleetTarget(target, mothershipDamage = 75) {
+        if (!target || !target.ref) return false;
+        if (target.kind === 'SHIP') {
+          const idx = colonyShips.indexOf(target.ref);
+          if (idx === -1) return false;
+          const ship = colonyShips[idx];
+          explodeCraft(ship.x, ship.y, ship.faction, ship.hueOffset, false);
+          respawnQueue.push({ faction: ship.faction, timer: 300 });
+          colonyShips.splice(idx, 1);
+          return true;
+        }
+        if (target.kind === 'MOTHERSHIP') {
+          const ms = FACTIONS[target.factionKey] && FACTIONS[target.factionKey].mothership;
+          if (!ms || ms !== target.ref) return false;
+          ms.hp -= mothershipDamage;
+          fleetEffects.push({
+            type: 'SPARK',
+            x: ms.x + (Math.random() - 0.5) * 18,
+            y: ms.y + (Math.random() - 0.5) * 18,
+            life: 1,
+            decay: 0.1,
+            faction: target.factionKey,
+            hueOffset: ms.hueOffset,
+          });
+          if (ms.hp <= 0) {
+            explodeCraft(ms.x, ms.y, target.factionKey, ms.hueOffset, true);
+            FACTIONS[target.factionKey].mothership = null;
+          }
+          return true;
+        }
+        return false;
+      }
+
+      function damageFleetInRadius(cx, cy, radius, mothershipDamage = 55) {
+        let hitAny = false;
+        for (let i = colonyShips.length - 1; i >= 0; i--) {
+          const ship = colonyShips[i];
+          if (ship.state === 'HYPER_ARRIVE' || ship.state === 'HYPER_DASH') continue;
+          if (Math.hypot(ship.x - cx, ship.y - cy) <= radius + 8) {
+            explodeCraft(ship.x, ship.y, ship.faction, ship.hueOffset, false);
+            respawnQueue.push({ faction: ship.faction, timer: 300 });
+            colonyShips.splice(i, 1);
+            hitAny = true;
+          }
+        }
+        for (let k = 0; k < FACTION_KEYS.length; k++) {
+          const fKey = FACTION_KEYS[k];
+          const ms = FACTIONS[fKey].mothership;
+          if (!ms || ms.hyperState === 'HYPER_ARRIVE' || ms.hyperState === 'HYPER_DASH') continue;
+          if (Math.hypot(ms.x - cx, ms.y - cy) <= radius + 24) {
+            ms.hp -= mothershipDamage;
+            fleetEffects.push({
+              type: 'SPARK',
+              x: ms.x + (Math.random() - 0.5) * 20,
+              y: ms.y + (Math.random() - 0.5) * 20,
+              life: 1,
+              decay: 0.1,
+              faction: fKey,
+              hueOffset: ms.hueOffset,
+            });
+            if (ms.hp <= 0) {
+              explodeCraft(ms.x, ms.y, fKey, ms.hueOffset, true);
+              FACTIONS[fKey].mothership = null;
+            }
+            hitAny = true;
+          }
+        }
+        return hitAny;
+      }
+
+      function pullFleetInVortex(cx, cy, vortexRadius) {
+        let crushedAny = false;
+        for (let i = colonyShips.length - 1; i >= 0; i--) {
+          const ship = colonyShips[i];
+          if (ship.state === 'HYPER_ARRIVE' || ship.state === 'HYPER_DASH') continue;
+          const dx = cx - ship.x;
+          const dy = cy - ship.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < vortexRadius && dist > 1) {
+            const pull = (1 - dist / vortexRadius) * 2.8 + 0.85;
+            const nx = dx / dist;
+            const ny = dy / dist;
+            ship.vx += nx * pull - ny * pull * 0.72;
+            ship.vy += ny * pull + nx * pull * 0.72;
+            if (dist < 48) {
+              explodeCraft(ship.x, ship.y, ship.faction, ship.hueOffset, false);
+              respawnQueue.push({ faction: ship.faction, timer: 300 });
+              colonyShips.splice(i, 1);
+              crushedAny = true;
+            }
+          }
+        }
+        for (let k = 0; k < FACTION_KEYS.length; k++) {
+          const fKey = FACTION_KEYS[k];
+          const ms = FACTIONS[fKey].mothership;
+          if (!ms) continue;
+          const dx = cx - ms.x;
+          const dy = cy - ms.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < vortexRadius && dist > 1) {
+            const nx = dx / dist;
+            const ny = dy / dist;
+            ms.x += nx * 1.1;
+            ms.y += ny * 1.1;
+            if (dist < 64) {
+              ms.hp -= 6;
+              if (ms.hp <= 0) {
+                explodeCraft(ms.x, ms.y, fKey, ms.hueOffset, true);
+                FACTIONS[fKey].mothership = null;
+                crushedAny = true;
+              }
+            }
+          }
+        }
+        return crushedAny;
+      }
+
+      bgNetwork.getActiveFleetTargets = getActiveFleetTargets;
+      bgNetwork.destroyFleetTarget = destroyFleetTarget;
+      bgNetwork.damageFleetInRadius = damageFleetInRadius;
+      bgNetwork.pullFleetInVortex = pullFleetInVortex;
+      bgNetwork.setShipsEnabled = setShipsEnabled;
+
+      function updateAndRenderFleets(ctx, w, h, nowMs) {
+        fleetTime++;
+        const dtMs = Math.min(100, Math.max(0, nowMs - lastFleetFrameMs));
+        lastFleetFrameMs = nowMs;
+
+        // Track 10-second sustained proximity between each pair of ship types before combat triggers
+        for (let a = 0; a < FACTION_KEYS.length; a++) {
+          for (let b = a + 1; b < FACTION_KEYS.length; b++) {
+            const fA = FACTION_KEYS[a];
+            const fB = FACTION_KEYS[b];
+            const pairKey = getFactionPairKey(fA, fB);
+            if (!factionStandoffs[pairKey]) {
+              factionStandoffs[pairKey] = {
+                closeMs: 0,
+                hostile: false,
+                closestA: null,
+                closestB: null,
+                minDist: Infinity,
+              };
+            }
+            const standoff = factionStandoffs[pairKey];
+
+            // Gather all active ships & Motherships for Faction A and Faction B
+            const unitsA = [];
+            const unitsB = [];
+            for (let s = 0; s < colonyShips.length; s++) {
+              const unit = colonyShips[s];
+              if (unit.faction === fA) unitsA.push(unit);
+              else if (unit.faction === fB) unitsB.push(unit);
+            }
+            if (FACTIONS[fA].mothership) unitsA.push(FACTIONS[fA].mothership);
+            if (FACTIONS[fB].mothership) unitsB.push(FACTIONS[fB].mothership);
+
+            let minDist = Infinity;
+            let bestA = null;
+            let bestB = null;
+            for (let iA = 0; iA < unitsA.length; iA++) {
+              for (let iB = 0; iB < unitsB.length; iB++) {
+                const d = Math.hypot(unitsA[iA].x - unitsB[iB].x, unitsA[iA].y - unitsB[iB].y);
+                if (d < minDist) {
+                  minDist = d;
+                  bestA = unitsA[iA];
+                  bestB = unitsB[iB];
+                }
+              }
+            }
+
+            standoff.minDist = minDist;
+            standoff.closestA = bestA;
+            standoff.closestB = bestB;
+
+            const engageThreshold = standoff.hostile ? 245 : 185;
+            if (minDist <= engageThreshold) {
+              standoff.closeMs = Math.min(10000, standoff.closeMs + dtMs);
+              if (standoff.closeMs >= 10000) {
+                standoff.hostile = true;
+              }
+            } else {
+              standoff.closeMs = Math.max(0, standoff.closeMs - dtMs * 2);
+              if (standoff.closeMs === 0) {
+                standoff.hostile = false;
+              }
+            }
+
+            // Render subtle high-tech standoff telemetry link while counting toward the 10s combat threshold
+            if (!standoff.hostile && standoff.closeMs >= 1000 && bestA && bestB) {
+              const remainingSec = Math.max(0, (10000 - standoff.closeMs) / 1000);
+              const tensionRatio = standoff.closeMs / 10000;
+              ctx.save();
+              ctx.beginPath();
+              ctx.moveTo(bestA.x, bestA.y);
+              ctx.lineTo(bestB.x, bestB.y);
+              ctx.strokeStyle = `rgba(255, 0, 0, ${(0.22 + tensionRatio * 0.5).toFixed(2)})`;
+              ctx.lineWidth = 1;
+              ctx.setLineDash([4, 4]);
+              ctx.stroke();
+              ctx.setLineDash([]);
+
+              const midX = (bestA.x + bestB.x) * 0.5;
+              const midY = (bestA.y + bestB.y) * 0.5;
+              ctx.font = 'bold 9px "JetBrains Mono", monospace';
+              ctx.fillStyle = tensionRatio > 0.7 ? '#ff0000' : 'rgba(255, 255, 255, 0.8)';
+              ctx.fillText(`LOCK ${remainingSec.toFixed(1)}s`, midX + 6, midY - 6);
+              ctx.restore();
+            }
+          }
+        }
+
+        // 1% Mothership spawn roll check (evaluated 4 times/sec per faction without an active Mothership)
+        if (isShipsEnabled && nowMs - lastMothershipRollTime >= 250) {
+          lastMothershipRollTime = nowMs;
+          for (let k = 0; k < FACTION_KEYS.length; k++) {
+            const fKey = FACTION_KEYS[k];
+            if (!FACTIONS[fKey].mothership && Math.random() < 0.01) {
+              spawnMothership(fKey);
+            }
+          }
+        }
+
+        // Process colony ship respawns so colonies stay active
+        if (isShipsEnabled) {
+          for (let r = respawnQueue.length - 1; r >= 0; r--) {
+            respawnQueue[r].timer--;
+            if (respawnQueue[r].timer <= 0) {
+              const fId = respawnQueue[r].faction;
+              const ms = FACTIONS[fId].mothership;
+              if (ms && !ms.hyperState) {
+                spawnColonyShip(fId, ms.x, ms.y);
+              } else {
+                spawnColonyShip(fId);
+              }
+              respawnQueue.splice(r, 1);
+            }
+          }
+        }
+
+        // Update & render each faction's Mothership
+        for (let k = 0; k < FACTION_KEYS.length; k++) {
+          const fKey = FACTION_KEYS[k];
+          const ms = FACTIONS[fKey].mothership;
+          if (!ms) continue;
+
+          ms.pulsePhase += 0.06;
+
+          if (ms.hyperState === 'HYPER_ARRIVE') {
+            const dx = ms.arriveDestX - ms.x;
+            const dy = ms.arriveDestY - ms.y;
+            const remDist = Math.hypot(dx, dy);
+            const step = Math.min(remDist, Math.max(6, remDist * 0.22 + 3.5));
+
+            ms.angle = ms.hyperAngle;
+            if (remDist > 0.1) {
+              ms.x += (dx / remDist) * step;
+              ms.y += (dy / remDist) * step;
+            }
+
+            // Render decelerating Mothership hyperspace entry streak
+            const streakLen = Math.min(240, step * 6.5);
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(ms.x, ms.y);
+            ctx.lineTo(
+              ms.x - Math.cos(ms.hyperAngle) * streakLen,
+              ms.y - Math.sin(ms.hyperAngle) * streakLen
+            );
+            ctx.strokeStyle = getFactionColor(fKey, nowMs, ms.hueOffset, 0.85);
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(ms.x, ms.y);
+            ctx.lineTo(
+              ms.x - Math.cos(ms.hyperAngle) * (streakLen * 0.85),
+              ms.y - Math.sin(ms.hyperAngle) * (streakLen * 0.85)
+            );
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 3.5;
+            ctx.stroke();
+            ctx.restore();
+
+            if (remDist <= 8) {
+              ms.x = ms.arriveDestX;
+              ms.y = ms.arriveDestY;
+              ms.hyperState = null;
+
+              fleetEffects.push({
+                type: 'MOTHERSHIP_WARP',
+                x: ms.x,
+                y: ms.y,
+                radius: 10,
+                maxRadius: 96,
+                life: 1,
+                decay: 0.024,
+                faction: fKey,
+                hueOffset: ms.hueOffset,
+              });
+            }
+          } else if (ms.hyperState === 'HYPER_CHARGE') {
+            ms.hyperChargeTimer++;
+            const chargeRatio = Math.min(1, ms.hyperChargeTimer / ms.hyperChargeDuration);
+            ms.vx *= 0.88;
+            ms.vy *= 0.88;
+            ms.x += ms.vx + (Math.random() - 0.5) * (0.8 + chargeRatio * 2.2);
+            ms.y += ms.vy + (Math.random() - 0.5) * (0.8 + chargeRatio * 2.2);
+
+            let diff = ms.hyperAngle - ms.angle;
+            while (diff > Math.PI) diff -= Math.PI * 2;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            ms.angle += diff * 0.18;
+
+            // Render Mothership hyperdrive charge-up vector & contracting energy ring
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(ms.x, ms.y);
+            ctx.lineTo(
+              ms.x + Math.cos(ms.hyperAngle) * (90 + chargeRatio * 220),
+              ms.y + Math.sin(ms.hyperAngle) * (90 + chargeRatio * 220)
+            );
+            ctx.strokeStyle = getFactionColor(fKey, nowMs, ms.hueOffset, 0.35 + chargeRatio * 0.5);
+            ctx.lineWidth = 1.5 + chargeRatio * 2;
+            ctx.setLineDash([8, 6]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.beginPath();
+            ctx.arc(ms.x, ms.y, Math.max(14, 52 * (1 - chargeRatio * 0.68)), 0, Math.PI * 2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.5 + chargeRatio * 2;
+            ctx.stroke();
+            ctx.restore();
+
+            if (ms.hyperChargeTimer >= ms.hyperChargeDuration) {
+              ms.hyperState = 'HYPER_DASH';
+              ms.hyperSpeed = 5.5;
+              fleetEffects.push({
+                type: 'WARP_RING',
+                x: ms.x,
+                y: ms.y,
+                radius: 10,
+                maxRadius: 92,
+                life: 1,
+                decay: 0.032,
+                faction: fKey,
+                hueOffset: ms.hueOffset,
+              });
+            }
+          } else if (ms.hyperState === 'HYPER_DASH') {
+            ms.hyperSpeed = Math.min(30, ms.hyperSpeed * 1.18 + 1.5);
+            ms.angle = ms.hyperAngle;
+            ms.x += Math.cos(ms.hyperAngle) * ms.hyperSpeed;
+            ms.y += Math.sin(ms.hyperAngle) * ms.hyperSpeed;
+
+            // Render blazing Mothership hyperspace streak
+            const streakLen = Math.min(220, ms.hyperSpeed * 5.2);
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(ms.x, ms.y);
+            ctx.lineTo(
+              ms.x - Math.cos(ms.hyperAngle) * streakLen,
+              ms.y - Math.sin(ms.hyperAngle) * streakLen
+            );
+            ctx.strokeStyle = getFactionColor(fKey, nowMs, ms.hueOffset, 0.85);
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(ms.x, ms.y);
+            ctx.lineTo(
+              ms.x - Math.cos(ms.hyperAngle) * (streakLen * 0.85),
+              ms.y - Math.sin(ms.hyperAngle) * (streakLen * 0.85)
+            );
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 3.5;
+            ctx.stroke();
+            ctx.restore();
+
+            if (ms.x < -140 || ms.x > w + 140 || ms.y < -140 || ms.y > h + 140) {
+              FACTIONS[fKey].mothership = null;
+              continue;
+            }
+          } else {
+            ms.x += ms.vx;
+            ms.y += ms.vy;
+
+            const pad = 54;
+            if (ms.x < pad) {
+              ms.x = pad;
+              ms.vx = Math.abs(ms.vx);
+            } else if (ms.x > w - pad) {
+              ms.x = w - pad;
+              ms.vx = -Math.abs(ms.vx);
+            }
+            if (ms.y < pad) {
+              ms.y = pad;
+              ms.vy = Math.abs(ms.vy);
+            } else if (ms.y > h - pad) {
+              ms.y = h - pad;
+              ms.vy = -Math.abs(ms.vy);
+            }
+
+            const targetAngle = Math.atan2(ms.vy, ms.vx);
+            let diff = targetAngle - ms.angle;
+            while (diff > Math.PI) diff -= Math.PI * 2;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            ms.angle += diff * 0.04;
+
+            // Mothership periodically reinforces its colony up to 8 ships
+            ms.launchCooldown--;
+            if (ms.launchCooldown <= 0) {
+              ms.launchCooldown = 360;
+              const teamCount = colonyShips.filter((s) => s.faction === fKey).length;
+              if (teamCount < 8) {
+                spawnColonyShip(fKey, ms.x, ms.y);
+              }
+            }
+
+            // Mothership engages any rival ship or rival Mothership within 240px (only after 10s proximity)
+            ms.fireCooldown--;
+            if (ms.fireCooldown <= 0) {
+              let closestThreat = null;
+              let closestDist = 240;
+
+              for (let i = 0; i < colonyShips.length; i++) {
+                const s = colonyShips[i];
+                if (!areFactionsHostile(fKey, s.faction)) continue;
+                const d = Math.hypot(s.x - ms.x, s.y - ms.y);
+                if (d < closestDist) {
+                  closestDist = d;
+                  closestThreat = s;
+                }
+              }
+
+              for (let m = 0; m < FACTION_KEYS.length; m++) {
+                const otherKey = FACTION_KEYS[m];
+                if (!areFactionsHostile(fKey, otherKey)) continue;
+                const otherMs = FACTIONS[otherKey].mothership;
+                if (!otherMs) continue;
+                const d = Math.hypot(otherMs.x - ms.x, otherMs.y - ms.y);
+                if (d < closestDist) {
+                  closestDist = d;
+                  closestThreat = otherMs;
+                }
+              }
+
+              if (closestThreat) {
+                ms.fireCooldown = 32;
+                const aim = Math.atan2(closestThreat.y - ms.y, closestThreat.x - ms.x);
+                fireFleetLaser(ms.x, ms.y, aim - 0.08, fKey, ms.hueOffset, true);
+                fireFleetLaser(ms.x, ms.y, aim + 0.08, fKey, ms.hueOffset + 60, true);
+              }
+            }
+          }
+
+          // Render Mothership
+          ctx.save();
+          ctx.translate(ms.x, ms.y);
+
+          // Subtle hull integrity arc if damaged
+          if (ms.hp < ms.maxHp) {
+            const hpPct = Math.max(0, ms.hp / ms.maxHp);
+            ctx.beginPath();
+            ctx.arc(0, 0, 33, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * hpPct);
+            ctx.strokeStyle = getFactionColor(fKey, nowMs, ms.hueOffset, 0.75);
+            ctx.lineWidth = 1.8;
+            ctx.stroke();
+          }
+
+          ctx.rotate(ms.angle);
+          ctx.scale(MOTHERSHIP_SCALE, MOTHERSHIP_SCALE);
+
+          if (fKey === 'CRIMSON_WHITE') {
+            // Red & White Twin-Pronged High-Tech Carrier
+            ctx.fillStyle = '#000000';
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(36, 0);
+            ctx.lineTo(14, -18);
+            ctx.lineTo(-28, -22);
+            ctx.lineTo(-20, -8);
+            ctx.lineTo(-32, 0);
+            ctx.lineTo(-20, 8);
+            ctx.lineTo(-28, 22);
+            ctx.lineTo(14, 18);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Pure white inner spine & reactor core
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(26, 0);
+            ctx.lineTo(-16, 0);
+            ctx.moveTo(6, -11);
+            ctx.lineTo(-14, -11);
+            ctx.moveTo(6, 11);
+            ctx.lineTo(-14, 11);
+            ctx.stroke();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(4, 0, 4.5 + Math.sin(ms.pulsePhase) * 1.2, 0, Math.PI * 2);
+            ctx.fill();
+          } else if (fKey === 'RGB') {
+            // RGB Hexagonal Prism Dreadnought with Red, Green & Blue Reactor Nodes
+            const cPrimary = getFactionColor('RGB', nowMs, ms.hueOffset);
+            ctx.fillStyle = '#000000';
+            ctx.strokeStyle = cPrimary;
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(38, 0);
+            ctx.lineTo(18, -20);
+            ctx.lineTo(-18, -20);
+            ctx.lineTo(-34, 0);
+            ctx.lineTo(-18, 20);
+            ctx.lineTo(18, 20);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Tri-core RGB nodes (#ff0000, #00ff44, #0099ff)
+            const triColors = ['#ff0000', '#00ff44', '#0099ff'];
+            for (let t = 0; t < 3; t++) {
+              const ang = ms.pulsePhase * 0.7 + (t * Math.PI * 2) / 3;
+              const rx = Math.cos(ang) * 9;
+              const ry = Math.sin(ang) * 9;
+              ctx.fillStyle = triColors[t];
+              ctx.beginPath();
+              ctx.arc(rx, ry, 3.6, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          } else {
+            // Monochrome Brutalist Stealth Citadel
+            ctx.fillStyle = '#000000';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(36, 0);
+            ctx.lineTo(10, -21);
+            ctx.lineTo(-26, -16);
+            ctx.lineTo(-32, 0);
+            ctx.lineTo(-26, 16);
+            ctx.lineTo(10, 21);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.strokeStyle = '#888888';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(-14, -9, 22, 18);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(-4, -4, 8, 8);
+          }
+
+          ctx.restore();
+        }
+
+        // Compute squadron centroids & average headings so each faction stays grouped together
+        const squadCentroids = {};
+        for (let k = 0; k < FACTION_KEYS.length; k++) {
+          const fKey = FACTION_KEYS[k];
+          let sumX = 0;
+          let sumY = 0;
+          let sumVx = 0;
+          let sumVy = 0;
+          let count = 0;
+
+          for (let s = 0; s < colonyShips.length; s++) {
+            const member = colonyShips[s];
+            if (member.faction !== fKey) continue;
+            sumX += member.x;
+            sumY += member.y;
+            sumVx += member.vx;
+            sumVy += member.vy;
+            count++;
+          }
+
+          const ms = FACTIONS[fKey].mothership;
+          if (ms) {
+            // Anchor squadron gently around their Mothership when active
+            sumX += ms.x * 2.5;
+            sumY += ms.y * 2.5;
+            sumVx += ms.vx * 2.5;
+            sumVy += ms.vy * 2.5;
+            count += 2.5;
+          }
+
+          squadCentroids[fKey] =
+            count > 0
+              ? {
+                  x: sumX / count,
+                  y: sumY / count,
+                  vx: sumVx / count,
+                  vy: sumVy / count,
+                }
+              : null;
+        }
+
+        // Update & render each Colony Ship
+        for (let i = colonyShips.length - 1; i >= 0; i--) {
+          const ship = colonyShips[i];
+          if (ship.backupCooldown > 0) ship.backupCooldown--;
+          if (ship.fireCooldown > 0) ship.fireCooldown--;
+
+          // Handle Hyperdrive Arrival (streaking in from off-screen and decelerating with warp-exit ring)
+          if (ship.state === 'HYPER_ARRIVE') {
+            const dx = ship.arriveDestX - ship.x;
+            const dy = ship.arriveDestY - ship.y;
+            const remDist = Math.hypot(dx, dy);
+            const step = Math.min(remDist, Math.max(7, remDist * 0.24 + 4.5));
+
+            ship.angle = ship.hyperAngle;
+            ship.hyperSpeed = step;
+            if (remDist > 0.1) {
+              ship.x += (dx / remDist) * step;
+              ship.y += (dy / remDist) * step;
+            }
+
+            // Render blazing hyperspace entry streak behind the arriving ship
+            const streakLen = Math.min(165, step * 4.6);
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(ship.x, ship.y);
+            ctx.lineTo(
+              ship.x - Math.cos(ship.hyperAngle) * streakLen,
+              ship.y - Math.sin(ship.hyperAngle) * streakLen
+            );
+            ctx.strokeStyle = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.9);
+            ctx.lineWidth = 3.8;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(ship.x, ship.y);
+            ctx.lineTo(
+              ship.x - Math.cos(ship.hyperAngle) * (streakLen * 0.8),
+              ship.y - Math.sin(ship.hyperAngle) * (streakLen * 0.8)
+            );
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.restore();
+
+            if (remDist <= 6) {
+              ship.x = ship.arriveDestX;
+              ship.y = ship.arriveDestY;
+              ship.vx = Math.cos(ship.hyperAngle) * 1.45;
+              ship.vy = Math.sin(ship.hyperAngle) * 1.45;
+              ship.state = 'SCOUT';
+              ship.stateTimer = 70 + Math.floor(Math.random() * 90);
+
+              // Hyperdrive exit shock-ring & core flash upon dropping to sub-light speed
+              fleetEffects.push({
+                type: 'WARP_RING',
+                x: ship.x,
+                y: ship.y,
+                radius: 3,
+                maxRadius: 26,
+                life: 1,
+                decay: 0.055,
+                faction: ship.faction,
+                hueOffset: ship.hueOffset,
+              });
+              fleetEffects.push({
+                type: 'SPARK',
+                x: ship.x,
+                y: ship.y,
+                life: 1,
+                decay: 0.12,
+                faction: ship.faction,
+                hueOffset: ship.hueOffset,
+              });
+            }
+          } else if (ship.state === 'HYPER_CHARGE') {
+            // Handle Hyperdrive Charge-Up & Hyper-Speed Dash Exit when ships are turned off
+            ship.hyperChargeTimer++;
+            const chargeRatio = Math.min(1, ship.hyperChargeTimer / ship.hyperChargeDuration);
+
+            // Brake to a hover and vibrate with hyperdrive spool-up energy
+            ship.vx *= 0.85;
+            ship.vy *= 0.85;
+            ship.x += ship.vx + (Math.random() - 0.5) * (0.5 + chargeRatio * 1.6);
+            ship.y += ship.vy + (Math.random() - 0.5) * (0.5 + chargeRatio * 1.6);
+
+            let angDiff = ship.hyperAngle - ship.angle;
+            while (angDiff > Math.PI) angDiff -= Math.PI * 2;
+            while (angDiff < -Math.PI) angDiff += Math.PI * 2;
+            ship.angle += angDiff * 0.24;
+
+            // Render hyperdrive spool-up ring, core flare & jump vector line
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(ship.x, ship.y);
+            ctx.lineTo(
+              ship.x + Math.cos(ship.hyperAngle) * (42 + chargeRatio * 120),
+              ship.y + Math.sin(ship.hyperAngle) * (42 + chargeRatio * 120)
+            );
+            ctx.strokeStyle = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.3 + chargeRatio * 0.55);
+            ctx.lineWidth = 1 + chargeRatio * 1.2;
+            ctx.setLineDash([4, 4]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.beginPath();
+            ctx.arc(ship.x, ship.y, Math.max(5, 20 * (1 - chargeRatio * 0.65)), 0, Math.PI * 2);
+            ctx.strokeStyle = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.45 + chargeRatio * 0.55);
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+
+            // Thruster charge glow at ship tail
+            const tailX = ship.x - Math.cos(ship.angle) * 5;
+            const tailY = ship.y - Math.sin(ship.angle) * 5;
+            ctx.beginPath();
+            ctx.arc(tailX, tailY, 1.4 + chargeRatio * 3.2, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.restore();
+
+            if (ship.hyperChargeTimer >= ship.hyperChargeDuration) {
+              ship.state = 'HYPER_DASH';
+              ship.hyperSpeed = 7.5;
+              fleetEffects.push({
+                type: 'WARP_RING',
+                x: ship.x,
+                y: ship.y,
+                radius: 3,
+                maxRadius: 28,
+                life: 1,
+                decay: 0.06,
+                faction: ship.faction,
+                hueOffset: ship.hueOffset,
+              });
+            }
+          } else if (ship.state === 'HYPER_DASH') {
+            ship.hyperSpeed = Math.min(36, ship.hyperSpeed * 1.2 + 1.8);
+            ship.angle = ship.hyperAngle;
+            ship.x += Math.cos(ship.hyperAngle) * ship.hyperSpeed;
+            ship.y += Math.sin(ship.hyperAngle) * ship.hyperSpeed;
+
+            // Blazing hyper-speed jump trail
+            const streakLen = Math.min(140, ship.hyperSpeed * 3.8);
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(ship.x, ship.y);
+            ctx.lineTo(
+              ship.x - Math.cos(ship.hyperAngle) * streakLen,
+              ship.y - Math.sin(ship.hyperAngle) * streakLen
+            );
+            ctx.strokeStyle = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.9);
+            ctx.lineWidth = 3.8;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(ship.x, ship.y);
+            ctx.lineTo(
+              ship.x - Math.cos(ship.hyperAngle) * (streakLen * 0.8),
+              ship.y - Math.sin(ship.hyperAngle) * (streakLen * 0.8)
+            );
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.restore();
+
+            if (ship.x < -90 || ship.x > w + 90 || ship.y < -90 || ship.y > h + 90) {
+              colonyShips.splice(i, 1);
+              continue;
+            }
+          } else {
+            // 1. Check for nearby hostile rival ships or Motherships (only after 10s sustained proximity)
+            let nearestEnemy = null;
+            let nearestEnemyDist = 185;
+
+            for (let j = 0; j < colonyShips.length; j++) {
+              if (i === j) continue;
+              const other = colonyShips[j];
+              if (other.state === 'HYPER_ARRIVE' || other.state === 'HYPER_DASH') continue;
+              if (!areFactionsHostile(ship.faction, other.faction)) continue;
+              const d = Math.hypot(other.x - ship.x, other.y - ship.y);
+              if (d < nearestEnemyDist) {
+                nearestEnemyDist = d;
+                nearestEnemy = other;
+              }
+            }
+
+            for (let m = 0; m < FACTION_KEYS.length; m++) {
+              const otherKey = FACTION_KEYS[m];
+              if (!areFactionsHostile(ship.faction, otherKey)) continue;
+              const otherMs = FACTIONS[otherKey].mothership;
+              if (!otherMs) continue;
+              const d = Math.hypot(otherMs.x - ship.x, otherMs.y - ship.y);
+              if (d < nearestEnemyDist + 30) {
+                nearestEnemyDist = d;
+                nearestEnemy = otherMs;
+              }
+            }
+
+            if (nearestEnemy) {
+              const wasInCombat = ship.state === 'COMBAT';
+              ship.state = 'COMBAT';
+              ship.targetEnemy = nearestEnemy;
+              ship.targetNode = null;
+
+              // Call for backup when entering a fight!
+              if (!wasInCombat && ship.backupCooldown <= 0) {
+                triggerBackupCall(ship);
+              }
+            } else if (ship.state === 'COMBAT') {
+              ship.targetEnemy = null;
+              ship.state = 'SCOUT';
+              ship.stateTimer = 80;
+            }
+
+            // Abort tesseract examination immediately if the tesseract begins attacking
+            if (ship.state === 'EXAMINE_TESSERACT' && tesseractTelemetry.isAttacking) {
+              ship.state = 'SCOUT';
+              ship.stateTimer = 90;
+              const awayAng = Math.atan2(ship.y - tesseractTelemetry.y, ship.x - tesseractTelemetry.x);
+              ship.vx = Math.cos(awayAng) * 2.6;
+              ship.vy = Math.sin(awayAng) * 2.6;
+            }
+
+            // 2. Execute state-driven steering & behavior
+            let desiredVx = ship.vx;
+            let desiredVy = ship.vy;
+            let maxSpeed = 1.65;
+            let lookAngle = Math.atan2(ship.vy, ship.vx);
+
+            if (ship.state === 'COMBAT' && ship.targetEnemy) {
+              maxSpeed = ship.upgradeTier === 3 ? 2.85 : ship.upgradeTier === 2 ? 2.65 : 2.45;
+              const dx = ship.targetEnemy.x - ship.x;
+              const dy = ship.targetEnemy.y - ship.y;
+              const dist = Math.max(1, Math.hypot(dx, dy));
+              const toEnemyAng = Math.atan2(dy, dx);
+              const projSpeed = ship.upgradeTier === 3 ? 10.6 : ship.upgradeTier === 2 ? 9.0 : 7.6;
+              const aimAngle = ship.upgradeTier >= 2
+                ? computeLeadAngle(
+                    ship.x,
+                    ship.y,
+                    ship.targetEnemy.x,
+                    ship.targetEnemy.y,
+                    ship.targetEnemy.vx || 0,
+                    ship.targetEnemy.vy || 0,
+                    projSpeed
+                  )
+                : toEnemyAng;
+              lookAngle = aimAngle;
+
+              // Orbit / strafe at tactical combat range (~95px)
+              const orbitDir = i % 2 === 0 ? 1 : -1;
+              const radialFactor = dist > 110 ? 0.75 : dist < 72 ? -0.65 : 0.05;
+              desiredVx =
+                (Math.cos(toEnemyAng) * radialFactor - Math.sin(toEnemyAng) * 0.85 * orbitDir) * maxSpeed;
+              desiredVy =
+                (Math.sin(toEnemyAng) * radialFactor + Math.cos(toEnemyAng) * 0.85 * orbitDir) * maxSpeed;
+
+              const engageRange = ship.upgradeTier === 3 ? 275 : ship.upgradeTier === 2 ? 245 : 210;
+              if (ship.fireCooldown <= 0 && dist < engageRange) {
+                if (ship.upgradeTier === 3) {
+                  // Mk-III Apex Interceptor: 3x firing rate over Mk-II with hyper-accurate shot leading
+                  ship.fireCooldown = 4 + Math.floor(Math.random() * 3);
+                  fireFleetLaser(
+                    ship.x,
+                    ship.y,
+                    aimAngle + (Math.random() - 0.5) * 0.012,
+                    ship.faction,
+                    ship.hueOffset,
+                    false,
+                    3
+                  );
+                } else if (ship.upgradeTier === 2) {
+                  // Mk-II Elite Interceptor: faster-firing predictive lead shot
+                  ship.fireCooldown = 12 + Math.floor(Math.random() * 7);
+                  fireFleetLaser(
+                    ship.x,
+                    ship.y,
+                    aimAngle + (Math.random() - 0.5) * 0.02,
+                    ship.faction,
+                    ship.hueOffset,
+                    false,
+                    2
+                  );
+                } else {
+                  ship.fireCooldown = 26 + Math.floor(Math.random() * 14);
+                  fireFleetLaser(
+                    ship.x,
+                    ship.y,
+                    toEnemyAng + (Math.random() - 0.5) * 0.08,
+                    ship.faction,
+                    ship.hueOffset,
+                    false,
+                    1
+                  );
+                }
+              }
+            } else if (ship.state === 'BACKUP') {
+              maxSpeed = 2.6;
+              const dx = ship.backupX - ship.x;
+              const dy = ship.backupY - ship.y;
+              const dist = Math.hypot(dx, dy);
+              ship.stateTimer--;
+
+              if (dist < 48 || ship.stateTimer <= 0) {
+                ship.state = 'SCOUT';
+                ship.stateTimer = 70;
+              } else {
+                desiredVx = (dx / dist) * maxSpeed;
+                desiredVy = (dy / dist) * maxSpeed;
+                lookAngle = Math.atan2(desiredVy, desiredVx);
+              }
+            } else if (ship.state === 'EXAMINE_TESSERACT') {
+              maxSpeed = 1.75;
+              const dx = tesseractTelemetry.x - ship.x;
+              const dy = tesseractTelemetry.y - ship.y;
+              const dist = Math.max(1, Math.hypot(dx, dy));
+              const toTessAng = Math.atan2(dy, dx);
+              lookAngle = toTessAng;
+
+              // Hover & orbit respectfully around the peaceful 4D tesseract at ~108px
+              const orbitDir = i % 2 === 0 ? 1 : -1;
+              const radialPull = dist > 118 ? 0.7 : dist < 92 ? -0.55 : 0.0;
+              desiredVx =
+                (Math.cos(toTessAng) * radialPull - Math.sin(toTessAng) * 0.65 * orbitDir) * maxSpeed;
+              desiredVy =
+                (Math.sin(toTessAng) * radialPull + Math.cos(toTessAng) * 0.65 * orbitDir) * maxSpeed;
+
+              // Project 4D analysis scanner beam onto the tesseract when in range
+              if (dist < 165) {
+                const scanColor = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.24);
+                const edgeColor = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.65);
+                const perpX = -Math.sin(toTessAng) * 18;
+                const perpY = Math.cos(toTessAng) * 18;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(ship.x + Math.cos(toTessAng) * 9, ship.y + Math.sin(toTessAng) * 9);
+                ctx.lineTo(tesseractTelemetry.x + perpX, tesseractTelemetry.y + perpY);
+                ctx.lineTo(tesseractTelemetry.x - perpX, tesseractTelemetry.y - perpY);
+                ctx.closePath();
+                ctx.fillStyle = scanColor;
+                ctx.fill();
+
+                ctx.strokeStyle = edgeColor;
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 4]);
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              ship.stateTimer--;
+              if (ship.stateTimer <= 0) {
+                ship.state = 'SCOUT';
+                ship.stateTimer = 110 + Math.floor(Math.random() * 100);
+              }
+            } else if (ship.state === 'EXAMINE_DOT' && ship.targetNode && ship.targetNode.alive) {
+              maxSpeed = 1.5;
+              const dx = ship.targetNode.x - ship.x;
+              const dy = ship.targetNode.y - ship.y;
+              const dist = Math.max(1, Math.hypot(dx, dy));
+              const toDotAng = Math.atan2(dy, dx);
+              lookAngle = toDotAng;
+
+              // Hover and slowly circle the BG dot at ~34px while scanning it
+              const orbitDir = i % 2 === 0 ? 1 : -1;
+              const radialPull = dist > 42 ? 0.8 : dist < 26 ? -0.5 : 0.0;
+              desiredVx =
+                (Math.cos(toDotAng) * radialPull - Math.sin(toDotAng) * 0.55 * orbitDir) * maxSpeed;
+              desiredVy =
+                (Math.sin(toDotAng) * radialPull + Math.cos(toDotAng) * 0.55 * orbitDir) * maxSpeed;
+
+              if (dist < 75) {
+                const scanFill = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.22);
+                const scanStroke = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.7);
+                const perpX = -Math.sin(toDotAng) * 8;
+                const perpY = Math.cos(toDotAng) * 8;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(ship.x + Math.cos(toDotAng) * 8, ship.y + Math.sin(toDotAng) * 8);
+                ctx.lineTo(ship.targetNode.x + perpX, ship.targetNode.y + perpY);
+                ctx.lineTo(ship.targetNode.x - perpX, ship.targetNode.y - perpY);
+                ctx.closePath();
+                ctx.fillStyle = scanFill;
+                ctx.fill();
+
+                // Target lock ring around examined BG dot
+                ctx.beginPath();
+                ctx.arc(ship.targetNode.x, ship.targetNode.y, 7, 0, Math.PI * 2);
+                ctx.strokeStyle = scanStroke;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              ship.stateTimer--;
+              if (ship.stateTimer <= 0) {
+                ship.targetNode = null;
+                ship.state = 'SCOUT';
+                ship.stateTimer = 90 + Math.floor(Math.random() * 90);
+              }
+            } else if (ship.state === 'MINE_DOT' && ship.targetNode && ship.targetNode.alive) {
+              maxSpeed = 1.6;
+              const dx = ship.targetNode.x - ship.x;
+              const dy = ship.targetNode.y - ship.y;
+              const dist = Math.max(1, Math.hypot(dx, dy));
+              const toDotAng = Math.atan2(dy, dx);
+              lookAngle = toDotAng;
+
+              // Hold steady mining station ~28px from the BG dot
+              const orbitDir = i % 2 === 0 ? 1 : -1;
+              const radialPull = dist > 34 ? 0.85 : dist < 22 ? -0.55 : 0.0;
+              desiredVx =
+                (Math.cos(toDotAng) * radialPull - Math.sin(toDotAng) * 0.35 * orbitDir) * maxSpeed;
+              desiredVy =
+                (Math.sin(toDotAng) * radialPull + Math.cos(toDotAng) * 0.35 * orbitDir) * maxSpeed;
+
+              if (dist < 72) {
+                ship.mineProgress++;
+                const mineRatio = Math.min(1, ship.mineProgress / ship.mineDuration);
+                const beamColor = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.85);
+                const coreColor = getFactionSecondaryColor(ship.faction, nowMs, ship.hueOffset, 0.95);
+
+                ctx.save();
+                // Pulsing mining laser beam from ship nose into dot
+                ctx.beginPath();
+                ctx.moveTo(ship.x + Math.cos(toDotAng) * 8, ship.y + Math.sin(toDotAng) * 8);
+                ctx.lineTo(ship.targetNode.x, ship.targetNode.y);
+                ctx.strokeStyle = beamColor;
+                ctx.lineWidth = 2.4 + Math.sin(fleetTime * 0.5) * 0.8;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(ship.x + Math.cos(toDotAng) * 8, ship.y + Math.sin(toDotAng) * 8);
+                ctx.lineTo(ship.targetNode.x, ship.targetNode.y);
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 0.9;
+                ctx.stroke();
+
+                // Extraction progress arc around the dot
+                ctx.beginPath();
+                ctx.arc(
+                  ship.targetNode.x,
+                  ship.targetNode.y,
+                  8.5,
+                  -Math.PI / 2,
+                  -Math.PI / 2 + Math.PI * 2 * mineRatio
+                );
+                ctx.strokeStyle = coreColor;
+                ctx.lineWidth = 1.6;
+                ctx.stroke();
+                ctx.restore();
+
+                // Periodic mineral sparks drawn toward the mining ship
+                if (ship.mineProgress % 9 === 0) {
+                  fleetEffects.push({
+                    type: 'SHARD',
+                    x: ship.targetNode.x,
+                    y: ship.targetNode.y,
+                    vx: -Math.cos(toDotAng) * 2.2 + (Math.random() - 0.5) * 1.4,
+                    vy: -Math.sin(toDotAng) * 2.2 + (Math.random() - 0.5) * 1.4,
+                    size: 1.8,
+                    life: 0.9,
+                    decay: 0.06,
+                    faction: ship.faction,
+                    hueOffset: ship.hueOffset,
+                  });
+                }
+
+                if (ship.mineProgress >= ship.mineDuration) {
+                  // Harvest the BG dot
+                  destroyNode(
+                    ship.targetNode,
+                    (ship.x - ship.targetNode.x) * 0.04,
+                    (ship.y - ship.targetNode.y) * 0.04
+                  );
+
+                  const factionMs = FACTIONS[ship.faction].mothership;
+                  const canHealMs = Boolean(
+                    factionMs && !factionMs.hyperState && factionMs.hp < factionMs.maxHp
+                  );
+                  const shouldHealMs =
+                    canHealMs &&
+                    (ship.upgradeTier >= 3 ||
+                      factionMs.hp < factionMs.maxHp * 0.65 ||
+                      Math.random() < 0.5);
+
+                  if (shouldHealMs) {
+                    // Launch repair energy transfer bolt to heal the faction's Mothership
+                    fleetEffects.push({
+                      type: 'HEAL_TRANSFER',
+                      x: ship.x,
+                      y: ship.y,
+                      tx: factionMs.x,
+                      ty: factionMs.y,
+                      progress: 0,
+                      speed: 0.055,
+                      life: 1,
+                      decay: 0.005,
+                      healAmount: 25,
+                      faction: ship.faction,
+                      hueOffset: ship.hueOffset,
+                    });
+                  } else if (ship.upgradeTier === 1) {
+                    // Upgrade Mk-I -> Mk-II: faster-firing, +5 HP, shot-leading elite ship
+                    ship.upgradeTier = 2;
+                    ship.isUpgraded = true;
+                    ship.maxHp += 5;
+                    ship.hp = ship.maxHp;
+                    fleetEffects.push({
+                      type: 'UPGRADE_PULSE',
+                      tier: 2,
+                      x: ship.x,
+                      y: ship.y,
+                      radius: 4,
+                      maxRadius: 34,
+                      life: 1,
+                      decay: 0.032,
+                      faction: ship.faction,
+                      hueOffset: ship.hueOffset,
+                    });
+                  } else if (ship.upgradeTier === 2) {
+                    // Upgrade Mk-II -> Mk-III: 3x firing rate and +10 HP apex interceptor
+                    ship.upgradeTier = 3;
+                    ship.isUpgraded = true;
+                    ship.maxHp += 10;
+                    ship.hp = ship.maxHp;
+                    fleetEffects.push({
+                      type: 'UPGRADE_PULSE',
+                      tier: 3,
+                      x: ship.x,
+                      y: ship.y,
+                      radius: 5,
+                      maxRadius: 44,
+                      life: 1,
+                      decay: 0.028,
+                      faction: ship.faction,
+                      hueOffset: ship.hueOffset,
+                    });
+                  } else {
+                    // Already Mk-III and Mothership at full HP: restore ship hull
+                    ship.hp = ship.maxHp;
+                    fleetEffects.push({
+                      type: 'WARP_RING',
+                      x: ship.x,
+                      y: ship.y,
+                      radius: 3,
+                      maxRadius: 24,
+                      life: 1,
+                      decay: 0.05,
+                      faction: ship.faction,
+                      hueOffset: ship.hueOffset,
+                    });
+                  }
+
+                  ship.targetNode = null;
+                  ship.mineProgress = 0;
+                  ship.state = 'SCOUT';
+                  ship.stateTimer = 95 + Math.floor(Math.random() * 80);
+                }
+              }
+            } else {
+              // SCOUT state: patrol sector, occasionally examine or mine (25% chance) a BG dot, or examine peaceful 4D tesseract
+              ship.state = 'SCOUT';
+              ship.mineProgress = 0;
+              maxSpeed = ship.upgradeTier === 3 ? 1.95 : ship.upgradeTier === 2 ? 1.8 : 1.65;
+              if (fleetTime % 18 === i % 18) {
+                const wanderAng = Math.atan2(ship.vy, ship.vx) + (Math.random() - 0.5) * 0.7;
+                desiredVx = Math.cos(wanderAng) * maxSpeed;
+                desiredVy = Math.sin(wanderAng) * maxSpeed;
+              }
+              lookAngle = Math.atan2(ship.vy, ship.vx);
+
+              // Avoid getting close to the tesseract when it is actively attacking
+              if (tesseractTelemetry.isAttacking) {
+                const tDist = Math.hypot(ship.x - tesseractTelemetry.x, ship.y - tesseractTelemetry.y);
+                if (tDist < 190 && tDist > 1) {
+                  const fleeAng = Math.atan2(ship.y - tesseractTelemetry.y, ship.x - tesseractTelemetry.x);
+                  desiredVx = Math.cos(fleeAng) * 2.5;
+                  desiredVy = Math.sin(fleeAng) * 2.5;
+                }
+              }
+
+              ship.stateTimer--;
+              if (ship.stateTimer <= 0) {
+                const activeSquad = squadCentroids[ship.faction];
+                // Check if peaceful 4D tesseract is nearby to examine
+                const distToTess = Math.hypot(
+                  tesseractTelemetry.x - ship.x,
+                  tesseractTelemetry.y - ship.y
+                );
+                if (!tesseractTelemetry.isAttacking && distToTess < 320 && Math.random() < 0.45) {
+                  ship.state = 'EXAMINE_TESSERACT';
+                  ship.stateTimer = 150 + Math.floor(Math.random() * 90);
+                } else {
+                  // Pick a nearby BG dot close to the squadron so teammates stay grouped
+                  let bestDot = null;
+                  let bestDotDist = 165;
+                  for (let n = 0; n < nodes.length; n += 3) {
+                    const candidate = nodes[n];
+                    if (!candidate.alive) continue;
+                    const d = Math.hypot(candidate.x - ship.x, candidate.y - ship.y);
+                    if (d < bestDotDist) {
+                      const squadDist = activeSquad
+                        ? Math.hypot(candidate.x - activeSquad.x, candidate.y - activeSquad.y)
+                        : 0;
+                      if (squadDist < 190) {
+                        bestDotDist = d;
+                        bestDot = candidate;
+                      }
+                    }
+                  }
+                  if (bestDot) {
+                    ship.targetNode = bestDot;
+                    // 25% chance to mine the dot to upgrade itself (+5 HP, faster firing, shot-leading) or heal its Mothership
+                    if (Math.random() < 0.25) {
+                      ship.state = 'MINE_DOT';
+                      ship.mineProgress = 0;
+                      ship.mineDuration = 72;
+                    } else {
+                      ship.state = 'EXAMINE_DOT';
+                      ship.stateTimer = 110 + Math.floor(Math.random() * 70);
+                    }
+                  } else {
+                    ship.stateTimer = 75;
+                  }
+                }
+              }
+            }
+
+            // Smooth velocity steering & viewport margin containment
+            ship.vx += (desiredVx - ship.vx) * 0.1;
+            ship.vy += (desiredVy - ship.vy) * 0.1;
+
+            // Squadron cohesion, alignment & personal spacing so same-type ships stay together cleanly
+            const squad = squadCentroids[ship.faction];
+            let sepX = 0;
+            let sepY = 0;
+            let alignX = 0;
+            let alignY = 0;
+            let neighborCount = 0;
+
+            for (let j = 0; j < colonyShips.length; j++) {
+              if (i === j) continue;
+              const mate = colonyShips[j];
+              if (mate.faction !== ship.faction) continue;
+              const dxMate = ship.x - mate.x;
+              const dyMate = ship.y - mate.y;
+              const distMate = Math.hypot(dxMate, dyMate);
+
+              if (distMate > 0.1 && distMate < 22) {
+                const push = (22 - distMate) / 22;
+                sepX += (dxMate / distMate) * push;
+                sepY += (dyMate / distMate) * push;
+              }
+              if (distMate < 130) {
+                alignX += mate.vx;
+                alignY += mate.vy;
+                neighborCount++;
+              }
+            }
+
+            ship.vx += sepX * 0.24;
+            ship.vy += sepY * 0.24;
+
+            if (squad && ship.state !== 'COMBAT' && ship.state !== 'BACKUP') {
+              const toCenterDx = squad.x - ship.x;
+              const toCenterDy = squad.y - ship.y;
+              const distToCenter = Math.hypot(toCenterDx, toCenterDy);
+
+              if (distToCenter > 42) {
+                const pullStrength = Math.min(0.42, (distToCenter - 42) * 0.0045);
+                ship.vx += (toCenterDx / distToCenter) * pullStrength;
+                ship.vy += (toCenterDy / distToCenter) * pullStrength;
+                if (distToCenter > 150) {
+                  maxSpeed *= 1.25;
+                }
+              }
+
+              if (neighborCount > 0) {
+                ship.vx += (alignX / neighborCount - ship.vx) * 0.04;
+                ship.vy += (alignY / neighborCount - ship.vy) * 0.04;
+              }
+            }
+
+            const margin = 24;
+            if (ship.x < margin) ship.vx += 0.35;
+            else if (ship.x > w - margin) ship.vx -= 0.35;
+            if (ship.y < margin) ship.vy += 0.35;
+            else if (ship.y > h - margin) ship.vy -= 0.35;
+
+            const curSpd = Math.hypot(ship.vx, ship.vy);
+            if (curSpd > maxSpeed) {
+              ship.vx = (ship.vx / curSpd) * maxSpeed;
+              ship.vy = (ship.vy / curSpd) * maxSpeed;
+            }
+
+            ship.x += ship.vx;
+            ship.y += ship.vy;
+
+            // Smooth nose orientation
+            let angDiff = lookAngle - ship.angle;
+            while (angDiff > Math.PI) angDiff -= Math.PI * 2;
+            while (angDiff < -Math.PI) angDiff += Math.PI * 2;
+            ship.angle += angDiff * 0.16;
+
+            // Record thruster trail
+            ship.trail.push({ x: ship.x, y: ship.y });
+            if (ship.trail.length > 7) ship.trail.shift();
+
+            // Render thruster trail
+            if (ship.trail.length > 1) {
+              ctx.beginPath();
+              ctx.moveTo(ship.trail[0].x, ship.trail[0].y);
+              for (let t = 1; t < ship.trail.length; t++) {
+                ctx.lineTo(ship.trail[t].x, ship.trail[t].y);
+              }
+              ctx.strokeStyle = getFactionColor(ship.faction, nowMs, ship.hueOffset, 0.32);
+              ctx.lineWidth = 1.1;
+              ctx.stroke();
+            }
+          }
+
+          // Render Colony Fighter Hull
+          ctx.save();
+          ctx.translate(ship.x, ship.y);
+          ctx.rotate(ship.angle);
+          const eliteScale = ship.upgradeTier === 3 ? 1.32 : ship.upgradeTier === 2 ? 1.18 : 1.0;
+          if (ship.state === 'HYPER_DASH' || (ship.state === 'HYPER_ARRIVE' && ship.hyperSpeed > 10)) {
+            ctx.scale(SHIP_SCALE * eliteScale * 1.65, SHIP_SCALE * eliteScale * 0.72);
+          } else {
+            ctx.scale(SHIP_SCALE * eliteScale, SHIP_SCALE * eliteScale);
+          }
+
+          if (ship.faction === 'CRIMSON_WHITE') {
+            // Red & White Delta Interceptor
+            ctx.fillStyle = '#000000';
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = ship.upgradeTier === 3 ? 2.1 : ship.upgradeTier === 2 ? 1.8 : 1.5;
+            ctx.beginPath();
+            ctx.moveTo(9, 0);
+            ctx.lineTo(-6, -5.5);
+            ctx.lineTo(-3.5, 0);
+            ctx.lineTo(-6, 5.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Pure white nose core
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(8, 0);
+            ctx.lineTo(1, -2);
+            ctx.lineTo(1, 2);
+            ctx.closePath();
+            ctx.fill();
+          } else if (ship.faction === 'RGB') {
+            // RGB Tri-Wing Cyber Fighter
+            const primaryRgb = getFactionColor('RGB', nowMs, ship.hueOffset);
+            ctx.fillStyle = '#000000';
+            ctx.strokeStyle = primaryRgb;
+            ctx.lineWidth = ship.upgradeTier === 3 ? 2.1 : ship.upgradeTier === 2 ? 1.8 : 1.5;
+            ctx.beginPath();
+            ctx.moveTo(9, 0);
+            ctx.lineTo(-5, -6);
+            ctx.lineTo(-3, 0);
+            ctx.lineTo(-5, 6);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Red, Green, Blue wingtip micro-nodes
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(4, -1, 2, 2);
+            ctx.fillStyle = '#00ff44';
+            ctx.fillRect(-5, -6, 2, 2);
+            ctx.fillStyle = '#0099ff';
+            ctx.fillRect(-5, 4, 2, 2);
+          } else {
+            // Monochrome Stealth Diamond Fighter
+            ctx.fillStyle = '#000000';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = ship.upgradeTier === 3 ? 2.1 : ship.upgradeTier === 2 ? 1.8 : 1.5;
+            ctx.beginPath();
+            ctx.moveTo(9, 0);
+            ctx.lineTo(-2, -5.5);
+            ctx.lineTo(-7, 0);
+            ctx.lineTo(-2, 5.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#9ca3af';
+            ctx.beginPath();
+            ctx.arc(0, 0, 1.8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // Upgraded Mk-II Elite Canards
+          if (ship.upgradeTier >= 2) {
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(5, -2.5);
+            ctx.lineTo(1.5, -6.5);
+            ctx.moveTo(5, 2.5);
+            ctx.lineTo(1.5, 6.5);
+            ctx.stroke();
+          }
+
+          // Upgraded Mk-III Apex Outer Wing Blades & Reactor Halo
+          if (ship.upgradeTier === 3) {
+            ctx.strokeStyle = getFactionColor(ship.faction, nowMs, ship.hueOffset);
+            ctx.lineWidth = 1.3;
+            ctx.beginPath();
+            ctx.moveTo(1.5, -6.5);
+            ctx.lineTo(-5.5, -8.5);
+            ctx.lineTo(-4.5, -5.5);
+            ctx.moveTo(1.5, 6.5);
+            ctx.lineTo(-5.5, 8.5);
+            ctx.lineTo(-4.5, 5.5);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 10.5, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+          }
+
+          ctx.restore();
+        }
+
+        // Update & render Fleet Laser Bolts + Hit Detection
+        for (let l = fleetLasers.length - 1; l >= 0; l--) {
+          const bolt = fleetLasers[l];
+          bolt.x += bolt.vx;
+          bolt.y += bolt.vy;
+          bolt.life--;
+
+          if (bolt.life <= 0 || bolt.x < 0 || bolt.x > w || bolt.y < 0 || bolt.y > h) {
+            fleetLasers.splice(l, 1);
+            continue;
+          }
+
+          let hit = false;
+
+          // Check hit against rival colony ships
+          for (let s = colonyShips.length - 1; s >= 0; s--) {
+            const target = colonyShips[s];
+            if (target.faction === bolt.faction) continue;
+            if (target.state === 'HYPER_ARRIVE' || target.state === 'HYPER_DASH') continue;
+            if (Math.hypot(target.x - bolt.x, target.y - bolt.y) < (bolt.isHeavy ? 11 : 7.5)) {
+              target.hp -= bolt.damage;
+              hit = true;
+
+              fleetEffects.push({
+                type: 'SPARK',
+                x: bolt.x,
+                y: bolt.y,
+                life: 1,
+                decay: 0.14,
+                faction: bolt.faction,
+                hueOffset: bolt.hueOffset,
+              });
+
+              if (target.hp <= 0) {
+                explodeCraft(target.x, target.y, target.faction, target.hueOffset, false);
+                respawnQueue.push({ faction: target.faction, timer: 300 });
+                colonyShips.splice(s, 1);
+              }
+              break;
+            }
+          }
+
+          // Check hit against rival Motherships
+          if (!hit) {
+            for (let m = 0; m < FACTION_KEYS.length; m++) {
+              const fKey = FACTION_KEYS[m];
+              if (fKey === bolt.faction) continue;
+              const ms = FACTIONS[fKey].mothership;
+              if (!ms) continue;
+              if (Math.hypot(ms.x - bolt.x, ms.y - bolt.y) < 24) {
+                ms.hp -= bolt.damage;
+                hit = true;
+
+                fleetEffects.push({
+                  type: 'SPARK',
+                  x: bolt.x,
+                  y: bolt.y,
+                  life: 1,
+                  decay: 0.14,
+                  faction: bolt.faction,
+                  hueOffset: bolt.hueOffset,
+                });
+
+                if (ms.hp <= 0) {
+                  explodeCraft(ms.x, ms.y, fKey, ms.hueOffset, true);
+                  FACTIONS[fKey].mothership = null;
+                }
+                break;
+              }
+            }
+          }
+
+          if (hit) {
+            fleetLasers.splice(l, 1);
+            continue;
+          }
+
+          // Render Laser Bolt
+          const tailLen = bolt.isHeavy ? 14 : bolt.upgradeTier === 3 ? 13 : bolt.upgradeTier === 2 ? 11 : 9;
+          ctx.beginPath();
+          ctx.moveTo(bolt.x, bolt.y);
+          ctx.lineTo(bolt.x - Math.cos(bolt.angle) * tailLen, bolt.y - Math.sin(bolt.angle) * tailLen);
+          ctx.strokeStyle = getFactionColor(bolt.faction, nowMs, bolt.hueOffset);
+          ctx.lineWidth = bolt.isHeavy ? 2.8 : bolt.upgradeTier === 3 ? 2.4 : bolt.upgradeTier === 2 ? 2.1 : 1.7;
+          ctx.stroke();
+
+          if (bolt.isHeavy || bolt.upgradeTier >= 2) {
+            ctx.beginPath();
+            ctx.moveTo(bolt.x, bolt.y);
+            ctx.lineTo(
+              bolt.x - Math.cos(bolt.angle) * (tailLen * 0.7),
+              bolt.y - Math.sin(bolt.angle) * (tailLen * 0.7)
+            );
+            ctx.strokeStyle = bolt.upgradeTier >= 2
+              ? '#ffffff'
+              : getFactionSecondaryColor(bolt.faction, nowMs, bolt.hueOffset);
+            ctx.lineWidth = bolt.isHeavy ? 1.1 : bolt.upgradeTier === 3 ? 1.15 : 0.95;
+            ctx.stroke();
+          }
+        }
+
+        // Update & render Fleet Effects (Backup Call Pings, Warp Rings, Shards, Sparks)
+        for (let e = fleetEffects.length - 1; e >= 0; e--) {
+          const ef = fleetEffects[e];
+          if (ef.type !== 'HEAL_TRANSFER') {
+            ef.life -= ef.decay;
+            if (ef.life <= 0) {
+              fleetEffects.splice(e, 1);
+              continue;
+            }
+          }
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, Math.min(1, ef.life));
+
+          if (ef.type === 'BACKUP_CALL') {
+            ef.radius += (ef.maxRadius - ef.radius) * 0.08;
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = getFactionColor(ef.faction, nowMs, ef.hueOffset);
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            if (ef.life > 0.35) {
+              ctx.font = 'bold 9px "JetBrains Mono", monospace';
+              ctx.fillStyle = getFactionSecondaryColor(ef.faction, nowMs, ef.hueOffset);
+              ctx.fillText('SOS//BACKUP', ef.x + 12, ef.y - 10);
+            }
+          } else if (ef.type === 'UPGRADE_PULSE') {
+            ef.radius += (ef.maxRadius - ef.radius) * 0.14;
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = ef.tier === 3 ? 2.2 : 1.8;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius * 0.72, 0, Math.PI * 2);
+            ctx.strokeStyle = getFactionColor(ef.faction, nowMs, ef.hueOffset);
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+
+            if (ef.tier === 3) {
+              ctx.beginPath();
+              ctx.arc(ef.x, ef.y, ef.radius * 0.44, 0, Math.PI * 2);
+              ctx.strokeStyle = '#ffffff';
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+
+            if (ef.life > 0.3) {
+              ctx.font = 'bold 9px "JetBrains Mono", monospace';
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(ef.tier === 3 ? 'MK-III // +10HP' : 'MK-II // +5HP', ef.x + 10, ef.y - 10);
+            }
+          } else if (ef.type === 'HEAL_TRANSFER') {
+            const targetMs = FACTIONS[ef.faction] && FACTIONS[ef.faction].mothership;
+            if (!targetMs) {
+              fleetEffects.splice(e, 1);
+              ctx.restore();
+              continue;
+            }
+            ef.progress = Math.min(1, ef.progress + ef.speed);
+            const curX = ef.x + (targetMs.x - ef.x) * ef.progress;
+            const curY = ef.y + (targetMs.y - ef.y) * ef.progress;
+
+            // Energy repair tether & orb traveling to Mothership
+            ctx.beginPath();
+            ctx.moveTo(curX, curY);
+            ctx.lineTo(
+              ef.x + (targetMs.x - ef.x) * Math.max(0, ef.progress - 0.22),
+              ef.y + (targetMs.y - ef.y) * Math.max(0, ef.progress - 0.22)
+            );
+            ctx.strokeStyle = getFactionColor(ef.faction, nowMs, ef.hueOffset, 0.85);
+            ctx.lineWidth = 2.4;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(curX, curY, 3.6, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            if (ef.progress >= 1) {
+              targetMs.hp = Math.min(targetMs.maxHp, targetMs.hp + (ef.healAmount || 25));
+              fleetEffects.push({
+                type: 'MOTHERSHIP_HEAL_RING',
+                x: targetMs.x,
+                y: targetMs.y,
+                radius: 12,
+                maxRadius: 56,
+                life: 1,
+                decay: 0.032,
+                healAmount: ef.healAmount || 25,
+                faction: ef.faction,
+                hueOffset: ef.hueOffset,
+              });
+              fleetEffects.splice(e, 1);
+            }
+          } else if (ef.type === 'MOTHERSHIP_HEAL_RING') {
+            ef.radius += (ef.maxRadius - ef.radius) * 0.14;
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            if (ef.life > 0.3) {
+              ctx.font = 'bold 9px "JetBrains Mono", monospace';
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(`REPAIR +${ef.healAmount}`, ef.x - 28, ef.y - 28);
+            }
+          } else if (ef.type === 'WARP_RING' || ef.type === 'MOTHERSHIP_WARP') {
+            ef.radius += (ef.maxRadius - ef.radius) * 0.14;
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, ef.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = getFactionColor(ef.faction, nowMs, ef.hueOffset);
+            ctx.lineWidth = ef.type === 'MOTHERSHIP_WARP' ? 2.5 : 1.4;
+            ctx.stroke();
+
+            if (ef.type === 'MOTHERSHIP_WARP') {
+              ctx.font = 'bold 10px "JetBrains Mono", monospace';
+              ctx.fillStyle = getFactionSecondaryColor(ef.faction, nowMs, ef.hueOffset);
+              ctx.fillText(`${FACTIONS[ef.faction].label} MOTHERSHIP`, ef.x - 54, ef.y - 34);
+            }
+          } else if (ef.type === 'SHARD') {
+            ef.x += ef.vx;
+            ef.y += ef.vy;
+            ef.vx *= 0.94;
+            ef.vy *= 0.94;
+            ctx.fillStyle = getFactionColor(ef.faction, nowMs, ef.hueOffset);
+            ctx.fillRect(ef.x - ef.size / 2, ef.y - ef.size / 2, ef.size, ef.size);
+          } else if (ef.type === 'SPARK') {
+            ctx.beginPath();
+            ctx.arc(ef.x, ef.y, 4.5 * ef.life, 0, Math.PI * 2);
+            ctx.fillStyle = getFactionSecondaryColor(ef.faction, nowMs, ef.hueOffset);
+            ctx.fill();
+          }
+
+          ctx.restore();
+        }
+      }
+
+      function animateBg(nowMs = performance.now()) {
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, width, height);
 
@@ -1252,6 +3470,9 @@
           ctx.fillRect(sp.x - sp.size / 2, sp.y - sp.size / 2, sp.size, sp.size);
         }
         ctx.globalAlpha = 1;
+
+        // Render autonomous ship colonies, Motherships, combat & scanning beams
+        updateAndRenderFleets(ctx, width, height, nowMs);
 
         // Background raster slice tears during extreme explosion
         if (isGlitchingBg) {
@@ -1822,7 +4043,6 @@
       let velX = -1.15;
       let velY = 0.85;
       let driftPhase = Math.random() * Math.PI * 2;
-      let isLaserMode = false;
 
       // 4D rotation angles & interactive burst state
       let angleXW = 0.4;
@@ -1848,9 +4068,15 @@
       let hunterNovaRadius = 0;
 
       function pickDensestDotCluster() {
-        if (!bgNetwork || !bgNetwork.nodes.length) return null;
+        if (!bgNetwork) return null;
         const alive = bgNetwork.nodes.filter((n) => n.alive);
-        if (!alive.length) return null;
+        const ships = bgNetwork.getActiveFleetTargets ? bgNetwork.getActiveFleetTargets() : [];
+        if (!alive.length && !ships.length) return null;
+
+        // Prioritize hunting active ships or Motherships 55% of the time when present
+        if (ships.length > 0 && (alive.length === 0 || Math.random() < 0.55)) {
+          return ships[Math.floor(Math.random() * ships.length)];
+        }
 
         let bestNode = alive[Math.floor(Math.random() * alive.length)];
         let bestScore = -1;
@@ -1862,6 +4088,10 @@
           for (let j = 0; j < alive.length; j++) {
             const d = Math.hypot(candidate.x - alive[j].x, candidate.y - alive[j].y);
             if (d < 190) neighbors++;
+          }
+          for (let f = 0; f < ships.length; f++) {
+            const d = Math.hypot(candidate.x - ships[f].x, candidate.y - ships[f].y);
+            if (d < 210) neighbors += 4;
           }
           if (neighbors > bestScore) {
             bestScore = neighbors;
@@ -2209,6 +4439,9 @@
 
           // PHASE 2: Extended 2.9-second 4D Geometric Charge-Up at bottom center
           if (elapsed < chargeEnd) {
+            if (isBgOnlyMode) {
+              toggleBackgroundView();
+            }
             const cProgress = (elapsed - descendEnd) / (chargeEnd - descendEnd);
             const easeCharge = cProgress * cProgress;
             const shake = (Math.random() - 0.5) * (3 + easeCharge * 16);
@@ -2221,199 +4454,122 @@
               const cx = posX + size / 2;
               const cy = posY + size / 2;
 
-              // Ambient crimson reactor aura building around the tesseract
-              const aura = ctxOverlay.createRadialGradient(cx, cy, 8, cx, cy, 120 + easeCharge * 220);
-              aura.addColorStop(0, `rgba(255, 255, 255, ${(0.25 + easeCharge * 0.45).toFixed(2)})`);
-              aura.addColorStop(0.35, `rgba(255, 0, 0, ${(0.3 + easeCharge * 0.5).toFixed(2)})`);
-              aura.addColorStop(1, 'rgba(0, 0, 0, 0)');
-              ctxOverlay.fillStyle = aura;
-              ctxOverlay.fillRect(0, 0, width, height);
-
-              // Siphoning energy particles drawn inward into the tesseract core
-              if (Math.random() < 0.85) {
-                const ang = Math.random() * Math.PI * 2;
-                const dist = 130 + Math.random() * 240;
-                chargeParticles.push({
-                  x: cx + Math.cos(ang) * dist,
-                  y: cy + Math.sin(ang) * dist,
-                  speed: 0.045 + easeCharge * 0.075,
-                  size: 1.5 + Math.random() * 3,
-                  isWhite: Math.random() < 0.42,
-                });
-              }
-
-              for (let i = chargeParticles.length - 1; i >= 0; i--) {
-                const pt = chargeParticles[i];
-                const prevX = pt.x;
-                const prevY = pt.y;
-                pt.x += (cx - pt.x) * pt.speed;
-                pt.y += (cy - pt.y) * pt.speed;
-                const d = Math.hypot(cx - pt.x, cy - pt.y);
-                if (d < 16) {
-                  chargeParticles.splice(i, 1);
-                  continue;
-                }
-                ctxOverlay.beginPath();
-                ctxOverlay.moveTo(prevX, prevY);
-                ctxOverlay.lineTo(pt.x, pt.y);
-                ctxOverlay.strokeStyle = pt.isWhite ? '#ffffff' : '#ff0000';
-                ctxOverlay.lineWidth = pt.size;
-                ctxOverlay.stroke();
-              }
-
-              // Contracting nested 4D hypercube wireframe squares locking onto the core
-              for (let r = 0; r < 4; r++) {
-                const cycle = ((cProgress * 2.4 + r * 0.25) % 1);
-                const glyphRadius = (1 - cycle) * (150 + easeCharge * 90) + 18;
-                const glyphAlpha = Math.sin(cycle * Math.PI) * (0.45 + easeCharge * 0.55);
+              // Converging 4D containment glyphs during charge-up
+              for (let r = 0; r < 3; r++) {
+                const ringR = Math.max(18, (1 - easeCharge * 0.65) * (72 + r * 36));
                 drawTesseractGlyph(
                   ctxOverlay,
                   cx,
                   cy,
-                  glyphRadius,
-                  elapsed * 0.002 * (r % 2 === 0 ? 1 : -1),
-                  glyphAlpha
+                  ringR,
+                  elapsed * 0.005 * (r % 2 === 0 ? 1 : -1),
+                  0.35 + easeCharge * 0.55
                 );
               }
 
-              // Vertical targeting sightline & harmonic tick marks locking upward
-              ctxOverlay.save();
-              ctxOverlay.strokeStyle = `rgba(255, 0, 0, ${(0.3 + easeCharge * 0.65).toFixed(2)})`;
-              ctxOverlay.lineWidth = 1.5 + easeCharge * 3;
-              ctxOverlay.setLineDash([12, 8]);
+              // Vertical targeting preview line before beam ignition
               ctxOverlay.beginPath();
-              ctxOverlay.moveTo(cx, cy - 20);
+              ctxOverlay.moveTo(cx, cy);
               ctxOverlay.lineTo(cx, 0);
+              ctxOverlay.strokeStyle = `rgba(255, 0, 0, ${(0.2 + easeCharge * 0.65).toFixed(2)})`;
+              ctxOverlay.lineWidth = 1 + easeCharge * 3;
+              ctxOverlay.setLineDash([8, 6]);
               ctxOverlay.stroke();
-
-              // Horizontal targeting calibration bars ascending the sightline
               ctxOverlay.setLineDash([]);
-              const tickCount = Math.floor(3 + easeCharge * 8);
-              for (let tk = 0; tk < tickCount; tk++) {
-                const ty = cy - ((tk + 1) / (tickCount + 1)) * cy;
-                const halfW = 14 + (1 - tk / tickCount) * (35 + easeCharge * 45);
-                ctxOverlay.strokeStyle = tk % 2 === 0 ? '#ffffff' : '#ff0000';
-                ctxOverlay.lineWidth = 1.25;
-                ctxOverlay.beginPath();
-                ctxOverlay.moveTo(cx - halfW, ty);
-                ctxOverlay.lineTo(cx + halfW, ty);
-                ctxOverlay.stroke();
+
+              // Spawn inward-rushing energy particles
+              for (let p = 0; p < 3; p++) {
+                const ang = Math.random() * Math.PI * 2;
+                const dist = 70 + Math.random() * 90;
+                chargeParticles.push({
+                  x: cx + Math.cos(ang) * dist,
+                  y: cy + Math.sin(ang) * dist,
+                  isWhite: Math.random() < 0.45,
+                });
               }
-              ctxOverlay.restore();
 
-              // Blinding core flare right before ignition
-              const coreRadius = 8 + easeCharge * 36 + Math.sin(elapsed * 0.05) * 4;
-              ctxOverlay.beginPath();
-              ctxOverlay.arc(cx, cy, coreRadius, 0, Math.PI * 2);
-              ctxOverlay.fillStyle = '#ffffff';
-              ctxOverlay.fill();
-              ctxOverlay.lineWidth = 3;
-              ctxOverlay.strokeStyle = '#ff0000';
-              ctxOverlay.stroke();
-            }
-
-            // Subtle pre-ignition tremor on the UI
-            if (portfolioUi && !isBgOnlyMode && easeCharge > 0.35) {
-              const preShake = (easeCharge - 0.35) * 8;
-              portfolioUi.style.transform = `translate3d(${((Math.random() - 0.5) * preShake).toFixed(1)}px, ${((Math.random() - 0.5) * preShake).toFixed(1)}px, 0)`;
+              for (let i = chargeParticles.length - 1; i >= 0; i--) {
+                const cp = chargeParticles[i];
+                const dx = cx - cp.x;
+                const dy = cy - cp.y;
+                const d = Math.hypot(dx, dy);
+                if (d < 10) {
+                  chargeParticles.splice(i, 1);
+                  continue;
+                }
+                cp.x += (dx / d) * (5 + easeCharge * 8);
+                cp.y += (dy / d) * (5 + easeCharge * 8);
+                ctxOverlay.fillStyle = cp.isWhite ? '#ffffff' : '#ff0000';
+                ctxOverlay.fillRect(cp.x - 1.5, cp.y - 1.5, 3, 3);
+              }
             }
 
             requestAnimationFrame(runMeltdownFrame);
             return;
           }
 
-          // PHASE 3: Lock viewport scroll, fire stationary 4D Hyper-Laser, and glitch the site
+          // PHASE 3: Stationary 4D Hyper-Laser Beam Firing Straight Upward
           if (elapsed < laserEnd) {
             lockViewportScroll();
-            if (isBgOnlyMode) {
-              toggleBackgroundView();
-            }
-
             const lProgress = (elapsed - chargeEnd) / (laserEnd - chargeEnd);
-            const beamX = width / 2;
-            posX = beamX - size / 2 + (Math.random() - 0.5) * 6;
-            posY = bottomTargetY + (Math.random() - 0.5) * 4;
-            spinBoost = 1.15;
+            const pulseMod = 0.88 + Math.sin(elapsed * 0.045) * 0.22;
+
+            posX = bottomTargetX + (Math.random() - 0.5) * 6;
+            posY = bottomTargetY + (Math.random() - 0.5) * 3;
+            spinBoost = 1.25;
             pulseEnergy = 1.8;
 
+            const cx = posX + size / 2;
+            const cy = posY + size / 2;
+            const beamX = cx;
             const beamTopY = 0;
-            const beamBottomY = posY + size / 2;
-            const pulseMod = 1 + Math.sin(elapsed * 0.07) * 0.14;
+            const beamBottomY = cy;
 
             if (ctxOverlay) {
-              // 1. Wide crimson atmospheric shock-column
-              const outerWidth = 220 * pulseMod;
-              const beamGrad = ctxOverlay.createLinearGradient(beamX - outerWidth / 2, 0, beamX + outerWidth / 2, 0);
+              // Full-height 4D Hyper-Laser beam column (#ff0000 outer plasma + #ffffff core)
+              const outerW = 76 * pulseMod;
+              const midW = 34 * pulseMod;
+              const coreW = 12 * pulseMod;
+
+              const beamGrad = ctxOverlay.createLinearGradient(beamX - outerW, 0, beamX + outerW, 0);
               beamGrad.addColorStop(0, 'rgba(255, 0, 0, 0)');
-              beamGrad.addColorStop(0.25, 'rgba(255, 0, 0, 0.28)');
-              beamGrad.addColorStop(0.45, 'rgba(255, 0, 0, 0.85)');
-              beamGrad.addColorStop(0.5, 'rgba(255, 255, 255, 1)');
-              beamGrad.addColorStop(0.55, 'rgba(255, 0, 0, 0.85)');
-              beamGrad.addColorStop(0.75, 'rgba(255, 0, 0, 0.28)');
+              beamGrad.addColorStop(0.28, 'rgba(255, 0, 0, 0.32)');
+              beamGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.92)');
+              beamGrad.addColorStop(0.72, 'rgba(255, 0, 0, 0.32)');
               beamGrad.addColorStop(1, 'rgba(255, 0, 0, 0)');
               ctxOverlay.fillStyle = beamGrad;
-              ctxOverlay.fillRect(beamX - outerWidth / 2, beamTopY, outerWidth, beamBottomY);
+              ctxOverlay.fillRect(beamX - outerW, beamTopY, outerW * 2, beamBottomY - beamTopY);
 
-              // 2. High-energy crimson containment sheath
-              const midWidth = 54 * pulseMod;
-              ctxOverlay.fillStyle = 'rgba(255, 0, 0, 0.9)';
-              ctxOverlay.fillRect(beamX - midWidth / 2, beamTopY, midWidth, beamBottomY);
+              ctxOverlay.fillStyle = 'rgba(255, 0, 0, 0.78)';
+              ctxOverlay.fillRect(beamX - midW / 2, beamTopY, midW, beamBottomY - beamTopY);
 
-              // 3. Blinding #ffffff inner plasma core
-              const coreWidth = 18 * pulseMod;
               ctxOverlay.fillStyle = '#ffffff';
-              ctxOverlay.fillRect(beamX - coreWidth / 2, beamTopY, coreWidth, beamBottomY);
+              ctxOverlay.fillRect(beamX - coreW / 2, beamTopY, coreW, beamBottomY - beamTopY);
 
-              // 4. Twin braided 4D phase-wave helices oscillating around the beam
-              ctxOverlay.save();
-              for (let strand = 0; strand < 2; strand++) {
-                ctxOverlay.beginPath();
-                const phaseOffset = strand * Math.PI;
-                for (let y = beamBottomY; y >= beamTopY; y -= 12) {
-                  const wave = Math.sin(y * 0.028 + elapsed * 0.025 + phaseOffset) * (36 * pulseMod);
-                  const wx = beamX + wave;
-                  if (y === beamBottomY) ctxOverlay.moveTo(wx, y);
-                  else ctxOverlay.lineTo(wx, y);
-                }
-                ctxOverlay.strokeStyle = strand === 0 ? '#ffffff' : '#ff0000';
-                ctxOverlay.lineWidth = strand === 0 ? 2.5 : 3.5;
-                ctxOverlay.stroke();
-              }
-              ctxOverlay.restore();
-
-              // 5. Scrolling 4D Tesseract wireframe cross-sections racing up the beam
-              const nodeCount = 7;
-              for (let n = 0; n < nodeCount; n++) {
-                const travel = ((elapsed * 0.0014 + n / nodeCount) % 1);
-                const ny = beamBottomY - travel * beamBottomY;
-                const glyphSize = 24 + Math.sin(travel * Math.PI) * 26;
+              // Ascending 4D hypercube cross-sections traveling up the laser column
+              const waveOffset = (elapsed * 0.45) % 110;
+              for (let glyphY = beamBottomY - waveOffset; glyphY > 0; glyphY -= 110) {
                 drawTesseractGlyph(
                   ctxOverlay,
                   beamX,
-                  ny,
-                  glyphSize,
-                  elapsed * 0.004 + n,
+                  glyphY,
+                  26 + Math.sin((glyphY + elapsed) * 0.03) * 6,
+                  elapsed * 0.006 + glyphY * 0.01,
                   0.85
                 );
               }
 
-              // 6. Emitter muzzle blast rings around the tesseract
-              drawTesseractGlyph(ctxOverlay, beamX, beamBottomY, 64 * pulseMod, elapsed * 0.006, 0.95);
-              ctxOverlay.beginPath();
-              ctxOverlay.arc(beamX, beamBottomY, 34 * pulseMod, 0, Math.PI * 2);
-              ctxOverlay.fillStyle = '#ffffff';
-              ctxOverlay.fill();
-              ctxOverlay.lineWidth = 4;
-              ctxOverlay.strokeStyle = '#ff0000';
-              ctxOverlay.stroke();
+              // Emitter flare at the tesseract core
+              drawTesseractGlyph(ctxOverlay, cx, cy, 44 * pulseMod, -elapsed * 0.008, 0.95);
 
-              // 7. Top-screen impact crater & plasma spark shower
-              for (let s = 0; s < 9; s++) {
+              // Eject crimson & white plasma sparks from the beam column
+              for (let s = 0; s < 4; s++) {
                 sparks.push({
-                  x: beamX + (Math.random() - 0.5) * 44,
-                  y: Math.random() * 28,
-                  vx: (Math.random() - 0.5) * 20,
-                  vy: Math.random() * 14 + 3,
+                  x: beamX + (Math.random() - 0.5) * 36,
+                  y: Math.random() * beamBottomY,
+                  vx: (Math.random() - 0.5) * 14,
+                  vy: (Math.random() - 0.5) * 10,
+                  size: 2 + Math.random() * 3.5,
                   life: 1,
                   isWhite: Math.random() < 0.45,
                 });
@@ -2423,99 +4579,73 @@
                 const sp = sparks[i];
                 sp.x += sp.vx;
                 sp.y += sp.vy;
-                sp.vy += 0.42;
-                sp.life -= 0.032;
+                sp.life -= 0.045;
                 if (sp.life <= 0) {
                   sparks.splice(i, 1);
                   continue;
                 }
-                ctxOverlay.fillStyle = sp.isWhite ? '#ffffff' : '#ff0000';
                 ctxOverlay.globalAlpha = sp.life;
-                ctxOverlay.fillRect(sp.x, sp.y, 4.5, 4.5);
+                ctxOverlay.fillStyle = sp.isWhite ? '#ffffff' : '#ff0000';
+                ctxOverlay.fillRect(sp.x - sp.size / 2, sp.y - sp.size / 2, sp.size, sp.size);
               }
               ctxOverlay.globalAlpha = 1;
 
-              // 8. Site-wide dimensional glitch tears, sync bars, and fault readouts during laser fire
-              const glitchSlices = 14;
-              for (let g = 0; g < glitchSlices; g++) {
-                const gy = Math.random() * height;
-                const gh = 2 + Math.random() * 22;
-                const gw = width * (0.18 + Math.random() * 0.82);
-                const gx = Math.random() * (width - gw * 0.35) + (Math.random() - 0.5) * 110;
-                const roll = Math.random();
-                ctxOverlay.fillStyle =
-                  roll < 0.48
-                    ? 'rgba(255, 0, 0, 0.34)'
-                    : roll < 0.8
-                    ? 'rgba(255, 255, 255, 0.28)'
-                    : 'rgba(0, 0, 0, 0.82)';
-                ctxOverlay.fillRect(gx, gy, gw, gh);
-              }
-
-              // Random hex fault readouts flashing across the glitching viewport
-              if (Math.random() < 0.75) {
-                for (let f = 0; f < 4; f++) {
-                  const code = laserGlitchCodes[Math.floor(Math.random() * laserGlitchCodes.length)];
-                  ctxOverlay.font = 'bold 12px "JetBrains Mono", monospace';
-                  ctxOverlay.fillStyle = Math.random() < 0.6 ? '#ff0000' : '#ffffff';
-                  ctxOverlay.fillText(code, Math.random() * (width - 110), Math.random() * height);
-                }
-              }
-
-              // Rolling CRT scanlines
-              ctxOverlay.fillStyle = 'rgba(255, 255, 255, 0.06)';
-              for (let syLine = 0; syLine < height; syLine += 5) {
-                ctxOverlay.fillRect(0, syLine, width, 1.5);
+              // Telemetry glitch codes flashing around the beam
+              if (Math.random() < 0.55) {
+                const code = laserGlitchCodes[Math.floor(Math.random() * laserGlitchCodes.length)];
+                ctxOverlay.font = 'bold 12px "JetBrains Mono", monospace';
+                ctxOverlay.fillStyle = Math.random() < 0.6 ? '#ff0000' : '#ffffff';
+                ctxOverlay.fillText(
+                  code,
+                  beamX + (Math.random() < 0.5 ? -155 : 55) + (Math.random() - 0.5) * 30,
+                  80 + Math.random() * (height - 160)
+                );
               }
             }
 
-            // Shatter and collapse UI blocks progressively as the laser destabilizes the page
+            // Physically shatter and drop UI blocks as the hyper-laser tears through the page
             breakableBlocks.forEach((b) => {
               if (!b.broken && lProgress >= b.breakAt) {
                 b.broken = true;
-                b.el.style.borderColor = '#ff0000';
-                b.el.style.boxShadow = '0 0 24px rgba(255, 0, 0, 0.85)';
+                b.dropVy = 2 + Math.random() * 4;
               }
               if (b.broken) {
-                b.dropVy += 0.38;
+                b.dropVy += 0.65;
                 b.dropY += b.dropVy;
-                b.rot += b.rotV * 0.14;
-                const glitchJitterX = (Math.random() - 0.5) * 18;
-                const glitchSkew = (Math.random() - 0.5) * 5;
-                b.el.style.transform = `translate3d(${(b.shiftX * lProgress + glitchJitterX).toFixed(1)}px, ${b.dropY.toFixed(1)}px, 0) rotate(${b.rot.toFixed(1)}deg) skewX(${glitchSkew.toFixed(1)}deg)`;
-                b.el.style.opacity = String(Math.max(0.25, 1 - b.dropY / (height * 1.15)));
+                b.rot += b.rotV;
+                b.el.style.transform = `translate3d(${(b.shiftX * lProgress).toFixed(1)}px, ${b.dropY.toFixed(1)}px, 0) rotate(${b.rot.toFixed(1)}deg)`;
+                b.el.style.borderColor = Math.random() < 0.5 ? '#ff0000' : '#ffffff';
               }
             });
 
-            // Violent camera shake, skew glitch, and chromatic aberration across the UI
             if (portfolioUi && !isBgOnlyMode) {
-              const sx = ((Math.random() - 0.5) * 24).toFixed(1);
-              const sy = ((Math.random() - 0.5) * 16).toFixed(1);
-              const skew = ((Math.random() - 0.5) * 4.2).toFixed(2);
-              portfolioUi.style.transform = `translate3d(${sx}px, ${sy}px, 0) skewX(${skew}deg)`;
-              portfolioUi.style.filter = 'drop-shadow(-4px 0 0 #ff0000) drop-shadow(4px 0 0 #ffffff)';
+              const jx = ((Math.random() - 0.5) * 22).toFixed(1);
+              const jy = ((Math.random() - 0.5) * 14).toFixed(1);
+              const skew = ((Math.random() - 0.5) * 5).toFixed(2);
+              const split = (4 + Math.random() * 6).toFixed(1);
+              portfolioUi.style.transform = `translate3d(${jx}px, ${jy}px, 0) skewX(${skew}deg)`;
+              portfolioUi.style.filter = `drop-shadow(${-split}px 0 0 #ff0000) drop-shadow(${split}px 0 0 #ffffff)`;
             }
-            if (bgCanvas) {
-              const bx = ((Math.random() - 0.5) * 18).toFixed(1);
-              const by = ((Math.random() - 0.5) * 14).toFixed(1);
-              bgCanvas.style.transform = `translate3d(${bx}px, ${by}px, 0)`;
+
+            if (hudClock && Math.random() < 0.6) {
+              hudClock.textContent = laserGlitchCodes[Math.floor(Math.random() * laserGlitchCodes.length)];
             }
 
             requestAnimationFrame(runMeltdownFrame);
             return;
           }
 
-          // PHASE 4: Tesseract surges to the exact center of the screen and compresses before detonation
+          // PHASE 4: Tesseract surges rapidly to the center of the screen & compresses into a singularity
           if (elapsed < centerMoveEnd) {
             const mProgress = (elapsed - laserEnd) / (centerMoveEnd - laserEnd);
-            const easeSurge = 1 - Math.pow(1 - mProgress, 3);
+            const easeMove = 1 - Math.pow(1 - mProgress, 3);
             const centerTargetX = width / 2 - size / 2;
             const centerTargetY = height / 2 - size / 2;
 
-            posX = bottomTargetX + (centerTargetX - bottomTargetX) * easeSurge + (Math.random() - 0.5) * (10 * mProgress);
-            posY = bottomTargetY + (centerTargetY - bottomTargetY) * easeSurge + (Math.random() - 0.5) * (10 * mProgress);
-            spinBoost = 1.2 + mProgress * 1.6;
-            pulseEnergy = 1.8 + mProgress * 1.2;
+            posX = bottomTargetX + (centerTargetX - bottomTargetX) * easeMove;
+            posY = bottomTargetY + (centerTargetY - bottomTargetY) * easeMove;
+            spinBoost = 1.35 + mProgress * 0.9;
+            pulseEnergy = 2.0;
 
             if (ctxOverlay) {
               const cx = posX + size / 2;
@@ -2614,328 +4744,102 @@
                 b.dropVy += (by / dist) * 18 + 7;
                 b.rotV *= 3.4;
               });
+
+              // Obliterate all active ships and Motherships in the 4D center detonation
+              if (bgNetwork && bgNetwork.damageFleetInRadius) {
+                bgNetwork.damageFleetInRadius(cx, cy, maxDiag * 1.25, 999);
+              }
             }
 
-            // Violently corrupt every visible UI text node into glitch glyphs & panic codes
-            explosionTextBackups.forEach((origVal, textNode) => {
-              if (Math.random() < 0.94) {
-                if (origVal.trim().length > 6 && Math.random() < 0.24) {
-                  textNode.nodeValue =
-                    explosionPanicCodes[Math.floor(Math.random() * explosionPanicCodes.length)];
-                } else {
-                  let scrambled = '';
-                  for (let ch = 0; ch < origVal.length; ch++) {
-                    const c = origVal[ch];
-                    if (c !== ' ' && c !== '\n' && Math.random() < 0.82) {
-                      scrambled += explosionGlyphs[Math.floor(Math.random() * explosionGlyphs.length)];
-                    } else {
-                      scrambled += c;
-                    }
-                  }
-                  textNode.nodeValue = scrambled;
-                }
-              } else {
-                textNode.nodeValue = origVal;
-              }
-            });
-
-            // Continue driving blasted UI blocks outward with aggressive polygon/inset slicing & jitter
-            breakableBlocks.forEach((b) => {
-              b.dropVy += 0.95;
-              b.dropY += b.dropVy;
-              b.rot += b.rotV * 0.32;
-              const jx = (Math.random() - 0.5) * 68;
-              const jy = (Math.random() - 0.5) * 44;
-              const skewX = (Math.random() - 0.5) * 22;
-              const skewY = (Math.random() - 0.5) * 10;
-              b.el.style.borderColor = Math.random() < 0.55 ? '#ff0000' : '#ffffff';
-              b.el.style.backgroundColor =
-                Math.random() < 0.18
-                  ? 'rgba(255, 0, 0, 0.25)'
-                  : Math.random() < 0.28
-                  ? 'rgba(255, 255, 255, 0.18)'
-                  : '';
-              b.el.style.boxShadow =
-                Math.random() < 0.5
-                  ? '0 0 34px rgba(255, 0, 0, 1)'
-                  : '0 0 28px rgba(255, 255, 255, 0.95)';
-              b.el.style.transform = `translate3d(${(b.shiftX * (0.4 + eProgress) + jx).toFixed(1)}px, ${(b.dropY + jy).toFixed(1)}px, 0) rotate(${b.rot.toFixed(1)}deg) skew(${skewX.toFixed(1)}deg, ${skewY.toFixed(1)}deg)`;
-              if (Math.random() < 0.78) {
-                const topCut = Math.floor(Math.random() * 48);
-                const bottomCut = Math.floor(Math.random() * 48);
-                const leftCut = Math.floor(Math.random() * 22);
-                const rightCut = Math.floor(Math.random() * 22);
-                b.el.style.clipPath = `inset(${topCut}% ${rightCut}% ${bottomCut}% ${leftCut}%)`;
-              } else {
-                b.el.style.clipPath = '';
-              }
-              b.el.style.opacity = String(Math.max(0.2, 1 - eProgress * 0.9));
-            });
-
-            // Extreme micro-glitch on every inner button, header, badge, link, input & SVG
-            explosionSubElements.forEach((sub) => {
-              if (Math.random() < 0.75) {
-                const sx = ((Math.random() - 0.5) * 48 * glitchIntensity).toFixed(1);
-                const sy = ((Math.random() - 0.5) * 28 * glitchIntensity).toFixed(1);
-                const sSkew = ((Math.random() - 0.5) * 24).toFixed(1);
-                const sScale = (0.85 + Math.random() * 0.4).toFixed(2);
-                sub.style.transform = `translate3d(${sx}px, ${sy}px, 0) skewX(${sSkew}deg) scale(${sScale})`;
-                if (Math.random() < 0.55) {
-                  sub.style.clipPath = `inset(${Math.floor(Math.random() * 40)}% 0 ${Math.floor(Math.random() * 40)}% 0)`;
-                } else {
-                  sub.style.clipPath = '';
-                }
-                if (Math.random() < 0.35) {
-                  sub.style.color = Math.random() < 0.55 ? '#ff0000' : '#ffffff';
-                } else {
-                  sub.style.color = '';
-                }
-              } else {
-                sub.style.transform = '';
-                sub.style.clipPath = '';
-                sub.style.color = '';
-              }
-            });
-
+            // Render expanding 4D detonation shockwaves, shards, plasma sparks & glitch slices
             if (ctxOverlay) {
-              // 1. High-intensity #ffffff / #ff0000 / #000000 detonation strobe
-              if (eProgress < 0.25) {
-                const flashNorm = 1 - eProgress / 0.25;
-                ctxOverlay.fillStyle =
-                  Math.random() < 0.48
-                    ? `rgba(255, 255, 255, ${(flashNorm * 0.95).toFixed(2)})`
-                    : `rgba(255, 0, 0, ${(flashNorm * 0.85).toFixed(2)})`;
-                ctxOverlay.fillRect(0, 0, width, height);
-              } else {
-                const strobeRoll = Math.random();
-                ctxOverlay.fillStyle =
-                  strobeRoll < 0.2
-                    ? 'rgba(255, 255, 255, 0.32)'
-                    : strobeRoll < 0.44
-                    ? 'rgba(255, 0, 0, 0.34)'
-                    : `rgba(0, 0, 0, ${((eProgress - 0.25) * 0.62).toFixed(2)})`;
+              if (eProgress < 0.14) {
+                ctxOverlay.fillStyle = `rgba(255, 255, 255, ${(0.85 * (1 - eProgress / 0.14)).toFixed(2)})`;
                 ctxOverlay.fillRect(0, 0, width, height);
               }
 
-              // 2. Primary & Secondary Expanding Circular Shockwave Rings
-              const primaryR = Math.pow(eProgress, 0.72) * maxDiag * 1.25;
-              const secondaryR = Math.pow(Math.max(0, eProgress - 0.08), 0.78) * maxDiag * 1.1;
-
-              ctxOverlay.save();
+              const waveR = Math.pow(eProgress, 0.65) * maxDiag * 1.35;
               ctxOverlay.beginPath();
-              ctxOverlay.arc(cx, cy, primaryR, 0, Math.PI * 2);
-              ctxOverlay.strokeStyle = '#ffffff';
-              ctxOverlay.globalAlpha = Math.max(0, 1 - eProgress * 1.1);
-              ctxOverlay.lineWidth = Math.max(3, (1 - eProgress) * 34);
+              ctxOverlay.arc(cx, cy, waveR, 0, Math.PI * 2);
+              ctxOverlay.strokeStyle = '#ff0000';
+              ctxOverlay.lineWidth = Math.max(2, 18 * (1 - eProgress));
               ctxOverlay.stroke();
 
-              if (secondaryR > 0) {
-                ctxOverlay.beginPath();
-                ctxOverlay.arc(cx, cy, secondaryR, 0, Math.PI * 2);
-                ctxOverlay.strokeStyle = '#ff0000';
-                ctxOverlay.globalAlpha = Math.max(0, 0.95 - eProgress * 0.95);
-                ctxOverlay.lineWidth = Math.max(4, (1 - eProgress) * 54);
-                ctxOverlay.stroke();
-              }
-              ctxOverlay.restore();
+              ctxOverlay.beginPath();
+              ctxOverlay.arc(cx, cy, waveR * 0.88, 0, Math.PI * 2);
+              ctxOverlay.strokeStyle = '#ffffff';
+              ctxOverlay.lineWidth = Math.max(1.5, 8 * (1 - eProgress));
+              ctxOverlay.stroke();
 
-              // 3. Expanding 4D Hypercube Wireframe Shockwaves
-              for (let g = 0; g < 4; g++) {
-                const gP = Math.max(0, eProgress - g * 0.09);
-                if (gP <= 0) continue;
-                const glyphRadius = Math.pow(gP, 0.75) * maxDiag * 0.95;
-                const glyphAlpha = Math.max(0, (1 - gP) * 0.95);
-                drawTesseractGlyph(
-                  ctxOverlay,
-                  cx,
-                  cy,
-                  glyphRadius,
-                  gP * Math.PI * (g % 2 === 0 ? 1.6 : -1.6),
-                  glyphAlpha
-                );
-              }
+              drawTesseractGlyph(ctxOverlay, cx, cy, waveR * 0.65, eProgress * Math.PI * 3, 1 - eProgress * 0.7);
 
-              // 4. Screen-Wide Dimensional Fracture Cracks Radiating from Center
-              const crackCount = 16;
-              for (let cr = 0; cr < crackCount; cr++) {
-                const baseAng = (cr / crackCount) * Math.PI * 2 + Math.sin(elapsed * 0.03 + cr) * 0.12;
-                const reach = Math.min(1, eProgress * 2.4) * maxDiag * 1.15;
-                ctxOverlay.beginPath();
-                ctxOverlay.moveTo(cx, cy);
-                let curX = cx;
-                let curY = cy;
-                const steps = 7;
-                for (let st = 1; st <= steps; st++) {
-                  const frac = st / steps;
-                  const perp = baseAng + Math.PI / 2;
-                  const jag = (Math.random() - 0.5) * 48;
-                  curX = cx + Math.cos(baseAng) * reach * frac + Math.cos(perp) * jag;
-                  curY = cy + Math.sin(baseAng) * reach * frac + Math.sin(perp) * jag;
-                  ctxOverlay.lineTo(curX, curY);
-                }
-                ctxOverlay.strokeStyle = cr % 2 === 0 ? '#ffffff' : '#ff0000';
-                ctxOverlay.lineWidth = cr % 3 === 0 ? 3.2 : 1.8;
-                ctxOverlay.globalAlpha = Math.max(0.25, 1 - eProgress * 0.75);
-                ctxOverlay.stroke();
-              }
-              ctxOverlay.globalAlpha = 1;
-
-              // 5. Rotating Geometric Shrapnel Shards
-              for (let s = 0; s < explosionShards.length; s++) {
-                const sh = explosionShards[s];
-                sh.x += sh.vx;
-                sh.y += sh.vy;
-                sh.vx *= 0.97;
-                sh.vy *= 0.97;
-                sh.rot += sh.rotV;
-
-                ctxOverlay.save();
-                ctxOverlay.translate(sh.x, sh.y);
-                ctxOverlay.rotate(sh.rot);
-                ctxOverlay.globalAlpha = Math.max(0, 1 - eProgress * 1.05);
-                ctxOverlay.fillStyle = '#000000';
-                ctxOverlay.strokeStyle = sh.isCrimson ? '#ff0000' : '#ffffff';
-                ctxOverlay.lineWidth = 2.2;
-                ctxOverlay.beginPath();
-                ctxOverlay.moveTo(0, -sh.size);
-                ctxOverlay.lineTo(sh.size * 0.75, sh.size * 0.65);
-                ctxOverlay.lineTo(-sh.size * 0.75, sh.size * 0.65);
-                ctxOverlay.closePath();
-                ctxOverlay.fill();
-                ctxOverlay.stroke();
-                ctxOverlay.restore();
-              }
-
-              // 6. High-Velocity Radial Plasma Sparks
               for (let i = explosionParticles.length - 1; i >= 0; i--) {
                 const pt = explosionParticles[i];
-                const prevX = pt.x;
-                const prevY = pt.y;
                 pt.x += pt.vx;
                 pt.y += pt.vy;
-                pt.vx *= 0.955;
-                pt.vy *= 0.955;
+                pt.vx *= 0.96;
+                pt.vy *= 0.96;
                 pt.life -= pt.decay;
                 if (pt.life <= 0) {
                   explosionParticles.splice(i, 1);
                   continue;
                 }
-                ctxOverlay.beginPath();
-                ctxOverlay.moveTo(prevX, prevY);
-                ctxOverlay.lineTo(pt.x, pt.y);
-                ctxOverlay.strokeStyle = pt.isWhite ? '#ffffff' : '#ff0000';
                 ctxOverlay.globalAlpha = Math.max(0, pt.life);
-                ctxOverlay.lineWidth = pt.size;
-                ctxOverlay.stroke();
+                ctxOverlay.fillStyle = pt.isWhite ? '#ffffff' : '#ff0000';
+                ctxOverlay.fillRect(pt.x - pt.size / 2, pt.y - pt.size / 2, pt.size, pt.size);
+              }
+
+              for (let s = 0; s < explosionShards.length; s++) {
+                const sh = explosionShards[s];
+                sh.x += sh.vx;
+                sh.y += sh.vy;
+                sh.rot += sh.rotV;
+                ctxOverlay.save();
+                ctxOverlay.translate(sh.x, sh.y);
+                ctxOverlay.rotate(sh.rot);
+                ctxOverlay.globalAlpha = Math.max(0, 1 - eProgress * 0.85);
+                ctxOverlay.strokeStyle = sh.isCrimson ? '#ff0000' : '#ffffff';
+                ctxOverlay.lineWidth = 2;
+                ctxOverlay.strokeRect(-sh.size / 2, -sh.size / 2, sh.size, sh.size);
+                ctxOverlay.restore();
               }
               ctxOverlay.globalAlpha = 1;
 
-              // 7. EXTREME FULL-SCREEN GLITCH LAYER: Massive Horizontal Tear Slices
-              const extremeSlices = Math.floor(42 + Math.random() * 28);
-              for (let t = 0; t < extremeSlices; t++) {
-                const sy = Math.random() * height;
-                const sh = 2 + Math.random() * 48;
-                const sw = width * (0.25 + Math.random() * 0.75);
-                const sx = Math.random() * (width - sw * 0.25) + (Math.random() - 0.5) * 220;
-                const roll = Math.random();
+              // Extreme raster tear bands & panic codes
+              const sliceCount = Math.floor(14 * glitchIntensity);
+              for (let sl = 0; sl < sliceCount; sl++) {
                 ctxOverlay.fillStyle =
-                  roll < 0.45
-                    ? 'rgba(255, 0, 0, 0.58)'
-                    : roll < 0.8
-                    ? 'rgba(255, 255, 255, 0.5)'
-                    : 'rgba(0, 0, 0, 0.92)';
-                ctxOverlay.fillRect(sx, sy, sw, sh);
-              }
-
-              // 8. EXTREME VERTICAL SYNC-DROP COLUMNS
-              const extremeCols = Math.floor(16 + Math.random() * 18);
-              for (let c = 0; c < extremeCols; c++) {
-                const colX = Math.random() * width;
-                const colW = 3 + Math.random() * 36;
-                const colH = height * (0.3 + Math.random() * 0.7);
-                const colY = Math.random() * (height - colH * 0.35);
-                const roll = Math.random();
-                ctxOverlay.fillStyle =
-                  roll < 0.48
-                    ? 'rgba(255, 0, 0, 0.48)'
-                    : roll < 0.82
-                    ? 'rgba(255, 255, 255, 0.42)'
-                    : 'rgba(0, 0, 0, 0.9)';
-                ctxOverlay.fillRect(colX, colY, colW, colH);
-              }
-
-              // 9. JAGGED #000000 VOID PUNCTURES WITH #ff0000 / #ffffff WIREFRAME BORDERS
-              const voidBoxes = Math.floor(10 + Math.random() * 10);
-              for (let v = 0; v < voidBoxes; v++) {
-                const vw = 60 + Math.random() * 320;
-                const vh = 24 + Math.random() * 150;
-                const vx = Math.random() * (width - vw);
-                const vy = Math.random() * (height - vh);
-                ctxOverlay.fillStyle = '#000000';
-                ctxOverlay.fillRect(vx, vy, vw, vh);
-                ctxOverlay.strokeStyle = Math.random() < 0.6 ? '#ff0000' : '#ffffff';
-                ctxOverlay.lineWidth = 2;
-                ctxOverlay.strokeRect(vx, vy, vw, vh);
-              }
-
-              // 10. HIGH-FREQUENCY DIGITAL STATIC SNOW STORMS
-              for (let z = 0; z < 8; z++) {
-                const zx = Math.random() * width;
-                const zy = Math.random() * height;
-                const zw = 110 + Math.random() * 280;
-                const zh = 50 + Math.random() * 160;
-                for (let sp = 0; sp < 70; sp++) {
-                  ctxOverlay.fillStyle = Math.random() < 0.52 ? '#ffffff' : '#ff0000';
-                  ctxOverlay.fillRect(
-                    zx + Math.random() * zw,
-                    zy + Math.random() * zh,
-                    2 + Math.random() * 10,
-                    2 + Math.random() * 4
-                  );
-                }
-              }
-
-              // 11. DENSE KERNEL PANIC / HEX TELEMETRY BLEED
-              for (let p = 0; p < 18; p++) {
-                const panicText =
-                  explosionPanicCodes[Math.floor(Math.random() * explosionPanicCodes.length)];
-                const fontSize = Math.floor(12 + Math.random() * 18);
-                ctxOverlay.font = `bold ${fontSize}px "JetBrains Mono", monospace`;
-                ctxOverlay.fillStyle = Math.random() < 0.58 ? '#ff0000' : '#ffffff';
-                ctxOverlay.globalAlpha = 0.94;
-                ctxOverlay.fillText(
-                  panicText,
-                  Math.random() * (width - 150),
-                  Math.random() * height
+                  Math.random() < 0.5 ? 'rgba(255, 0, 0, 0.34)' : 'rgba(255, 255, 255, 0.28)';
+                ctxOverlay.fillRect(
+                  Math.random() * width * 0.3,
+                  Math.random() * height,
+                  width * (0.35 + Math.random() * 0.65),
+                  3 + Math.random() * 28
                 );
               }
-              ctxOverlay.globalAlpha = 1;
 
-              // 12. DUAL ROLLING CRT SYNC BARS & THICK SCANLINES
-              for (let rb = 0; rb < 2; rb++) {
-                const rollY = (((eProgress * (6 + rb * 3) + rb * 0.5) % 1) * height);
-                ctxOverlay.fillStyle = 'rgba(255, 0, 0, 0.34)';
-                ctxOverlay.fillRect(0, rollY - 40, width, 80);
-                ctxOverlay.fillStyle = 'rgba(255, 255, 255, 0.55)';
-                ctxOverlay.fillRect(0, rollY, width, 4);
-              }
-
-              ctxOverlay.fillStyle = 'rgba(255, 255, 255, 0.12)';
-              for (let syLine = 0; syLine < height; syLine += 4) {
-                ctxOverlay.fillRect(0, syLine, width, 2);
-              }
-
-              // 13. Residual Center Fireball Core
-              if (eProgress < 0.6) {
-                const coreNorm = 1 - eProgress / 0.6;
-                ctxOverlay.beginPath();
-                ctxOverlay.arc(cx, cy, coreNorm * 115 + 12, 0, Math.PI * 2);
-                ctxOverlay.fillStyle = eProgress < 0.25 ? '#ffffff' : '#ff0000';
-                ctxOverlay.globalAlpha = coreNorm * 0.95;
-                ctxOverlay.fill();
-                ctxOverlay.globalAlpha = 1;
+              if (Math.random() < 0.8) {
+                const pCode = explosionPanicCodes[Math.floor(Math.random() * explosionPanicCodes.length)];
+                ctxOverlay.font = 'bold 14px "JetBrains Mono", monospace';
+                ctxOverlay.fillStyle = Math.random() < 0.5 ? '#ff0000' : '#ffffff';
+                ctxOverlay.fillText(pCode, Math.random() * (width - 180), Math.random() * height);
               }
             }
+
+            // Corrupt visible text nodes dynamically during the detonation storm
+            explosionTextBackups.forEach((origVal, tNode) => {
+              if (Math.random() < 0.65) {
+                let garbled = '';
+                for (let c = 0; c < origVal.length; c++) {
+                  const ch = origVal[c];
+                  garbled +=
+                    ch !== ' ' && Math.random() < 0.45
+                      ? explosionGlyphs[Math.floor(Math.random() * explosionGlyphs.length)]
+                      : ch;
+                }
+                tNode.nodeValue = garbled;
+              }
+            });
 
             // Extreme 3D perspective warp, chromatic split, contrast inversion & violent camera shake
             const shakeMag = Math.max(22, (1 - eProgress * 0.45) * 74);
@@ -3168,7 +5072,7 @@
         const maxY = Math.max(margin, window.innerHeight - size - margin);
 
         if (!isLaserMode) {
-          if (isBgOnlyMode && bgNetwork) {
+          if (isBgOnlyMode && isTesseractAttackEnabled && bgNetwork) {
             const cx = posX + size / 2;
             const cy = posY + size / 2;
 
@@ -3202,16 +5106,16 @@
                 velY += ((dy / dist) * steerSpeed - velY) * 0.15;
               }
               posX += velX;
-              posY += velY;
-              spinBoost = Math.max(spinBoost, 0.045);
-
-              // Vaporize any dot touched directly while flying
+              // Vaporize any dot or ship touched directly while flying
               for (let i = 0; i < bgNetwork.nodes.length; i++) {
                 const n = bgNetwork.nodes[i];
                 if (n.alive && Math.hypot(n.x - cx, n.y - cy) < 38) {
                   bgNetwork.destroyNode(n, velX, velY);
                   pulseEnergy = Math.max(pulseEnergy, 0.45);
                 }
+              }
+              if (bgNetwork.damageFleetInRadius && bgNetwork.damageFleetInRadius(cx, cy, 38, 45)) {
+                pulseEnergy = Math.max(pulseEnergy, 0.65);
               }
 
               if ((nextAttack === 'DASH' && dist >= 160 && dist <= 420) || dist <= desiredRange || hunterTimer > 65) {
@@ -3273,6 +5177,9 @@
                     bgNetwork.destroyNode(n, hunterDashVx, hunterDashVy);
                   }
                 }
+                if (bgNetwork.damageFleetInRadius) {
+                  bgNetwork.damageFleetInRadius(newCx, newCy, 68, 75);
+                }
               } else {
                 hunterDashRemaining--;
                 if (hunterDashRemaining > 0) {
@@ -3292,12 +5199,19 @@
 
               if (hunterTimer % 12 === 1 && hunterShotsRemaining > 0) {
                 hunterShotsRemaining--;
-                const alive = bgNetwork.nodes.filter((n) => n.alive);
-                if (alive.length > 0) {
-                  alive.sort(
+                const aliveDots = bgNetwork.nodes
+                  .filter((n) => n.alive)
+                  .map((n) => ({ kind: 'DOT', ref: n, x: n.x, y: n.y }));
+                const activeShips = bgNetwork.getActiveFleetTargets
+                  ? bgNetwork.getActiveFleetTargets()
+                  : [];
+                const combinedPool = activeShips.concat(aliveDots);
+
+                if (combinedPool.length > 0) {
+                  combinedPool.sort(
                     (a, b) => Math.hypot(a.x - cx, a.y - cy) - Math.hypot(b.x - cx, b.y - cy)
                   );
-                  const pickPool = alive.slice(0, Math.min(5, alive.length));
+                  const pickPool = combinedPool.slice(0, Math.min(6, combinedPool.length));
                   const victim = pickPool[Math.floor(Math.random() * pickPool.length)];
                   bgNetwork.attackEffects.push({
                     type: 'SNIPER_BEAM',
@@ -3308,7 +5222,11 @@
                     life: 1,
                     decay: 0.085,
                   });
-                  bgNetwork.destroyNode(victim, (victim.x - cx) * 0.04, (victim.y - cy) * 0.04);
+                  if (victim.kind === 'DOT') {
+                    bgNetwork.destroyNode(victim.ref, (victim.x - cx) * 0.04, (victim.y - cy) * 0.04);
+                  } else if (bgNetwork.destroyFleetTarget) {
+                    bgNetwork.destroyFleetTarget(victim, 80);
+                  }
                   pulseEnergy = 0.85;
                 }
               }
@@ -3328,21 +5246,35 @@
                 const visited = new Set();
                 let curX = cx;
                 let curY = cy;
+                const activeShips = bgNetwork.getActiveFleetTargets
+                  ? bgNetwork.getActiveFleetTargets()
+                  : [];
 
                 for (let hop = 0; hop < 7; hop++) {
                   let nearest = null;
                   let nearestDist = hop === 0 ? 440 : 250;
+
+                  for (let s = 0; s < activeShips.length; s++) {
+                    const shipTarget = activeShips[s];
+                    if (visited.has(shipTarget.ref)) continue;
+                    const d = Math.hypot(shipTarget.x - curX, shipTarget.y - curY);
+                    if (d < nearestDist) {
+                      nearestDist = d;
+                      nearest = shipTarget;
+                    }
+                  }
+
                   for (let i = 0; i < bgNetwork.nodes.length; i++) {
                     const candidate = bgNetwork.nodes[i];
                     if (!candidate.alive || visited.has(candidate)) continue;
                     const d = Math.hypot(candidate.x - curX, candidate.y - curY);
                     if (d < nearestDist) {
                       nearestDist = d;
-                      nearest = candidate;
+                      nearest = { kind: 'DOT', ref: candidate, x: candidate.x, y: candidate.y };
                     }
                   }
                   if (!nearest) break;
-                  visited.add(nearest);
+                  visited.add(nearest.ref);
 
                   bgNetwork.attackEffects.push({
                     type: 'CHAIN_BOLT',
@@ -3353,7 +5285,15 @@
                     life: 1,
                     decay: 0.065,
                   });
-                  bgNetwork.destroyNode(nearest, (nearest.x - curX) * 0.05, (nearest.y - curY) * 0.05);
+                  if (nearest.kind === 'DOT') {
+                    bgNetwork.destroyNode(
+                      nearest.ref,
+                      (nearest.x - curX) * 0.05,
+                      (nearest.y - curY) * 0.05
+                    );
+                  } else if (bgNetwork.destroyFleetTarget) {
+                    bgNetwork.destroyFleetTarget(nearest, 75);
+                  }
                   curX = nearest.x;
                   curY = nearest.y;
                 }
@@ -3405,6 +5345,10 @@
                 }
               }
 
+              if (bgNetwork.pullFleetInVortex) {
+                bgNetwork.pullFleetInVortex(cx, cy, vortexRadius);
+              }
+
               if (hunterTimer >= 95) {
                 hunterState = 'SEEK';
                 hunterTimer = 0;
@@ -3453,6 +5397,10 @@
                 }
               }
 
+              if (bgNetwork.damageFleetInRadius) {
+                bgNetwork.damageFleetInRadius(cx, cy, bladeRadius + 12, 14);
+              }
+
               if (hunterTimer >= 115) {
                 hunterState = 'SEEK';
                 hunterTimer = 0;
@@ -3491,6 +5439,10 @@
                   }
                 }
 
+                if (bgNetwork.damageFleetInRadius) {
+                  bgNetwork.damageFleetInRadius(cx, cy, hunterNovaRadius + 14, 22);
+                }
+
                 if (hunterNovaRadius >= 310) {
                   hunterState = 'SEEK';
                   hunterTimer = 0;
@@ -3521,6 +5473,11 @@
             if (hunterState !== 'IDLE') {
               hunterState = 'IDLE';
               hunterTimer = 0;
+              const exitSpeed = Math.hypot(velX, velY);
+              if (exitSpeed > 1.35) {
+                velX = (velX / exitSpeed) * 1.35;
+                velY = (velY / exitSpeed) * 1.35;
+              }
             }
 
             // Smooth orbital drift + velocity damping
@@ -3570,6 +5527,12 @@
         // Move floating canvas container across viewport
         canvas.style.transform = `translate3d(${posX.toFixed(1)}px, ${posY.toFixed(1)}px, 0)`;
 
+        // Broadcast tesseract position & attack state for ship scanner AI
+        tesseractTelemetry.x = posX + size / 2;
+        tesseractTelemetry.y = posY + size / 2;
+        tesseractTelemetry.isAttacking =
+          isLaserMode || (isBgOnlyMode && isTesseractAttackEnabled);
+
         // Render 4D Tesseract wireframe
         ctx.clearRect(0, 0, size, size);
         const center = size / 2;
@@ -3585,7 +5548,10 @@
 
         ctx.beginPath();
         ctx.arc(center, center, 48, 0, Math.PI * 2);
-        ctx.strokeStyle = isHovered || isBgOnlyMode ? 'rgba(255, 0, 0, 0.55)' : 'rgba(255, 255, 255, 0.14)';
+        ctx.strokeStyle =
+          isHovered || (isBgOnlyMode && isTesseractAttackEnabled)
+            ? 'rgba(255, 0, 0, 0.55)'
+            : 'rgba(255, 255, 255, 0.14)';
         ctx.lineWidth = 1;
         ctx.setLineDash([4, 6]);
         ctx.stroke();
@@ -3681,6 +5647,16 @@
 
       if (toggleBgBtn) {
         toggleBgBtn.addEventListener('click', toggleBackgroundView);
+      }
+
+      if (toggleAttackBtn) {
+        toggleAttackBtn.addEventListener('click', toggleTesseractAttackMode);
+        updateAttackButtonUi();
+      }
+
+      if (toggleShipsBtn) {
+        toggleShipsBtn.addEventListener('click', toggleShipsMode);
+        updateShipsButtonUi();
       }
 
       renderMainProjects();
